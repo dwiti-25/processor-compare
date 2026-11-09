@@ -7,6 +7,9 @@
 #   core    : hazard3 | ibex | veer_el2
 #   CLK_MHZ : clock target (default 50)
 #   CFG     : config name (default "default"; VeeR: min | bp)
+# WRAP=1    : synthesize <core>_wrap (core + thin common-interface wrapper, the CLAUDE.md core-only
+#             scope; tie-offs such as Ibex cheriot_enable_i are constants) instead of the vendor top
+# SYNTH_ONLY=1: stop after Yosys synthesis (no placement/timing estimate; low memory)
 # Output: results/raw/sky130/<core>/synth_<cfg>_<clk>MHz/  (LibreLane run dir under build/, gitignored)
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
@@ -21,12 +24,19 @@ export CFG
 source "cores/$CORE/sky130/synth.conf"
 
 RUN=synth_${CFG}_${CLK_MHZ}MHz
+if [ "${WRAP:-0}" = 1 ]; then
+  RUN=synth_${CFG}_wrap_${CLK_MHZ}MHz
+  TOP=${CORE}_wrap
+  CLK_PORT=clk
+  PARAMS=""   # configuration parameters are set inside the wrapper
+fi
 OUT=results/raw/sky130/$CORE/$RUN
 BUILD=build/librelane/$CORE/$RUN
 rm -rf "$OUT" "$BUILD"; mkdir -p "$OUT" "$BUILD"
 
 SRCS="${PRE_SOURCES:-} $(grep -v -e '^//' -e '^+' -e '^\s*$' "cores/$CORE/sky130/sources.f" | tr '\n' ' ')"
 INCS="$(sed -n 's/^+incdir+//p' "cores/$CORE/sky130/sources.f") $EXTRA_INC"
+[ "${WRAP:-0}" = 1 ] && SRCS="$SRCS common/wrapper/obi32to64.sv common/wrapper/ahbl2obi.sv common/wrapper/axi2obi64.sv cores/$CORE/wrapper/${CORE}_wrap.sv"
 
 # Vendor RTL is never edited: files touched by cores/<core>/patches/*.patch are copied to
 # build/patched/<core>/, patched there, and substituted into the source list.
@@ -80,7 +90,9 @@ EOF
 } > "$OUT/run.info"
 
 echo "[synth] $CORE cfg=$CFG clk=${CLK_MHZ}MHz -> $OUT"
-flows/librelane.sh "$BUILD/config.json" --run-tag run --overwrite --to OpenROAD.STAMidPNR-1 > "$OUT/librelane.log" 2>&1 \
+TO=OpenROAD.STAMidPNR-1
+[ "${SYNTH_ONLY:-0}" = 1 ] && TO=Checker.NetlistAssignStatements
+flows/librelane.sh "$BUILD/config.json" --run-tag run --overwrite --to $TO > "$OUT/librelane.log" 2>&1 \
   || { echo "[synth] LibreLane failed, see $OUT/librelane.log"; exit 1; }
 LR=$BUILD/runs/run
 
@@ -90,6 +102,7 @@ cp -R "$SYN"/reports "$OUT/yosys_reports"
 cp "$SYN"/*.log "$OUT/" 2>/dev/null || true
 cp "$LR/resolved.json" "$OUT/"
 cp "$SYN"/*.nl.v "$OUT/netlist.v"
+[ "${SYNTH_ONLY:-0}" = 1 ] && { echo "[synth] done (synthesis only): $OUT"; exit 0; }
 STA=$(ls -d "$LR"/*-openroad-stamidpnr-1)
 mkdir -p "$OUT/sta_postgpl"
 cp "$STA"/*.rpt "$STA"/state_out.json "$STA"/*.log "$OUT/sta_postgpl/"

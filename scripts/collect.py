@@ -23,7 +23,7 @@ RAW = os.path.join(REPO, "results", "raw")
 CSV = os.path.join(REPO, "results", "results.csv")
 
 COLUMNS = [
-    "core", "core_commit", "config", "technology", "scope", "stage", "clock_target_mhz", "run_id",
+    "core", "core_commit", "config", "top", "technology", "scope", "stage", "clock_target_mhz", "run_id",
     "frontend", "patches", "tool_versions", "pdk_version",
     "cells", "area_um2", "sequential_area_um2", "flops", "latches", "clock_gates",
     "setup_ws_all_ns_postgpl_tt", "reg2reg_slack_ns_postgpl_tt", "fmax_est_mhz_postgpl_tt",
@@ -103,6 +103,7 @@ def parse_synth(run_dir):
         yosys_ver = mm.group(1) if mm else ""
     return {
         "core": info["core"], "core_commit": info["core_commit"], "config": CONFIG_LABELS.get((info["core"], info["config"]), info["config"]),
+        "top": "wrapper" if info["top"].endswith("_wrap") else "vendor",
         "technology": "sky130", "scope": "core", "stage": "synth",
         "clock_target_mhz": info["clk_mhz"], "run_id": os.path.basename(run_dir),
         "frontend": FRONTEND_NAMES.get(info["frontend"], info["frontend"]),
@@ -128,17 +129,28 @@ def collect():
     return rows
 
 
+def prefer_wrapped(rows):
+    """One row per (core, config): the wrapped run if there is one, else the vendor-top run."""
+    best = {}
+    for r in rows:
+        k = (r["core"], r["config"], r["clock_target_mhz"])
+        if k not in best or (r["top"] == "wrapper" and best[k]["top"] != "wrapper"):
+            best[k] = r
+    return list(best.values())
+
+
 def md_synth(rows):
     order = {"hazard3": 0, "ibex": 1, "veer_el2": 2}
     names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
     rows = sorted(rows, key=lambda r: (order.get(r["core"], 9), {"bp": 1}.get(r["config"], 0), float(r["clock_target_mhz"])))
     fmt = lambda v, f: format(v, f) if v != "" else "pending"
     base = next((r["area_um2"] for r in rows if r["core"] == "hazard3"), None)
-    out = ["| Core | Config | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | "
+    out = ["| Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | "
            "Est. fmax, post-CTS, tt (MHz) | Reg-to-reg slack @ target, post-CTS (ns) | Est. fmax, post-GPL, tt (MHz) |",
-           "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
+           "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for r in rows:
-        out.append(f"| {names.get(r['core'], r['core'])} | {r['config']} | {r['frontend']} | "
+        top = "core + wrapper" if r["top"] == "wrapper" else "vendor top (old)"
+        out.append(f"| {names.get(r['core'], r['core'])} | {r['config']} | {top} | {r['frontend']} | "
                    f"{r['cells']:,} | {r['area_um2']:,.0f} | {fmt(r['area_um2'] / base if base else '', '.2f')}× | "
                    f"{r['flops']:,} | {r['latches']:,} | "
                    f"{fmt(r['fmax_est_mhz_postcts_tt'], '.0f')} | {fmt(r['reg2reg_slack_ns_postcts_tt'], '+.2f')} | "
@@ -177,7 +189,7 @@ def main():
         w.writeheader()
         w.writerows(rows)
     print(f"[collect] wrote {len(rows)} rows to {os.path.relpath(CSV, REPO)}", file=sys.stderr)
-    synth = [r for r in rows if r["stage"] == "synth"]
+    synth = prefer_wrapped([r for r in rows if r["stage"] == "synth"])
     table = md_headline(synth) if a.headline else md_synth(synth)
     if a.md == "synth":
         print(table)
