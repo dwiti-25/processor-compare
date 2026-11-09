@@ -1,0 +1,3 @@
+[synth] veer_el2 cfg=min clk=50MHz -> results/raw/sky130/veer_el2/synth_min_50MHz
+cores/veer_el2/rtl/design/lib/beh_lib.sv:781: Warning: non-edge sensitivity on a signal will be synthesized as @* sensitivity
+[synth] done: results/raw/sky130/veer_el2/synth_min_50MHz

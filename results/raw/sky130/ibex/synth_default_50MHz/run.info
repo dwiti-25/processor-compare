@@ -1,0 +1,12 @@
+core=ibex
+config=default
+top=ibex_top
+params=RV32E=0 RV32M=ibex_pkg::RV32MFast RV32B=ibex_pkg::RV32BNone RV32ZC=ibex_pkg::RV32Zca RegFile=ibex_pkg::RegFileFF BranchTargetALU=0 WritebackStage=0 ICache=0 ICacheECC=0 ICacheScramble=0 BranchPredictor=0 DbgTriggerEn=0 DbgHwBreakNum=1 SecureIbex=0 PMPEnable=0 MHPMCounterNum=0
+core_commit=626034d7557ab85a6d989b13011b44296bad26fa
+clk_mhz=50
+frontend=slang
+patches=0001-ibex_top-unused-scramble-assign.patch 
+librelane_image=ghcr.io/librelane/librelane:3.0.17
+pdk=sky130A
+pdk_version=8afc8346a57fe1ab7934ba5a6056ea8b43078e71
+date=2026-11-09T15:41:08Z

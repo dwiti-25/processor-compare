@@ -19,3 +19,11 @@ __pycache__/
 build/
 # synthesized netlists are reproducible and large
 results/raw/**/netlist.v
+# big STA dumps / logs stay on disk only (summaries + r2r.rpt + state_out.json are committed)
+results/raw/**/sta_*/max.rpt
+results/raw/**/sta_*/min.rpt
+results/raw/**/sta_*/*.log
+results/raw/**/yosys_reports/pre_techmap.json
+results/raw/**/yosys_reports/post_dff.json
+results/raw/**/librelane*.log
+results/raw/**/yosys-synthesis.log

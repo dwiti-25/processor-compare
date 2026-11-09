@@ -1,0 +1,42 @@
+188. Printing statistics.
+
+=== el2_veer ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    88566        - wires
+   102725        - wire bits
+     2135        - public wires
+    16292        - public wire bits
+      284        - ports
+     2953        - port bits
+    98464  1.9E+05 cells
+    34592        -   $_ANDNOT_
+     2855        -   $_AND_
+     9400        -   $_MUX_
+     2198        -   $_NAND_
+     5661        -   $_NOR_
+     3986        -   $_NOT_
+     2890        -   $_ORNOT_
+    17869        -   $_OR_
+     2280        -   $_XNOR_
+     9404        -   $_XOR_
+     7069 1.86E+05   sky130_fd_sc_hd__dfrtp_2
+        2    52.55   sky130_fd_sc_hd__dfstp_2
+      258 3.87E+03   sky130_fd_sc_hd__dlxtn_1
+
+   Area for cell type $_ANDNOT_ is unknown!
+   Area for cell type $_AND_ is unknown!
+   Area for cell type $_MUX_ is unknown!
+   Area for cell type $_NAND_ is unknown!
+   Area for cell type $_NOR_ is unknown!
+   Area for cell type $_NOT_ is unknown!
+   Area for cell type $_ORNOT_ is unknown!
+   Area for cell type $_OR_ is unknown!
+   Area for cell type $_XNOR_ is unknown!
+   Area for cell type $_XOR_ is unknown!
+
+   Chip area for module '\el2_veer': 189665.654400
+     of which used for sequential elements: 185791.939200 (97.96%)
+

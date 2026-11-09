@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Core-only synthesis on sky130_fd_sc_hd with LibreLane's own Yosys step (same synthesis the
-# hardening flow uses), then a pre-layout timing estimate with OpenROAD (repair_design for
-# fanout/slew buffering, no wire parasitics) at the tt and ss corners.
+# hardening flow uses). For the timing estimate the LibreLane Classic flow continues through
+# floorplan, global placement and post-placement design repair (buffering), then runs LibreLane's
+# mid-PnR STA (placement-estimated parasitics, ideal clocks). Stops there: no CTS or routing.
 # usage: flows/synth.sh <core> [CLK_MHZ] [CFG]
 #   core    : hazard3 | ibex | veer_el2
 #   CLK_MHZ : clock target (default 50)
@@ -56,6 +57,10 @@ cfg = {
     "CLOCK_PORT": e["CLK_PORT"],
     "CLOCK_PERIOD": round(1000.0 / float(e["CLK_MHZ"]), 4),
     "RUN_LINTER": False,
+    "STA_EXTRA_CORNER_TCL_FILE": ab("flows/sta_r2r_hook.tcl"),
+    # Run LibreLane's mid-PnR STA once more right after post-placement repair, and stop there.
+    "meta": {"version": 3, "flow": "Classic",
+             "substituting_steps": {"+OpenROAD.RepairDesignPostGPL": "OpenROAD.STAMidPNR"}},
 }
 if e["FRONTEND"] == "slang":
     cfg["USE_SLANG"] = True
@@ -75,7 +80,7 @@ EOF
 } > "$OUT/run.info"
 
 echo "[synth] $CORE cfg=$CFG clk=${CLK_MHZ}MHz -> $OUT"
-flows/librelane.sh "$BUILD/config.json" --run-tag run --overwrite --to OpenROAD.STAPrePNR > "$OUT/librelane.log" 2>&1 \
+flows/librelane.sh "$BUILD/config.json" --run-tag run --overwrite --to OpenROAD.STAMidPNR-1 > "$OUT/librelane.log" 2>&1 \
   || { echo "[synth] LibreLane failed, see $OUT/librelane.log"; exit 1; }
 LR=$BUILD/runs/run
 
@@ -85,14 +90,9 @@ cp -R "$SYN"/reports "$OUT/yosys_reports"
 cp "$SYN"/*.log "$OUT/" 2>/dev/null || true
 cp "$LR/resolved.json" "$OUT/"
 cp "$SYN"/*.nl.v "$OUT/netlist.v"
-
-# Timing estimate: buffer the netlist (OpenROAD repair_design, no placement) and run STA per corner
-for CORNER in tt_025C_1v80 ss_100C_1v60; do
-  python3 flows/est_env.py "$OUT/resolved.json" "$CORNER" > "$OUT/est_env_$CORNER.tcl"
-  docker run --rm -v "$REPO:$REPO" -v "$PDK_ROOT:$PDK_ROOT" -w "$REPO" \
-    -e EST_ENV="$REPO/$OUT/est_env_$CORNER.tcl" -e EST_NETLIST="$REPO/$OUT/netlist.v" -e EST_CORNER="$CORNER" \
-    -e EST_OUT="$REPO/$OUT/est_$CORNER" "$LIBRELANE_IMAGE" \
-    openroad -no_init -exit flows/sta_estimate.tcl > "$OUT/est_$CORNER.log" 2>&1 \
-    || { echo "[synth] timing estimate failed ($CORNER), see $OUT/est_$CORNER.log"; exit 1; }
-done
+STA=$(ls -d "$LR"/*-openroad-stamidpnr-1)
+mkdir -p "$OUT/sta_postgpl"
+cp "$STA"/*.rpt "$STA"/state_out.json "$STA"/*.log "$OUT/sta_postgpl/"
+test -s "$OUT/sta_postgpl/r2r.rpt" || { echo "[synth] r2r.rpt missing"; exit 1; }
+cp "$(ls -d "$LR"/*-openroad-floorplan)"/*.log "$OUT/" 2>/dev/null || true
 echo "[synth] done: $OUT"

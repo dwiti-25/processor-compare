@@ -1,0 +1,2 @@
+[synth] ibex cfg=default clk=50MHz -> results/raw/sky130/ibex/synth_default_50MHz
+[synth] done: results/raw/sky130/ibex/synth_default_50MHz

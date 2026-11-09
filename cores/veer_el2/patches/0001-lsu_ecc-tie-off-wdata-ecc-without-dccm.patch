@@ -1,0 +1,13 @@
+diff --git a/design/lsu/el2_lsu_ecc.sv b/design/lsu/el2_lsu_ecc.sv
+index 6cb8467..7d1c549 100644
+--- a/design/lsu/el2_lsu_ecc.sv
++++ b/design/lsu/el2_lsu_ecc.sv
+@@ -241,6 +241,8 @@ import el2_pkg::*;
+       assign double_ecc_error_hi_any = '0;
+       assign single_ecc_error_lo_any = '0;
+       assign double_ecc_error_lo_any = '0;
++      assign dccm_wdata_ecc_hi_any = '0;
++      assign dccm_wdata_ecc_lo_any = '0;
+    end
+ 
+    rvdffe #(.WIDTH(pt.DCCM_DATA_WIDTH)) sec_data_hi_rplus1ff (.din(sec_data_hi_r[pt.DCCM_DATA_WIDTH-1:0]), .dout(sec_data_hi_r_ff[pt.DCCM_DATA_WIDTH-1:0]), .en(ld_single_ecc_error_r | clk_override), .clk(clk), .*);

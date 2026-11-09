@@ -1,0 +1,12 @@
+[synth] hazard3 cfg=default clk=50MHz -> results/raw/sky130/hazard3/synth_default_50MHz
+Warning: Encountered `translate_off' comment! Such legacy hot comments are supported by Yosys, but are not part of any formal language specification. Using a portable and standards-compliant construct such as `ifdef is recommended!
+Warning: Replacing memory \req_stratified with list of registers. See cores/hazard3/rtl/hdl/arith/hazard3_onehot_priority_dynamic.v:38, cores/hazard3/rtl/hdl/arith/hazard3_onehot_priority_dynamic.v:35
+Warning: Replacing memory \fifo_valid_hw with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:191
+Warning: Replacing memory \fifo_valid_m1 with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:180
+Warning: Replacing memory \fifo_valid with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:182, cores/hazard3/rtl/hdl/hazard3_frontend.v:175
+Warning: Replacing memory \fifo_break_d_mode with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:173
+Warning: Replacing memory \fifo_break_any with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:172
+Warning: Replacing memory \fifo_err with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:171
+Warning: Replacing memory \fifo_predbranch with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:170
+Warning: Replacing memory \fifo_mem with list of registers. See cores/hazard3/rtl/hdl/hazard3_frontend.v:169
+[synth] done: results/raw/sky130/hazard3/synth_default_50MHz

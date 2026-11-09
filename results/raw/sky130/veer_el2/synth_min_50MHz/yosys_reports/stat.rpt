@@ -1,0 +1,97 @@
+196. Printing statistics.
+
+=== el2_veer ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    55242        - wires
+    57911        - wire bits
+    12173        - public wires
+    14842        - public wire bits
+      284        - ports
+     2953        - port bits
+    56639  6.5E+05 cells
+      188 2.35E+03   sky130_fd_sc_hd__a2111o_2
+       17  255.245   sky130_fd_sc_hd__a2111oi_2
+      743 7.44E+03   sky130_fd_sc_hd__a211o_2
+      147 1.84E+03   sky130_fd_sc_hd__a211oi_2
+      332 3.32E+03   sky130_fd_sc_hd__a21bo_2
+       97 1.09E+03   sky130_fd_sc_hd__a21boi_2
+     1414 1.24E+04   sky130_fd_sc_hd__a21o_2
+     1337 1.17E+04   sky130_fd_sc_hd__a21oi_2
+     3420 3.85E+04   sky130_fd_sc_hd__a221o_2
+      105 1.58E+03   sky130_fd_sc_hd__a221oi_2
+     2885 2.89E+04   sky130_fd_sc_hd__a22o_2
+      392  4.9E+03   sky130_fd_sc_hd__a22oi_2
+      468 5.27E+03   sky130_fd_sc_hd__a2bb2o_2
+        3   45.043   sky130_fd_sc_hd__a2bb2oi_2
+       83  934.646   sky130_fd_sc_hd__a311o_2
+       12  180.173   sky130_fd_sc_hd__a311oi_2
+      614 5.38E+03   sky130_fd_sc_hd__a31o_2
+       36  450.432   sky130_fd_sc_hd__a31oi_2
+      172 1.94E+03   sky130_fd_sc_hd__a32o_2
+        7  113.859   sky130_fd_sc_hd__a32oi_2
+       52  585.562   sky130_fd_sc_hd__a41o_2
+        2   32.531   sky130_fd_sc_hd__a41oi_2
+     2223 1.67E+04   sky130_fd_sc_hd__and2_2
+      527 4.62E+03   sky130_fd_sc_hd__and2b_2
+     1645 1.23E+04   sky130_fd_sc_hd__and3_2
+      126  1261.21   sky130_fd_sc_hd__and3b_2
+      656 6.57E+03   sky130_fd_sc_hd__and4_2
+      148 1.67E+03   sky130_fd_sc_hd__and4b_2
+      118 1.48E+03   sky130_fd_sc_hd__and4bb_2
+        1    3.754   sky130_fd_sc_hd__buf_1
+      243 1.22E+03   sky130_fd_sc_hd__buf_2
+      816 3.06E+03   sky130_fd_sc_hd__conb_1
+     7069 1.86E+05   sky130_fd_sc_hd__dfrtp_2
+        2    52.55   sky130_fd_sc_hd__dfstp_2
+      258 3.87E+03   sky130_fd_sc_hd__dlxtn_1
+     1866    7E+03   sky130_fd_sc_hd__inv_2
+     3407 3.84E+04   sky130_fd_sc_hd__mux2_1
+      342  7.7E+03   sky130_fd_sc_hd__mux4_2
+     3532 2.21E+04   sky130_fd_sc_hd__nand2_2
+      452 3.96E+03   sky130_fd_sc_hd__nand2b_2
+      327 3.27E+03   sky130_fd_sc_hd__nand3_2
+       25   281.52   sky130_fd_sc_hd__nand3b_2
+       54  675.648   sky130_fd_sc_hd__nand4_2
+        4   60.058   sky130_fd_sc_hd__nand4b_2
+     4234 2.65E+04   sky130_fd_sc_hd__nor2_2
+      307 3.07E+03   sky130_fd_sc_hd__nor3_2
+       18  225.216   sky130_fd_sc_hd__nor3b_2
+       57  713.184   sky130_fd_sc_hd__nor4_2
+        9   135.13   sky130_fd_sc_hd__nor4b_2
+      161 2.01E+03   sky130_fd_sc_hd__o2111a_2
+       25   375.36   sky130_fd_sc_hd__o2111ai_2
+      778 7.79E+03   sky130_fd_sc_hd__o211a_2
+      110  1376.32   sky130_fd_sc_hd__o211ai_2
+      934 8.18E+03   sky130_fd_sc_hd__o21a_2
+     1297 1.14E+04   sky130_fd_sc_hd__o21ai_2
+      269 2.69E+03   sky130_fd_sc_hd__o21ba_2
+       67  754.474   sky130_fd_sc_hd__o21bai_2
+     1464 1.65E+04   sky130_fd_sc_hd__o221a_2
+       47  705.677   sky130_fd_sc_hd__o221ai_2
+     1053 1.05E+04   sky130_fd_sc_hd__o22a_2
+      110  1376.32   sky130_fd_sc_hd__o22ai_2
+      356 4.01E+03   sky130_fd_sc_hd__o2bb2a_2
+       12  180.173   sky130_fd_sc_hd__o2bb2ai_2
+      101 1.14E+03   sky130_fd_sc_hd__o311a_2
+        3   48.797   sky130_fd_sc_hd__o311ai_2
+      188 1.88E+03   sky130_fd_sc_hd__o31a_2
+       28  350.336   sky130_fd_sc_hd__o31ai_2
+      116 1.31E+03   sky130_fd_sc_hd__o32a_2
+        5   81.328   sky130_fd_sc_hd__o32ai_2
+       26  325.312   sky130_fd_sc_hd__o41a_2
+        1   16.266   sky130_fd_sc_hd__o41ai_2
+     2525  15796.4   sky130_fd_sc_hd__or2_2
+     1001 7.51E+03   sky130_fd_sc_hd__or3_2
+      297  2.6E+03   sky130_fd_sc_hd__or3b_2
+      669  5859.37   sky130_fd_sc_hd__or4_2
+      221 2.21E+03   sky130_fd_sc_hd__or4b_2
+       43  538.016   sky130_fd_sc_hd__or4bb_2
+     2403 3.91E+04   sky130_fd_sc_hd__xnor2_2
+     1337 2.17E+04   sky130_fd_sc_hd__xor2_2
+
+   Chip area for module '\el2_veer': 650156.051200
+     of which used for sequential elements: 185791.939200 (28.58%)
+
