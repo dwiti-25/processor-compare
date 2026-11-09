@@ -37,6 +37,15 @@ done
 [ "$CORE" = veer_el2 ] && SRCS="cores/veer_el2/config/$CFG/common_defines.vh $SRCS"
 
 WRAP=cores/$CORE/wrapper/${CORE}_wrap.sv
+WRAPMOD=${CORE}_wrap
+if [ "$CORE" = veer_el2 ] && [ "$CFG" = tcm ]; then
+  # VeeR with ICCM/DCCM: el2_veer_wrapper (core + el2_mem + JTAG/DMI) + behavioural TCM banks
+  R=cores/veer_el2/rtl/design
+  SRCS="$SRCS $R/el2_mem.sv $R/el2_veer_wrapper.sv $R/el2_veer_lockstep.sv $R/dmi/dmi_mux.v $R/dmi/dmi_wrapper.v \
+        $R/dmi/dmi_jtag_to_core_sync.v $R/dmi/rvjtag_tap.v cores/veer_el2/wrapper/veer_tcm_mem.sv"
+  WRAP=cores/veer_el2/wrapper/veer_el2_tcm_wrap.sv
+  WRAPMOD=veer_el2_tcm_wrap
+fi
 INCARGS=""; for i in $INCS; do INCARGS="$INCARGS -I$i"; done
 DEFARGS=""; for d in $DEFINES; do [ "$d" = SYNTHESIS ] || DEFARGS="$DEFARGS +define+$d"; done
 
@@ -45,7 +54,7 @@ if [ ! -x "$SIMDIR/Vtb_top" ] || [ -n "${REBUILD:-}" ]; then
   verilator --binary --timing -j 4 -O3 --x-assign fast --x-initial fast \
     -Wno-fatal -Wno-lint -Wno-style -Wno-TIMESCALEMOD -Wno-MULTIDRIVEN -Wno-UNOPTFLAT \
     -Wno-IMPLICITSTATIC -Wno-INITIALDLY -Wno-SIDEEFFECT -Wno-ASCRANGE -Wno-LATCH \
-    --top-module tb_top +define+CORE_WRAP=${CORE}_wrap $DEFARGS $INCARGS \
+    --top-module tb_top +define+CORE_WRAP=$WRAPMOD $DEFARGS $INCARGS \
     --Mdir "$SIMDIR/obj" -o ../Vtb_top \
     $SRCS common/wrapper/obi32to64.sv common/wrapper/ahbl2obi.sv common/wrapper/axi2obi64.sv \
     "$WRAP" common/tb/tb_mem.sv common/tb/tb_top.sv > "$SIMDIR/build.log" 2>&1 \

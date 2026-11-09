@@ -14,6 +14,10 @@ One entry per decision: date, decision, reason, who decided.
 - 2026-11-09: Hazard3 multiplier = `MUL_FAST=1` (single-cycle multiply, MULH via the sequential divider). It's the closest match to Ibex `RV32MFast` and VeeR's pipelined multiplier. Default `MUL_FAST=0` would give a much slower, 32+-cycle multiply (Claude Code).
 - 2026-11-09: Frontends: Hazard3 = Yosys `read_verilog` (plain Verilog 2005; yosys-slang turns its static functions, called from two always blocks, into multiply-driven flops). Ibex and VeeR EL2 = yosys-slang (`USE_SLANG` in LibreLane). sv2v is not needed (Claude Code).
 
+- 2026-11-10: VeeR EL2 reported in two configs (Dwiti): "min" (no TCM/cache, the fair-comparison rule; used for ASIC) and "tcm" (ICCM at 0x0 + DCCM at 0x2_0000, 128 KiB each, VeeR's intended memory system; RTL sim only, behavioural banks in `cores/veer_el2/wrapper/veer_tcm_mem.sv`, preloaded like VeeR's own testbench).
+- 2026-11-10: Common link layout split into code (0x0-0x1FFFF) and data/stack (0x20000-0x3FFFF), so one binary per benchmark runs on all cores, including VeeR "tcm" (its LSU cannot read ICCM). The other cores see one flat RAM; their cycle counts moved by under 2% after the re-link (all numbers re-run).
+- 2026-11-10: crt0 marks region 0x8 (testbench MMIO) as side-effect in VeeR's `mrac` CSR, guarded by `mvendorid == 0x45` so the binary stays identical for every core. Without it VeeR's unified write buffer merges successive putchar stores (seen with TCMs). Benchmark cycle counts are unaffected (CoreMark cycles identical before and after).
+
 ## Patches
 | Core | Patch | Reason |
 |---|---|---|

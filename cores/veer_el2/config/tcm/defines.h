@@ -1,0 +1,221 @@
+// Copyright 2019-2026 Western Digital Corporation or its affiliates.
+// Copyright 2022-2026 Antmicro <www.antmicro.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+//
+// This is an automatically generated file by dwitisuchak on Tue Nov 10 01:37:00 IST 2026
+//
+// cmd:    veer -target=typical_pd -fpga_optimize=0 -set=icache_enable=0 -set=user_mode=0 -set=lockstep_enable=0 -set=bitmanip_zba=0 -set=bitmanip_zbb=0 -set=bitmanip_zbc=0 -set=bitmanip_zbe=0 -set=bitmanip_zbf=0 -set=bitmanip_zbp=0 -set=bitmanip_zbr=0 -set=bitmanip_zbs=0 -set=pic_total_int=1 -set=btb_enable=0 -set=iccm_enable=1 -set=iccm_region=0x0 -set=iccm_offset=0x0 -set=iccm_size=128 -set=dccm_enable=1 -set=dccm_region=0x0 -set=dccm_offset=0x20000 -set=dccm_size=128 
+//
+#ifndef RV_DEFINES
+#define RV_DEFINES
+
+#define RV_BITMANIP_ZBA 0
+#define RV_BITMANIP_ZBB 0
+#define RV_BITMANIP_ZBC 0
+#define RV_BITMANIP_ZBE 0
+#define RV_BITMANIP_ZBF 0
+#define RV_BITMANIP_ZBP 0
+#define RV_BITMANIP_ZBR 0
+#define RV_BITMANIP_ZBS 0
+#define RV_DIV_BIT 4
+#define RV_DIV_NEW 1
+#define RV_DMA_BUF_DEPTH 5
+#define RV_FAST_INTERRUPT_REDIRECT 1
+#define RV_ICCM_ONLY 1
+#define RV_LSU2DMA 0
+#define RV_LSU_NUM_NBLOAD 4
+#define RV_LSU_NUM_NBLOAD_WIDTH 2
+#define RV_LSU_STBUF_DEPTH 4
+#define RV_TIMER_LEGAL_EN 1
+#define RV_DCCM_BANK_BITS 1
+#define RV_DCCM_BITS 17
+#define RV_DCCM_BYTE_WIDTH 4
+#define RV_DCCM_DATA_CELL ram_16384x39
+#define RV_DCCM_DATA_WIDTH 32
+#define RV_DCCM_EADR 0x3ffff
+#define RV_DCCM_ECC_WIDTH 7
+#define RV_DCCM_ENABLE 1
+#define RV_DCCM_FDATA_WIDTH 39
+#define RV_DCCM_INDEX_BITS 14
+#define RV_DCCM_NUM_BANKS 2
+#define RV_DCCM_NUM_BANKS_2 
+#define RV_DCCM_OFFSET 0x20000
+#define RV_DCCM_REGION 0x0
+#define RV_DCCM_RESERVED 0x1400
+#define RV_DCCM_ROWS 16384
+#define RV_DCCM_SADR 0x20000
+#define RV_DCCM_SIZE 128
+#define RV_DCCM_SIZE_128 
+#define RV_DCCM_WIDTH_BITS 2
+#define RV_LSU_SB_BITS 17
+#define RV_ICACHE_2BANKS 1
+#define RV_ICACHE_BANK_BITS 1
+#define RV_ICACHE_BANK_HI 3
+#define RV_ICACHE_BANK_LO 3
+#define RV_ICACHE_BANK_WIDTH 8
+#define RV_ICACHE_BANKS_WAY 2
+#define RV_ICACHE_BEAT_ADDR_HI 5
+#define RV_ICACHE_BEAT_BITS 3
+#define RV_ICACHE_BYPASS_ENABLE 1
+#define RV_ICACHE_DATA_CELL ram_512x71
+#define RV_ICACHE_DATA_DEPTH 512
+#define RV_ICACHE_DATA_INDEX_LO 4
+#define RV_ICACHE_DATA_WIDTH 64
+#define RV_ICACHE_ECC 1
+#define RV_ICACHE_FDATA_WIDTH 71
+#define RV_ICACHE_INDEX_HI 12
+#define RV_ICACHE_LN_SZ 64
+#define RV_ICACHE_NUM_BEATS 8
+#define RV_ICACHE_NUM_BYPASS 2
+#define RV_ICACHE_NUM_BYPASS_WIDTH 2
+#define RV_ICACHE_NUM_LINES 256
+#define RV_ICACHE_NUM_LINES_BANK 64
+#define RV_ICACHE_NUM_LINES_WAY 128
+#define RV_ICACHE_NUM_WAYS 2
+#define RV_ICACHE_SCND_LAST 6
+#define RV_ICACHE_SIZE 16
+#define RV_ICACHE_STATUS_BITS 1
+#define RV_ICACHE_TAG_BYPASS_ENABLE 1
+#define RV_ICACHE_TAG_CELL ram_128x25
+#define RV_ICACHE_TAG_DEPTH 128
+#define RV_ICACHE_TAG_INDEX_LO 6
+#define RV_ICACHE_TAG_LO 13
+#define RV_ICACHE_TAG_NUM_BYPASS 2
+#define RV_ICACHE_TAG_NUM_BYPASS_WIDTH 2
+#define RV_ICACHE_WAYPACK 1
+#define RV_ICCM_BANK_BITS 2
+#define RV_ICCM_BANK_HI 3
+#define RV_ICCM_BANK_INDEX_LO 4
+#define RV_ICCM_BITS 17
+#define RV_ICCM_DATA_CELL ram_8192x39
+#define RV_ICCM_EADR 0x0001ffff
+#define RV_ICCM_ECC_WIDTH 7
+#define RV_ICCM_ENABLE 1
+#define RV_ICCM_INDEX_BITS 13
+#define RV_ICCM_NUM_BANKS 4
+#define RV_ICCM_NUM_BANKS_4 
+#define RV_ICCM_OFFSET 0x0
+#define RV_ICCM_REGION 0x0
+#define RV_ICCM_RESERVED 0x1000
+#define RV_ICCM_ROWS 8192
+#define RV_ICCM_SADR 0x00000000
+#define RV_ICCM_SIZE 128
+#define RV_ICCM_SIZE_128 
+#define RV_DEBUG_SB_MEM 0xb0580000
+#ifndef RV_EXTERNAL_DATA
+#define RV_EXTERNAL_DATA 0xd0580000
+#endif
+#define RV_EXTERNAL_DATA_1 0xc0000000
+#ifndef RV_SERIALIO
+#define RV_SERIALIO 0xe0580000
+#endif
+#define RV_UNUSED_REGION0 0xa0000000
+#define RV_UNUSED_REGION1 0x90000000
+#define RV_UNUSED_REGION2 0x70000000
+#define RV_UNUSED_REGION3 0x60000000
+#define RV_UNUSED_REGION4 0x50000000
+#define RV_UNUSED_REGION5 0x40000000
+#define RV_UNUSED_REGION6 0x30000000
+#define RV_UNUSED_REGION7 0x20000000
+#define RV_UNUSED_REGION8 0x10000000
+#ifndef RV_NMI_VEC
+#define RV_NMI_VEC 0x11110000
+#endif
+#define RV_PIC_BASE_ADDR 0xf00c0000
+#define RV_PIC_BITS 15
+#define RV_PIC_INT_WORDS 0
+#define RV_PIC_MEIE_COUNT 1
+#define RV_PIC_MEIE_MASK 0x1
+#define RV_PIC_MEIE_OFFSET 0x2000
+#define RV_PIC_MEIGWCLR_COUNT 1
+#define RV_PIC_MEIGWCLR_MASK 0x0
+#define RV_PIC_MEIGWCLR_OFFSET 0x5000
+#define RV_PIC_MEIGWCTRL_COUNT 1
+#define RV_PIC_MEIGWCTRL_MASK 0x3
+#define RV_PIC_MEIGWCTRL_OFFSET 0x4000
+#define RV_PIC_MEIP_COUNT 0
+#define RV_PIC_MEIP_MASK 0x0
+#define RV_PIC_MEIP_OFFSET 0x1000
+#define RV_PIC_MEIPL_COUNT 1
+#define RV_PIC_MEIPL_MASK 0xf
+#define RV_PIC_MEIPL_OFFSET 0x0000
+#define RV_PIC_MEIPT_COUNT 1
+#define RV_PIC_MEIPT_MASK 0x0
+#define RV_PIC_MEIPT_OFFSET 0x3004
+#define RV_PIC_MPICCFG_COUNT 1
+#define RV_PIC_MPICCFG_MASK 0x1
+#define RV_PIC_MPICCFG_OFFSET 0x3000
+#define RV_PIC_OFFSET 0xc0000
+#define RV_PIC_REGION 0xf
+#define RV_PIC_SIZE 32
+#define RV_PIC_TOTAL_INT 1
+#define RV_PIC_TOTAL_INT_PLUS1 2
+#define RV_DATA_ACCESS_ADDR0 0x00000000
+#define RV_DATA_ACCESS_ADDR1 0x00000000
+#define RV_DATA_ACCESS_ADDR2 0x00000000
+#define RV_DATA_ACCESS_ADDR3 0x00000000
+#define RV_DATA_ACCESS_ADDR4 0x00000000
+#define RV_DATA_ACCESS_ADDR5 0x00000000
+#define RV_DATA_ACCESS_ADDR6 0x00000000
+#define RV_DATA_ACCESS_ADDR7 0x00000000
+#define RV_DATA_ACCESS_ENABLE0 0x0
+#define RV_DATA_ACCESS_ENABLE1 0x0
+#define RV_DATA_ACCESS_ENABLE2 0x0
+#define RV_DATA_ACCESS_ENABLE3 0x0
+#define RV_DATA_ACCESS_ENABLE4 0x0
+#define RV_DATA_ACCESS_ENABLE5 0x0
+#define RV_DATA_ACCESS_ENABLE6 0x0
+#define RV_DATA_ACCESS_ENABLE7 0x0
+#define RV_DATA_ACCESS_MASK0 0xffffffff
+#define RV_DATA_ACCESS_MASK1 0xffffffff
+#define RV_DATA_ACCESS_MASK2 0xffffffff
+#define RV_DATA_ACCESS_MASK3 0xffffffff
+#define RV_DATA_ACCESS_MASK4 0xffffffff
+#define RV_DATA_ACCESS_MASK5 0xffffffff
+#define RV_DATA_ACCESS_MASK6 0xffffffff
+#define RV_DATA_ACCESS_MASK7 0xffffffff
+#define RV_INST_ACCESS_ADDR0 0x00000000
+#define RV_INST_ACCESS_ADDR1 0x00000000
+#define RV_INST_ACCESS_ADDR2 0x00000000
+#define RV_INST_ACCESS_ADDR3 0x00000000
+#define RV_INST_ACCESS_ADDR4 0x00000000
+#define RV_INST_ACCESS_ADDR5 0x00000000
+#define RV_INST_ACCESS_ADDR6 0x00000000
+#define RV_INST_ACCESS_ADDR7 0x00000000
+#define RV_INST_ACCESS_ENABLE0 0x0
+#define RV_INST_ACCESS_ENABLE1 0x0
+#define RV_INST_ACCESS_ENABLE2 0x0
+#define RV_INST_ACCESS_ENABLE3 0x0
+#define RV_INST_ACCESS_ENABLE4 0x0
+#define RV_INST_ACCESS_ENABLE5 0x0
+#define RV_INST_ACCESS_ENABLE6 0x0
+#define RV_INST_ACCESS_ENABLE7 0x0
+#define RV_INST_ACCESS_MASK0 0xffffffff
+#define RV_INST_ACCESS_MASK1 0xffffffff
+#define RV_INST_ACCESS_MASK2 0xffffffff
+#define RV_INST_ACCESS_MASK3 0xffffffff
+#define RV_INST_ACCESS_MASK4 0xffffffff
+#define RV_INST_ACCESS_MASK5 0xffffffff
+#define RV_INST_ACCESS_MASK6 0xffffffff
+#define RV_INST_ACCESS_MASK7 0xffffffff
+#define RV_PMP_ENTRIES 16
+#ifndef RV_RESET_VEC
+#define RV_RESET_VEC 0x80000000
+#endif
+#define RV_TARGET typical_pd
+#define CPU_TOP `RV_TOP.veer
+#define RV_TOP `TOP.rvtop_wrapper.rvtop
+#define SDVT_AHB 0
+#define TOP tb_top
+#define RV_BUILD_AXI4 1
+#define RV_BUILD_AXI_NATIVE 1
+#define CLOCK_PERIOD 100
+#define RV_EXT_ADDRWIDTH 32
+#define RV_EXT_DATAWIDTH 64
+#define RV_LDERR_ROLLBACK 1
+#define RV_STERR_ROLLBACK 0
+#define RV_XLEN 32
+
+#endif // RV_DEFINES

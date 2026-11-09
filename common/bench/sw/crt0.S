@@ -19,6 +19,16 @@ _start:
   la t0, trap_entry
   csrw mtvec, t0          // base only: Ibex treats it as vectored, others as direct
   csrw mcountinhibit, zero  // enable mcycle/minstret (Hazard3 resets with them inhibited)
+  // VeeR EL2 only (mvendorid 0x45): mark region 0x8 (testbench MMIO) as side-effect in mrac
+  // (CSR 0x7c0), so its unified read/write buffer does not merge successive putchar stores.
+  // Other cores skip this; reading mvendorid is legal on all of them.
+  csrr t0, mvendorid
+  li t1, 0x45
+  bne t0, t1, 5f
+  li t0, 0x00020000         // mrac bit 2*8+1: region 8 side-effect, not cacheable
+  csrw 0x7c0, t0
+  fence
+5:
   call main
   li t0, MMIO_EXIT
   sw a0, 0(t0)

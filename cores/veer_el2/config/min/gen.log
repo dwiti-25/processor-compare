@@ -1,5 +1,5 @@
 veer: Using target "typical_pd"
-veer: Set(s) requested : iccm_enable=0 dccm_enable=0 icache_enable=0 user_mode=0 lockstep_enable=0 bitmanip_zba=0 bitmanip_zbb=0 bitmanip_zbc=0 bitmanip_zbe=0 bitmanip_zbf=0 bitmanip_zbp=0 bitmanip_zbr=0 bitmanip_zbs=0 pic_total_int=1 btb_enable=0
+veer: Set(s) requested : icache_enable=0 user_mode=0 lockstep_enable=0 bitmanip_zba=0 bitmanip_zbb=0 bitmanip_zbc=0 bitmanip_zbe=0 bitmanip_zbf=0 bitmanip_zbp=0 bitmanip_zbr=0 bitmanip_zbs=0 pic_total_int=1 btb_enable=0 iccm_enable=0 dccm_enable=0
 veer: Overriding btb_enable value 1 with 0
 veer: Overriding bitmanip_zba value 1 with 0
 veer: Overriding bitmanip_zbb value 1 with 0

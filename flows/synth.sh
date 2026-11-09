@@ -10,6 +10,8 @@
 # WRAP=1    : synthesize <core>_wrap (core + thin common-interface wrapper, the CLAUDE.md core-only
 #             scope; tie-offs such as Ibex cheriot_enable_i are constants) instead of the vendor top
 # SYNTH_ONLY=1: stop after Yosys synthesis (no placement/timing estimate; low memory)
+# HARDEN=1  : run the full LibreLane Classic flow to GDS + DRC/LVS/STA sign-off (core-only layout);
+#             output in results/raw/sky130/<core>/harden_<cfg>[_wrap]_<clk>MHz/
 # Output: results/raw/sky130/<core>/synth_<cfg>_<clk>MHz/  (LibreLane run dir under build/, gitignored)
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
@@ -30,6 +32,7 @@ if [ "${WRAP:-0}" = 1 ]; then
   CLK_PORT=clk
   PARAMS=""   # configuration parameters are set inside the wrapper
 fi
+[ "${HARDEN:-0}" = 1 ] && RUN=${RUN/synth_/harden_}
 OUT=results/raw/sky130/$CORE/$RUN
 BUILD=build/librelane/$CORE/$RUN
 rm -rf "$OUT" "$BUILD"; mkdir -p "$OUT" "$BUILD"
@@ -92,7 +95,9 @@ EOF
 echo "[synth] $CORE cfg=$CFG clk=${CLK_MHZ}MHz -> $OUT"
 TO=OpenROAD.STAMidPNR-1
 [ "${SYNTH_ONLY:-0}" = 1 ] && TO=Checker.NetlistAssignStatements
-flows/librelane.sh "$BUILD/config.json" --run-tag run --overwrite --to $TO > "$OUT/librelane.log" 2>&1 \
+TOARG="--to $TO"
+[ "${HARDEN:-0}" = 1 ] && TOARG=""
+flows/librelane.sh "$BUILD/config.json" --run-tag run --overwrite $TOARG > "$OUT/librelane.log" 2>&1 \
   || { echo "[synth] LibreLane failed, see $OUT/librelane.log"; exit 1; }
 LR=$BUILD/runs/run
 
@@ -103,6 +108,17 @@ cp "$SYN"/*.log "$OUT/" 2>/dev/null || true
 cp "$LR/resolved.json" "$OUT/"
 cp "$SYN"/*.nl.v "$OUT/netlist.v"
 [ "${SYNTH_ONLY:-0}" = 1 ] && { echo "[synth] done (synthesis only): $OUT"; exit 0; }
+if [ "${HARDEN:-0}" = 1 ]; then
+  # keep sign-off evidence (metrics, STA, DRC, LVS, antenna); GDS/DEF stay in build/
+  mkdir -p "$OUT/final"
+  cp "$LR/final/metrics.json" "$LR/final/metrics.csv" "$OUT/final/"
+  for d in openroad-stapostpnr magic-drc klayout-drc netgen-lvs openroad-checkantennas-1 misc-reportmanufacturability; do
+    src=$(ls -d "$LR"/*-"$d" 2>/dev/null | tail -1) || true
+    [ -n "$src" ] && mkdir -p "$OUT/$d" && cp -R "$src"/*.rpt "$src"/reports "$src"/*summary* "$OUT/$d/" 2>/dev/null || true
+  done
+  echo "[harden] done: $OUT (GDS: $LR/final/gds)"
+  exit 0
+fi
 STA=$(ls -d "$LR"/*-openroad-stamidpnr-1)
 mkdir -p "$OUT/sta_postgpl"
 cp "$STA"/*.rpt "$STA"/state_out.json "$STA"/*.log "$OUT/sta_postgpl/"
