@@ -84,6 +84,19 @@ if e.get("HARDEN") == "1":
     if e.get("PGRT") == "1":
         # extra multi-corner design repair after global routing (LibreLane: experimental)
         cfg["RUN_POST_GRT_DESIGN_REPAIR"] = True
+    if e.get("REPAIR_MARGIN") == "1":
+        # Post-route (RCX) wire loads exceed the pre-route estimates repair works from (e.g. a
+        # clkbuf_1 left driving 105 fF of routed wire, 1.33 ns slew at nom_tt), and the Classic
+        # flow has no design repair after detailed routing. So: buffer long wires, repair to a
+        # tighter target than the 0.75 ns / 0.2 pF sign-off limits (which stay unchanged), and keep
+        # CTS leaf fanout within the 10-fanout constraint.
+        cfg["DESIGN_REPAIR_MAX_WIRE_LENGTH"] = 400
+        cfg["GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH"] = 400
+        cfg["DESIGN_REPAIR_MAX_SLEW_PCT"] = 30
+        cfg["DESIGN_REPAIR_MAX_CAP_PCT"] = 30
+        cfg["GRT_DESIGN_REPAIR_MAX_SLEW_PCT"] = 30
+        cfg["GRT_DESIGN_REPAIR_MAX_CAP_PCT"] = 30
+        cfg["CTS_SINK_CLUSTERING_SIZE"] = 10
 if e["FRONTEND"] == "slang":
     cfg["USE_SLANG"] = True
     cfg["SLANG_ARGUMENTS"] = ["--std", "latest", "--single-unit", "--allow-hierarchical-const",
@@ -97,7 +110,7 @@ EOF
   echo "clk_mhz=$CLK_MHZ"; echo "frontend=${FRONTEND:-slang}"
   echo "patches=$(cd cores/$CORE/patches && ls *.patch 2>/dev/null | tr '\n' ' ')"
   echo "librelane_image=$LIBRELANE_IMAGE"
-  echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}"
+  echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}${REPAIR_MARGIN:+, wire-length 400um + 30% repair margin + CTS cluster 10}"
   echo "pdk=$PDK"; echo "pdk_version=$(basename "$(dirname "$(readlink "$PDK_ROOT/$PDK")")")"
   echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 } > "$OUT/run.info"
