@@ -21,6 +21,8 @@ One entry per decision: date, decision, reason, who decided.
 - 2026-11-10: Layout runs (flows/synth.sh HARDEN=1) exclude `sky130_fd_sc_hd__clkdlybuf4s*` from PnR via `EXTRA_EXCLUDED_CELLS` (same for every core). Reason: OpenROAD repair otherwise uses these clock-delay cells as fanout buffers, causing the max-slew/cap and much of the ss setup failure (STATUS.md, Hazard3 baseline). This is a don't-use restriction, not a waiver (Claude Code, on Dwiti's request to fix with legitimate flow settings).
 - 2026-11-10: fmax from a layout run = 1 / (T − worst register-to-register setup slack) in the post-route STA, reported at nom_tt_025C_1v80 (typical) and nom_ss_100C_1v60 (slow), plus max_ss (slow, max RC) in results/harden_results.csv. Sign-off "clean" requires all nine corners clean.
 
+- 2026-11-10: Layout settings for all cores (flows/synth.sh HARDEN=1 PGRT=1 REPAIR_MARGIN=1): exclude clkdlybuf4s* from PnR, post-GRT design repair, max wire length 400 µm (post-GPL and post-GRT), 30% repair slew/cap margins, CTS sink clustering 10. Sign-off limits unchanged (max transition 0.75 ns, max cap 0.2 pF, max fanout 10). MULTICORNER (PNR_CORNERS) is a no-op for repair/CTS (they already use STA_CORNERS) and is not used.
+
 ## Patches
 | Core | Patch | Reason |
 |---|---|---|
