@@ -32,6 +32,8 @@ COLUMNS = [
 ]
 
 FRONTEND_NAMES = {"slang": "yosys-slang", "verilog": "Yosys read_verilog"}
+# Display names for configs whose run directories use the flow's generic CFG name.
+CONFIG_LABELS = {("ibex", "default"): "small"}
 
 
 def read_kv(path):
@@ -100,7 +102,7 @@ def parse_synth(run_dir):
         mm = re.search(r"Yosys (\S+)", open(log, errors="replace").read(4000))
         yosys_ver = mm.group(1) if mm else ""
     return {
-        "core": info["core"], "core_commit": info["core_commit"], "config": info["config"],
+        "core": info["core"], "core_commit": info["core_commit"], "config": CONFIG_LABELS.get((info["core"], info["config"]), info["config"]),
         "technology": "sky130", "scope": "core", "stage": "synth",
         "clock_target_mhz": info["clk_mhz"], "run_id": os.path.basename(run_dir),
         "frontend": FRONTEND_NAMES.get(info["frontend"], info["frontend"]),
@@ -144,7 +146,7 @@ def md_synth(rows):
     return "\n".join(out)
 
 
-HEADLINE = {"hazard3": "default", "ibex": "default", "veer_el2": "min"}
+HEADLINE = {"hazard3": "default", "ibex": "small", "veer_el2": "min"}
 
 
 def md_headline(rows):

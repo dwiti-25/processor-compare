@@ -7,3 +7,9 @@
 [submodule "cores/veer_el2/rtl"]
 	path = cores/veer_el2/rtl
 	url = https://github.com/chipsalliance/Cores-VeeR-EL2
+[submodule "common/bench/riscv-tests"]
+	path = common/bench/riscv-tests
+	url = https://github.com/riscv-software-src/riscv-tests
+[submodule "common/bench/coremark"]
+	path = common/bench/coremark
+	url = https://github.com/eembc/coremark

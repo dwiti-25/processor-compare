@@ -38,3 +38,5 @@ smoke:
 
 all-results:
 	scripts/collect.py --update-report reports/initial_synthesis.md
+	scripts/collect.py --headline --update-report reports/email_prof_draft.md
+	~/tools/venv/bin/python scripts/md2pdf.py reports/initial_synthesis.md

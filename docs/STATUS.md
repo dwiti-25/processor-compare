@@ -13,6 +13,13 @@ Update at the start and end of every Claude Code session.
 3. Synthesize core-only at 50 MHz with LibreLane's Yosys step; timing estimate with OpenROAD.
 4. `scripts/collect.py` → `results/results.csv` → `reports/initial_synthesis.md` + email draft.
 
+## Plan for P1 (2026-11-09): benchmarks in RTL sim
+1. Shared memory map: RAM at 0x0 (entry 0x80), MMIO at 0x8000_0000: putchar, exit, cycle-count start/stop markers.
+2. One wrapper per core (`cores/<core>/wrapper/`) with identical simple instruction and data ports; Hazard3 AHB, Ibex OBI and VeeR AXI4 adapt in the wrapper.
+3. `common/tb`: fixed-latency dual-port memory model + MMIO + cycle counter, Verilator top shared by all cores.
+4. `common/bench`: hello, riscv-tests rv32ui/um/uc, Dhrystone, CoreMark, one Makefile with identical flags (rv32imc_zicsr).
+5. Run all on all three cores; report cycles and CoreMark/MHz vs published figures. No layout runs (P2) until Docker memory is raised (Dwiti).
+
 ## Log
 - 2026-11-06: Professor confirmed Hazard3, Ibex, VeeR EL2; SKY130 + SCL 180 with I/O pads. Repo kit created.
 - 2026-11-09: Tools installed on the MacBook (see VERSIONS.md). LibreLane runs on macOS through its Docker image (`flows/librelane.sh`); `--dockerized` needs a TTY, so we call `docker run` directly.
