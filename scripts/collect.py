@@ -170,9 +170,12 @@ def md_headline(rows):
     out = ["| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Est. fmax, tt (MHz)* |",
            "|---|---:|---:|---:|---:|---:|"]
     for r in rows:
-        out.append(f"| {names[r['core']]} | {r['cells']:,} | {r['area_um2']:,.0f} | "
+        name = names[r["core"]] + ("" if r["top"] == "wrapper" else " †")
+        out.append(f"| {name} | {r['cells']:,} | {r['area_um2']:,.0f} | "
                    f"{fmt(r['area_um2'] / base if base else '', '.2f')}× | {r['flops']:,} | "
                    f"{fmt(r['fmax_est_mhz_postcts_tt'], '.0f')} |")
+    if any(r["top"] != "wrapper" for r in rows):
+        out.append("\n† Synthesized from the core's own top, not yet with the common wrapper; to be updated.")
     return "\n".join(out)
 
 

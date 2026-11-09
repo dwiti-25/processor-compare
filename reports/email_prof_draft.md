@@ -12,9 +12,11 @@ configurations with unused features disabled.
 <!-- BEGIN collect.py --md synth -->
 | Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Est. fmax, tt (MHz)* |
 |---|---:|---:|---:|---:|---:|
-| Hazard3 | 13,152 | 156,519 | 1.00× | 1,940 | pending |
+| Hazard3 | 13,152 | 156,519 | 1.00× | 1,940 | 78 |
 | Ibex (small) | 11,922 | 150,477 | 0.96× | 1,924 | pending |
-| VeeR EL2 (min) | 56,639 | 650,156 | 4.15× | 7,071 | pending |
+| VeeR EL2 (min) † | 56,639 | 650,156 | 4.15× | 7,071 | pending |
+
+† Synthesized from the core's own top, not yet with the common wrapper; to be updated.
 <!-- END collect.py -->
 
 \* Pre-route estimate at the typical corner (25 °C, 1.8 V): after placement, clock-tree synthesis and

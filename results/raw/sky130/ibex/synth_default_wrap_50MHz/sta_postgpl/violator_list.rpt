@@ -1,0 +1,20 @@
+
+===========================================================================
+Violator List
+============================================================================
+[setup reg-reg] _21520_/Q -> _19758_/D : -0.291964
+[setup reg-reg] _21520_/Q -> _19756_/D : -0.291781
+[setup reg-reg] _21520_/Q -> _19762_/D : -0.291276
+[setup reg-reg] _21520_/Q -> _19761_/D : -0.291060
+[setup reg-reg] _21520_/Q -> _19757_/D : -0.290431
+[setup reg-reg] _21520_/Q -> _19759_/D : -0.290418
+[setup reg-reg] _21520_/Q -> _19760_/D : -0.289466
+[setup reg-reg] _21520_/Q -> _19754_/D : -0.289095
+[setup reg-reg] _21520_/Q -> _19752_/D : -0.288606
+[setup reg-reg] _21520_/Q -> _19755_/D : -0.286944
+Writing metric timing__hold_vio__count__corner:nom_tt_025C_1v80: 0
+Writing metric timing__hold_r2r__ws__corner:nom_tt_025C_1v80: 0.027499
+Writing metric timing__hold_r2r_vio__count__corner:nom_tt_025C_1v80: 0
+Writing metric timing__setup_vio__count__corner:nom_tt_025C_1v80: 10
+Writing metric timing__setup_r2r__ws__corner:nom_tt_025C_1v80: -0.291964
+Writing metric timing__setup_r2r_vio__count__corner:nom_tt_025C_1v80: 10

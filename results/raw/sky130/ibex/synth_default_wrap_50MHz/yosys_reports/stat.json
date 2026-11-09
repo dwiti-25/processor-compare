@@ -1,6 +1,6 @@
 {
    "creator": "Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)",
-   "invocation": "stat -json -liberty /Users/dwitisuchak/processor-compare/build/librelane/ibex/synth_default_wrap_50MHz/runs/run/tmp/adef714b4a6e41848c99b10a4c1b7e68.lib ",
+   "invocation": "stat -json -liberty /Users/dwitisuchak/processor-compare/build/librelane/ibex/synth_default_wrap_50MHz/runs/run/tmp/c5ca38baf68c40b585803717871faba9.lib ",
    "modules": {
       "\\ibex_wrap": {
          "num_wires":         11803,

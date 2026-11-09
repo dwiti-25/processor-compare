@@ -32,8 +32,8 @@ Dwiti Suchak, Ayush. BITS Pilani. Status as of 9 Nov 2026.
 <!-- BEGIN collect.py --md synth -->
 | Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | Est. fmax, post-CTS, tt (MHz) | Reg-to-reg slack @ target, post-CTS (ns) | Est. fmax, post-GPL, tt (MHz) |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Hazard3 | default | core + wrapper | Yosys read_verilog | 13,152 | 156,519 | 1.00× | 1,940 | 0 | pending | pending | pending |
-| Ibex | small | core + wrapper | yosys-slang | 11,922 | 150,477 | 0.96× | 1,924 | 1 | pending | pending | pending |
+| Hazard3 | default | core + wrapper | Yosys read_verilog | 13,152 | 156,519 | 1.00× | 1,940 | 0 | 78 | +7.12 | 48 |
+| Ibex | small | core + wrapper | yosys-slang | 11,922 | 150,477 | 0.96× | 1,924 | 1 | pending | pending | 49 |
 | VeeR EL2 | min | vendor top (old) | yosys-slang | 56,639 | 650,156 | 4.15× | 7,071 | 258 | pending | pending | 25 |
 | VeeR EL2 | bp | vendor top (old) | yosys-slang | 61,383 | 720,779 | 4.61× | 8,521 | 305 | pending | pending | 20 |
 <!-- END collect.py -->
