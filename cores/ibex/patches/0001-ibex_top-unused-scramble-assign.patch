@@ -1,0 +1,14 @@
+diff --git a/rtl/ibex_top.sv b/rtl/ibex_top.sv
+index 2513ca0c..ffc5383c 100644
+--- a/rtl/ibex_top.sv
++++ b/rtl/ibex_top.sv
+@@ -656,7 +656,8 @@ module ibex_top import ibex_pkg::*; import ibex_cheriot_pkg::*; #(
+ 
+   end else begin : gen_noscramble
+ 
+-    logic unused_scramble_inputs = scramble_key_valid_i & (|scramble_key_i) & (|RndCnstIbexKey) &
++    logic unused_scramble_inputs;
++    assign unused_scramble_inputs = scramble_key_valid_i & (|scramble_key_i) & (|RndCnstIbexKey) &
+                                    (|scramble_nonce_i) & (|RndCnstIbexNonce) & scramble_req_q &
+                                    ic_scr_key_req & scramble_key_valid_d & scramble_req_d &
+                                    (|scramble_key_q) & (|scramble_nonce_q) & scramble_key_valid_q &

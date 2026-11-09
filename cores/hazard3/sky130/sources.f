@@ -1,0 +1,23 @@
+// Hazard3 core-only synthesis sources (paths relative to repo root)
++incdir+cores/hazard3/rtl/hdl
+cores/hazard3/rtl/hdl/hazard3_core.v
+cores/hazard3/rtl/hdl/hazard3_cpu_1port.v
+cores/hazard3/rtl/hdl/hazard3_cpu_2port.v
+cores/hazard3/rtl/hdl/arith/hazard3_alu.v
+cores/hazard3/rtl/hdl/arith/hazard3_branchcmp.v
+cores/hazard3/rtl/hdl/arith/hazard3_mul_fast.v
+cores/hazard3/rtl/hdl/arith/hazard3_muldiv_seq.v
+cores/hazard3/rtl/hdl/arith/hazard3_onehot_encode.v
+cores/hazard3/rtl/hdl/arith/hazard3_onehot_priority.v
+cores/hazard3/rtl/hdl/arith/hazard3_onehot_priority_dynamic.v
+cores/hazard3/rtl/hdl/arith/hazard3_priority_encode.v
+cores/hazard3/rtl/hdl/arith/hazard3_shift_barrel.v
+cores/hazard3/rtl/hdl/hazard3_csr.v
+cores/hazard3/rtl/hdl/hazard3_decode.v
+cores/hazard3/rtl/hdl/hazard3_frontend.v
+cores/hazard3/rtl/hdl/hazard3_instr_decompress.v
+cores/hazard3/rtl/hdl/hazard3_irq_ctrl.v
+cores/hazard3/rtl/hdl/hazard3_pmp.v
+cores/hazard3/rtl/hdl/hazard3_power_ctrl.v
+cores/hazard3/rtl/hdl/hazard3_regfile_1w2r.v
+cores/hazard3/rtl/hdl/hazard3_triggers.v

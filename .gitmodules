@@ -1,0 +1,9 @@
+[submodule "cores/hazard3/rtl"]
+	path = cores/hazard3/rtl
+	url = https://github.com/Wren6991/Hazard3
+[submodule "cores/ibex/rtl"]
+	path = cores/ibex/rtl
+	url = https://github.com/lowRISC/ibex
+[submodule "cores/veer_el2/rtl"]
+	path = cores/veer_el2/rtl
+	url = https://github.com/chipsalliance/Cores-VeeR-EL2
