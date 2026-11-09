@@ -201,7 +201,7 @@
         "/Users/dwitisuchak/processor-compare/cores/veer_el2/rtl/design/lsu/el2_lsu_stbuf.sv",
         "/Users/dwitisuchak/processor-compare/cores/veer_el2/rtl/design/lsu/el2_lsu_bus_buffer.sv",
         "/Users/dwitisuchak/processor-compare/cores/veer_el2/rtl/design/lsu/el2_lsu_bus_intf.sv",
-        "/Users/dwitisuchak/processor-compare/build/patched/veer_el2/design/lsu/el2_lsu_ecc.sv",
+        "/Users/dwitisuchak/processor-compare/build/patched/synth/veer_el2/design/lsu/el2_lsu_ecc.sv",
         "/Users/dwitisuchak/processor-compare/cores/veer_el2/rtl/design/lsu/el2_lsu_dccm_mem.sv",
         "/Users/dwitisuchak/processor-compare/cores/veer_el2/rtl/design/lsu/el2_lsu_dccm_ctl.sv",
         "/Users/dwitisuchak/processor-compare/cores/veer_el2/rtl/design/lsu/el2_lsu_trigger.sv",

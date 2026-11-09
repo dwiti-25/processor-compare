@@ -40,7 +40,7 @@ INCS="$(sed -n 's/^+incdir+//p' "cores/$CORE/sky130/sources.f") $EXTRA_INC"
 
 # Vendor RTL is never edited: files touched by cores/<core>/patches/*.patch are copied to
 # build/patched/<core>/, patched there, and substituted into the source list.
-PATCHED=build/patched/$CORE
+PATCHED=build/patched/synth/$CORE
 rm -rf "$PATCHED"
 for pf in cores/$CORE/patches/*.patch; do
   [ -f "$pf" ] || continue

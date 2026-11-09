@@ -14,7 +14,7 @@ configurations with unused features disabled.
 |---|---:|---:|---:|---:|---:|
 | Hazard3 | 13,152 | 156,519 | 1.00× | 1,940 | 78 |
 | Ibex (small) | 11,922 | 150,477 | 0.96× | 1,924 | pending |
-| VeeR EL2 (min) | 50,523 | 577,762 | 3.69× | 6,387 | pending |
+| VeeR EL2 (min) | 50,509 | 578,750 | 3.70× | 6,384 | pending |
 <!-- END collect.py -->
 
 \* Pre-route estimate at the typical corner (25 °C, 1.8 V): after placement, clock-tree synthesis and

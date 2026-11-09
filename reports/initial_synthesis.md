@@ -36,7 +36,7 @@ Dwiti Suchak, Ayush. BITS Pilani. Status as of 9 Nov 2026.
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Hazard3 | default | core + wrapper | Yosys read_verilog | 13,152 | 156,519 | 1.00× | 1,940 | 0 | 78 | +7.12 | 48 |
 | Ibex | small | core + wrapper | yosys-slang | 11,922 | 150,477 | 0.96× | 1,924 | 1 | pending | pending | 49 |
-| VeeR EL2 | min | core + wrapper | yosys-slang | 50,523 | 577,762 | 3.69× | 6,387 | 224 | pending | pending | pending |
+| VeeR EL2 | min | core + wrapper | yosys-slang | 50,509 | 578,750 | 3.70× | 6,384 | 224 | pending | pending | pending |
 | VeeR EL2 | bp | vendor top (old) | yosys-slang | 61,383 | 720,779 | 4.61× | 8,521 | 305 | pending | pending | 20 |
 <!-- END collect.py -->
 

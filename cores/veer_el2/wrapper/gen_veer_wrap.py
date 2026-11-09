@@ -28,6 +28,7 @@ CONNECT = {
     "soft_int": "irq_soft",
     "extintsrc_req": "irq_ext",
     "scan_mode": "1'b0",
+    "mpc_reset_run_req": "1'b1",        # run after reset (0 = come out of reset halted)
     # system bus (debug master) and DMA slave: idle, always ready
     "sb_axi_awready": "1'b1", "sb_axi_wready": "1'b1", "sb_axi_arready": "1'b1",
     "dma_axi_bready": "1'b1", "dma_axi_rready": "1'b1",

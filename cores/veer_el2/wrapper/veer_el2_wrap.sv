@@ -77,7 +77,7 @@ import el2_pkg::*;
     .core_id                     (28'h0),
     .mpc_debug_halt_req          ('0),
     .mpc_debug_run_req           ('0),
-    .mpc_reset_run_req           ('0),
+    .mpc_reset_run_req           (1'b1),
     .mpc_debug_halt_ack          (),
     .mpc_debug_run_ack           (),
     .debug_brkpt_status          (),

@@ -23,7 +23,7 @@ mkdir -p "$SIMDIR" "$LOGDIR"
 # same sources (and patches) as synthesis
 SRCS="${PRE_SOURCES:-} $(grep -v -e '^//' -e '^+' -e '^\s*$' "cores/$CORE/sky130/sources.f" | tr '\n' ' ')"
 INCS="$(sed -n 's/^+incdir+//p' "cores/$CORE/sky130/sources.f") $EXTRA_INC"
-PATCHED=build/patched/$CORE
+PATCHED=build/patched/sim/$CORE
 rm -rf "$PATCHED"
 for pf in cores/$CORE/patches/*.patch; do
   [ -f "$pf" ] || continue
