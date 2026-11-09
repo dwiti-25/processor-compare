@@ -25,6 +25,15 @@ SIM_CSV = os.path.join(REPO, "results", "sim_results.csv")
 SIM_COLUMNS = ["core", "config", "bench", "exit", "cycles", "marked_cycles", "iterations",
                "coremark_per_mhz", "dhrystone_cycles_per_run", "dmips_per_mhz", "log_path"]
 COREMARK_ITER = 10      # common/bench/Makefile COREMARK_ITER
+# Published CoreMark/MHz (source, configuration it was measured with)
+PUBLISHED = {
+    "hazard3": (4.15, "https://github.com/Wren6991/Hazard3#rp2350",
+                "RP2350 config: Zba/Zbb/Zbkb/Zbs, fast multiply, branch predictor; GCC -O3 + tuning flags"),
+    "ibex": (2.47, "https://github.com/lowRISC/ibex#configuration",
+             "\"small\" config on Ibex Simple System; -O3 -funroll-all-loops"),
+    "veer_el2": (3.6, "https://www.westerndigital.com/company/newsroom/press-releases/2019/2019-12-10-western-digital-brings-memory-closer-to-compute-with-new-risc-v-innovations",
+                 "Western Digital, simulated; memory configuration not stated"),
+}
 DHRYSTONE_RUNS = 500    # riscv-tests dhrystone.h NUMBER_OF_RUNS
 
 COLUMNS = [
@@ -190,18 +199,14 @@ def md_synth(rows):
     order = {"hazard3": 0, "ibex": 1, "veer_el2": 2}
     names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
     rows = sorted(rows, key=lambda r: (order.get(r["core"], 9), {"bp": 1}.get(r["config"], 0), float(r["clock_target_mhz"])))
-    fmt = lambda v, f: format(v, f) if v != "" else "pending"
     base = next((r["area_um2"] for r in rows if r["core"] == "hazard3"), None)
-    out = ["| Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | "
-           "Est. fmax, post-CTS, tt (MHz) | Reg-to-reg slack @ target, post-CTS (ns) | Est. fmax, post-GPL, tt (MHz) |",
-           "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
+    out = ["| Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | fmax |",
+           "|---|---|---|---|---:|---:|---:|---:|---:|---|"]
     for r in rows:
         top = "core + wrapper" if r["top"] == "wrapper" else "vendor top (old)"
         out.append(f"| {names.get(r['core'], r['core'])} | {r['config']} | {top} | {r['frontend']} | "
-                   f"{r['cells']:,} | {r['area_um2']:,.0f} | {fmt(r['area_um2'] / base if base else '', '.2f')}× | "
-                   f"{r['flops']:,} | {r['latches']:,} | "
-                   f"{fmt(r['fmax_est_mhz_postcts_tt'], '.0f')} | {fmt(r['reg2reg_slack_ns_postcts_tt'], '+.2f')} | "
-                   f"{fmt(r['fmax_est_mhz_postgpl_tt'], '.0f')} |")
+                   f"{r['cells']:,} | {r['area_um2']:,.0f} | {r['area_um2'] / base:.2f}× | "
+                   f"{r['flops']:,} | {r['latches']:,} | pending (full layout) |")
     return "\n".join(out)
 
 
@@ -209,21 +214,64 @@ HEADLINE = {"hazard3": "default", "ibex": "small", "veer_el2": "min"}
 
 
 def md_headline(rows):
-    """Short table for emails: one headline config per core, post-CTS estimate only."""
+    """Short table for emails: one headline config per core."""
     names = {"hazard3": "Hazard3", "ibex": "Ibex (small)", "veer_el2": "VeeR EL2 (min)"}
     rows = [r for c, cfg in HEADLINE.items() for r in rows if r["core"] == c and r["config"] == cfg]
     base = next((r["area_um2"] for r in rows if r["core"] == "hazard3"), None)
-    fmt = lambda v, f: format(v, f) if v != "" else "pending"
-    out = ["| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Est. fmax, tt (MHz)* |",
-           "|---|---:|---:|---:|---:|---:|"]
+    out = ["| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | fmax |",
+           "|---|---:|---:|---:|---:|---|"]
     for r in rows:
         name = names[r["core"]] + ("" if r["top"] == "wrapper" else " †")
-        out.append(f"| {name} | {r['cells']:,} | {r['area_um2']:,.0f} | "
-                   f"{fmt(r['area_um2'] / base if base else '', '.2f')}× | {r['flops']:,} | "
-                   f"{fmt(r['fmax_est_mhz_postcts_tt'], '.0f')} |")
+        out.append(f"| {name} | {r['cells']:,} | {r['area_um2']:,.0f} | {r['area_um2'] / base:.2f}× | "
+                   f"{r['flops']:,} | pending, will come from full layout |")
     if any(r["top"] != "wrapper" for r in rows):
         out.append("\n† Synthesized from the core's own top, not yet with the common wrapper; to be updated.")
     return "\n".join(out)
+
+
+def md_sim_email(rows):
+    """Benchmark table with published CoreMark/MHz and measured/published ratio."""
+    names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
+    out = ["| Core | Config | Tests passed | CoreMark/MHz | DMIPS/MHz | Published CoreMark/MHz | Measured / published |",
+           "|---|---|---:|---:|---:|---:|---:|"]
+    for core, cfg in (("hazard3", "default"), ("ibex", "small"), ("veer_el2", "min"), ("veer_el2", "tcm")):
+        cm = next((r for r in rows if r["core"] == core and r["config"] == cfg and r["bench"] == "coremark"), None)
+        dh = next((r for r in rows if r["core"] == core and r["config"] == cfg and r["bench"] == "dhrystone"), None)
+        if not cm or cm["coremark_per_mhz"] == "":
+            continue
+        pub = PUBLISHED[core][0]
+        label = {"min": "no TCM (min)", "tcm": "ICCM + DCCM (tcm)"}.get(cfg, cfg)
+        rs = [r for r in rows if r["core"] == core and r["config"] == cfg]
+        passed = f"{sum(r['exit'] == '0' for r in rs)}/{len(rs)}"
+        out.append(f"| {names[core]} | {label} | {passed} | {cm['coremark_per_mhz']:.2f} | "
+                   f"{dh['dmips_per_mhz'] if dh else '':.2f} | {pub} | {cm['coremark_per_mhz'] / pub:.2f} |")
+    return "\n".join(out)
+
+
+def veer_tcm_ratio(rows):
+    get = lambda cfg: next(r["coremark_per_mhz"] for r in rows
+                           if r["core"] == "veer_el2" and r["config"] == cfg and r["bench"] == "coremark")
+    return f"{get('tcm') / get('min'):.1f}"
+
+
+def data_time(paths):
+    import datetime
+    t = max(os.path.getmtime(p) for p in paths)
+    return datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d %H:%M %Z").strip() + " (IST)"
+
+
+def fill_markers(path, tables):
+    """Replace every <!-- BEGIN collect.py:<name> --> ... <!-- END collect.py --> block."""
+    text = open(path).read()
+    out, pos = [], 0
+    for m in re.finditer(r"<!-- BEGIN collect\.py:(\w+) -->", text):
+        end = text.index("<!-- END collect.py -->", m.end())
+        out.append(text[pos:m.end()])
+        body = tables[m.group(1)]
+        out.append(body if "\n" not in body else "\n" + body + "\n")
+        pos = end
+    out.append(text[pos:])
+    open(path, "w").write("".join(out))
 
 
 def main():
@@ -253,11 +301,18 @@ def main():
     if a.md == "synth":
         print(table)
     if a.update_report:
-        begin, end = "<!-- BEGIN collect.py --md synth -->", "<!-- END collect.py -->"
+        srcs = [os.path.join(REPO, r["report_path"], "yosys_reports", "stat.json") for r in synth] + \
+               [os.path.join(REPO, r["log_path"]) for r in sim]
+        tables = {"synth": md_synth(synth), "headline": md_headline(synth), "sim": md_sim(sim),
+                  "sim_email": md_sim_email(sim), "veer_tcm_ratio": veer_tcm_ratio(sim),
+                  "data_time": data_time(srcs)}
         text = open(a.update_report).read()
-        i, j = text.index(begin) + len(begin), text.index(end)
-        open(a.update_report, "w").write(text[:i] + "\n" + table + "\n" + text[j:])
-        print(f"[collect] updated table in {a.update_report}", file=sys.stderr)
+        if "<!-- BEGIN collect.py --md synth -->" in text:   # legacy single-table marker
+            text = text.replace("<!-- BEGIN collect.py --md synth -->",
+                                "<!-- BEGIN collect.py:" + ("headline" if a.headline else "synth") + " -->")
+            open(a.update_report, "w").write(text)
+        fill_markers(a.update_report, tables)
+        print(f"[collect] updated tables in {a.update_report}", file=sys.stderr)
 
 
 if __name__ == "__main__":
