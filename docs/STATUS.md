@@ -3,15 +3,12 @@
 Update at the start and end of every Claude Code session.
 
 ## Current
-- Phase: P0 (setup + initial synthesis), SKY130 only (FPGA and SCL 180 deferred by Dwiti, 2026-11-09)
-- Running in background: post-CTS timing estimates via `flows/postcts.sh`, sequential: Ibex → VeeR min → VeeR bp → Hazard3 (log: `build/postcts.console.log`). Post-CTS timing repair is slow at 50 MHz; VeeR may take hours.
-- Blocked on: none. FPGA/SCL deferred. The rest of SKY130 (hardening, pads) can run on this Mac via Docker, but VeeR hardening may be slow with 8 GB RAM / 3.8 GB Docker VM limit (see "Machine" below).
-
-## Plan for P0 (2026-11-09)
-1. Install tools in user space on Dwiti's MacBook (OSS CAD Suite, LibreLane 3.0.17 via Docker, sky130A via ciel, GCC, sv2v); prove the flow with a counter to GDS.
-2. Add Hazard3, Ibex and VeeR EL2 as pinned submodules; choose configs per the CLAUDE.md rules.
-3. Synthesize core-only at 50 MHz with LibreLane's Yosys step; timing estimate with OpenROAD.
-4. `scripts/collect.py` → `results/results.csv` → `reports/initial_synthesis.md` + email draft.
+- Phase: P1 (benchmarks in RTL sim), SKY130 only. P0 report/email final, apart from pending timing and VeeR wrapped rows.
+- Running in background (Docker):
+  - VeeR min post-CTS estimate, old vendor top (`build/postcts.console.log`).
+  - Wrapped Hazard3 then Ibex: placement + post-GPL + post-CTS estimates (`build/wrap_est.console.log`).
+- Stopped by Claude: old-top Hazard3 post-CTS and queued old-top VeeR bp post-CTS. Both superseded by the core + wrapper runs.
+- Blocked on: VeeR RTL sim waits for host memory (swap nearly full while Docker jobs run). No layout runs (Prompt 5) until Dwiti raises Docker memory.
 
 ## Plan for P1 (2026-11-09): benchmarks in RTL sim
 1. Shared memory map: RAM at 0x0 (entry 0x80), MMIO at 0x8000_0000: putchar, exit, cycle-count start/stop markers.
@@ -43,3 +40,5 @@ Docker VM capped at 3.8 GB, 30 GB free disk. Hazard3/Ibex hardening should be fi
 ~0.65 mm² cell area) should fit, but routing/DRC will be slow and memory-tight. For the overnight
 clock sweep (3 cores × 3 points) a Linux x86 box with ≥16 GB RAM and ≥8 cores (BITS lab server or
 cloud VM) would be much faster. Raising Docker Desktop's memory limit to ~6 GB is the cheap fix here.
+- 2026-11-09: Wrapped (core + thin wrapper) synthesis for Hazard3 and Ibex; the report now prefers wrapped rows. VeeR wrapped synthesis is still to run.
+- 2026-11-09: P1: common wrappers, testbench and benchmarks built. Hazard3 and Ibex pass all 52 programs (hello, Dhrystone, CoreMark, 49 riscv-tests). The Ibex hang was a TB bug: rst_n started at 0 with no falling edge, so Ibex's async-reset flops behind its clock gate never reset (priv level came up as U-mode). Fixed in tb_top.
