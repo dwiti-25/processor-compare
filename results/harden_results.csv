@@ -1,0 +1,2 @@
+core,config,top,clock_target_mhz,run_id,magic_drc,klayout_drc,lvs_errors,antenna_nets,route_drc,setup_ws_tt_ns,setup_ws_ss_ns,setup_ws_ff_ns,setup_ws_worst_ns,setup_vio_count,hold_ws_worst_ns,hold_vio_count,max_slew_vio,max_cap_vio,die_area_um2,core_area_um2,stdcells,power_total_w,signoff_clean,report_path
+hazard3,default,wrapper,40,harden_default_wrap_40MHz,0,0,0,0,0,8.253,-4.132,11.704,-5.186,1375,0.107,0,5707,36,331626,311899,21879,0.027770768851041794,False,results/raw/sky130/hazard3/harden_default_wrap_40MHz

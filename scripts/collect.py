@@ -24,6 +24,12 @@ CSV = os.path.join(REPO, "results", "results.csv")
 SIM_CSV = os.path.join(REPO, "results", "sim_results.csv")
 SIM_COLUMNS = ["core", "config", "bench", "exit", "cycles", "marked_cycles", "iterations",
                "coremark_per_mhz", "dhrystone_cycles_per_run", "dmips_per_mhz", "log_path"]
+HARDEN_CSV = os.path.join(REPO, "results", "harden_results.csv")
+HARDEN_COLUMNS = ["core", "config", "top", "clock_target_mhz", "run_id", "magic_drc", "klayout_drc", "lvs_errors",
+                  "antenna_nets", "route_drc", "setup_ws_tt_ns", "setup_ws_ss_ns", "setup_ws_ff_ns",
+                  "setup_ws_worst_ns", "setup_vio_count", "hold_ws_worst_ns", "hold_vio_count",
+                  "max_slew_vio", "max_cap_vio", "die_area_um2", "core_area_um2", "stdcells",
+                  "power_total_w", "signoff_clean", "report_path"]
 COREMARK_ITER = 10      # common/bench/Makefile COREMARK_ITER
 # Published CoreMark/MHz (source, configuration it was measured with)
 PUBLISHED = {
@@ -153,6 +159,53 @@ def prefer_wrapped(rows):
     return list(best.values())
 
 
+def collect_harden():
+    """Core-only layout runs (results/raw/sky130/<core>/harden_*): sign-off metrics from LibreLane."""
+    rows = []
+    for d in sorted(glob.glob(os.path.join(RAW, "sky130", "*", "harden_*"))):
+        mf = os.path.join(d, "final", "metrics.json")
+        if not os.path.exists(mf):
+            continue
+        info = read_kv(os.path.join(d, "run.info"))
+        m = json.load(open(mf))
+        g = lambda k: m.get(k, "")
+        r = {
+            "core": info["core"], "config": CONFIG_LABELS.get((info["core"], info["config"]), info["config"]),
+            "top": "wrapper" if info["top"].endswith("_wrap") else "vendor",
+            "clock_target_mhz": info["clk_mhz"], "run_id": os.path.basename(d),
+            "magic_drc": g("magic__drc_error__count"), "klayout_drc": g("klayout__drc_error__count"),
+            "lvs_errors": g("design__lvs_error__count"), "antenna_nets": g("antenna__violating__nets"),
+            "route_drc": g("route__drc_errors"),
+            "setup_ws_tt_ns": round(g("timing__setup__ws__corner:nom_tt_025C_1v80"), 3),
+            "setup_ws_ss_ns": round(g("timing__setup__ws__corner:nom_ss_100C_1v60"), 3),
+            "setup_ws_ff_ns": round(g("timing__setup__ws__corner:nom_ff_n40C_1v95"), 3),
+            "setup_ws_worst_ns": round(g("timing__setup__ws"), 3), "setup_vio_count": g("timing__setup_vio__count"),
+            "hold_ws_worst_ns": round(g("timing__hold__ws"), 3), "hold_vio_count": g("timing__hold_vio__count"),
+            "max_slew_vio": g("design__max_slew_violation__count"), "max_cap_vio": g("design__max_cap_violation__count"),
+            "die_area_um2": round(g("design__die__area"), 1), "core_area_um2": round(g("design__core__area"), 1),
+            "stdcells": g("design__instance__count__stdcell"), "power_total_w": g("power__total"),
+            "report_path": os.path.relpath(d, REPO),
+        }
+        r["signoff_clean"] = all(r[k] == 0 for k in ("magic_drc", "klayout_drc", "lvs_errors", "antenna_nets",
+                                                     "setup_vio_count", "hold_vio_count", "max_slew_vio", "max_cap_vio"))
+        rows.append(r)
+    return rows
+
+
+def md_harden(rows):
+    names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
+    out = ["| Core | Clock (MHz) | DRC (Magic/KLayout) | LVS | Antenna | Setup WS tt / ss / ff (ns) | Setup viol. | "
+           "Hold WS (ns) | Slew / cap viol. | Core area (µm²) | Std cells | Power (mW) | Sign-off clean |",
+           "|---|---:|---|---:|---:|---|---:|---:|---|---:|---:|---:|---|"]
+    for r in sorted(rows, key=lambda r: (r["core"], float(r["clock_target_mhz"]))):
+        out.append(f"| {names.get(r['core'], r['core'])} | {r['clock_target_mhz']} | {r['magic_drc']}/{r['klayout_drc']} | "
+                   f"{r['lvs_errors']} | {r['antenna_nets']} | {r['setup_ws_tt_ns']:+.2f} / {r['setup_ws_ss_ns']:+.2f} / "
+                   f"{r['setup_ws_ff_ns']:+.2f} | {r['setup_vio_count']} | {r['hold_ws_worst_ns']:+.2f} | "
+                   f"{r['max_slew_vio']} / {r['max_cap_vio']} | {r['core_area_um2']:,.0f} | {r['stdcells']:,} | "
+                   f"{r['power_total_w'] * 1000:.1f} | {'yes' if r['signoff_clean'] else 'no'} |")
+    return "\n".join(out)
+
+
 def collect_sim():
     """RTL simulation results: one row per (core config, benchmark) from results/raw/sim logs."""
     rows = []
@@ -276,7 +329,7 @@ def fill_markers(path, tables):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--md", choices=["synth", "sim"], help="print a Markdown table to stdout")
+    ap.add_argument("--md", choices=["synth", "sim", "harden"], help="print a Markdown table to stdout")
     ap.add_argument("--update-report", metavar="MD", help="replace the synth table inside MD's markers")
     ap.add_argument("--headline", action="store_true", help="use the short one-config-per-core table")
     a = ap.parse_args()
@@ -295,6 +348,15 @@ def main():
     print(f"[collect] wrote {len(sim)} rows to {os.path.relpath(SIM_CSV, REPO)}", file=sys.stderr)
     if a.md == "sim":
         print(md_sim(sim))
+        return
+    harden = collect_harden()
+    with open(HARDEN_CSV, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=HARDEN_COLUMNS)
+        w.writeheader()
+        w.writerows(harden)
+    print(f"[collect] wrote {len(harden)} rows to {os.path.relpath(HARDEN_CSV, REPO)}", file=sys.stderr)
+    if a.md == "harden":
+        print(md_harden(harden))
         return
     synth = prefer_wrapped([r for r in rows if r["stage"] == "synth"])
     table = md_headline(synth) if a.headline else md_synth(synth)
