@@ -97,6 +97,12 @@ if e.get("HARDEN") == "1":
         cfg["GRT_DESIGN_REPAIR_MAX_SLEW_PCT"] = 30
         cfg["GRT_DESIGN_REPAIR_MAX_CAP_PCT"] = 30
         cfg["CTS_SINK_CLUSTERING_SIZE"] = 10
+    if e.get("MULTICORNER") == "1":
+        # LibreLane uses PNR_CORNERS or, if unset, only DEFAULT_CORNER (nom_tt) for every PnR step
+        # (repair, CTS, timing repair), despite its docs saying STA_CORNERS. Give PnR the corners
+        # that set the limits: worst setup/slew (ss, incl. max RC) and worst hold (ff, min RC).
+        cfg["PNR_CORNERS"] = ["nom_tt_025C_1v80", "nom_ss_100C_1v60", "max_ss_100C_1v60",
+                              "nom_ff_n40C_1v95", "min_ff_n40C_1v95"]
 if e["FRONTEND"] == "slang":
     cfg["USE_SLANG"] = True
     cfg["SLANG_ARGUMENTS"] = ["--std", "latest", "--single-unit", "--allow-hierarchical-const",
@@ -110,7 +116,7 @@ EOF
   echo "clk_mhz=$CLK_MHZ"; echo "frontend=${FRONTEND:-slang}"
   echo "patches=$(cd cores/$CORE/patches && ls *.patch 2>/dev/null | tr '\n' ' ')"
   echo "librelane_image=$LIBRELANE_IMAGE"
-  echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}${REPAIR_MARGIN:+, wire-length 400um + 30% repair margin + CTS cluster 10}"
+  echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}${REPAIR_MARGIN:+, wire-length 400um + 30% repair margin + CTS cluster 10}${MULTICORNER:+, multi-corner PnR (tt/ss/ff)}"
   echo "pdk=$PDK"; echo "pdk_version=$(basename "$(dirname "$(readlink "$PDK_ROOT/$PDK")")")"
   echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 } > "$OUT/run.info"
