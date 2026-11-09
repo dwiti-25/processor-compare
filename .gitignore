@@ -1,0 +1,18 @@
+# big run directories
+runs/
+**/runs/
+*.vcd
+*.fst
+*.jou
+*.log.bak
+.Xil/
+vivado*.log
+vivado*.jou
+# PDKs never go in git
+pdk/
+scl_pdk/
+.ciel/
+# python
+__pycache__/
+.venv/
+.DS_Store
