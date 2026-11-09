@@ -75,6 +75,15 @@ cfg = {
     "meta": {"version": 3, "flow": "Classic",
              "substituting_steps": {"+OpenROAD.RepairDesignPostGPL": "OpenROAD.STAMidPNR"}},
 }
+if e.get("HARDEN") == "1":
+    # sky130_fd_sc_hd__clkdlybuf4s* are clock *delay* cells. LibreLane already keeps them out of
+    # synthesis (no_synth.cells) but not out of PnR, and OpenROAD's design repair picked them as
+    # fanout buffers (1,169x in Hazard3 @40 MHz: ~0.5 ns each, slews up to 1.3 ns > 0.75 ns limit).
+    # Hold fixing (dlygate/dlymetal) and CTS (clkbuf) don't use them.
+    cfg["EXTRA_EXCLUDED_CELLS"] = ["sky130_fd_sc_hd__clkdlybuf4s*"]
+    if e.get("PGRT") == "1":
+        # extra multi-corner design repair after global routing (LibreLane: experimental)
+        cfg["RUN_POST_GRT_DESIGN_REPAIR"] = True
 if e["FRONTEND"] == "slang":
     cfg["USE_SLANG"] = True
     cfg["SLANG_ARGUMENTS"] = ["--std", "latest", "--single-unit", "--allow-hierarchical-const",
@@ -88,6 +97,7 @@ EOF
   echo "clk_mhz=$CLK_MHZ"; echo "frontend=${FRONTEND:-slang}"
   echo "patches=$(cd cores/$CORE/patches && ls *.patch 2>/dev/null | tr '\n' ' ')"
   echo "librelane_image=$LIBRELANE_IMAGE"
+  echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}"
   echo "pdk=$PDK"; echo "pdk_version=$(basename "$(dirname "$(readlink "$PDK_ROOT/$PDK")")")"
   echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 } > "$OUT/run.info"

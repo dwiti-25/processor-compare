@@ -18,6 +18,9 @@ One entry per decision: date, decision, reason, who decided.
 - 2026-11-10: Common link layout split into code (0x0-0x1FFFF) and data/stack (0x20000-0x3FFFF), so one binary per benchmark runs on all cores, including VeeR "tcm" (its LSU cannot read ICCM). The other cores see one flat RAM; their cycle counts moved by under 2% after the re-link (all numbers re-run).
 - 2026-11-10: crt0 marks region 0x8 (testbench MMIO) as side-effect in VeeR's `mrac` CSR, guarded by `mvendorid == 0x45` so the binary stays identical for every core. Without it VeeR's unified write buffer merges successive putchar stores (seen with TCMs). Benchmark cycle counts are unaffected (CoreMark cycles identical before and after).
 
+- 2026-11-10: Layout runs (flows/synth.sh HARDEN=1) exclude `sky130_fd_sc_hd__clkdlybuf4s*` from PnR via `EXTRA_EXCLUDED_CELLS` (same for every core). Reason: OpenROAD repair otherwise uses these clock-delay cells as fanout buffers, causing the max-slew/cap and much of the ss setup failure (STATUS.md, Hazard3 baseline). This is a don't-use restriction, not a waiver (Claude Code, on Dwiti's request to fix with legitimate flow settings).
+- 2026-11-10: fmax from a layout run = 1 / (T − worst register-to-register setup slack) in the post-route STA, reported at nom_tt_025C_1v80 (typical) and nom_ss_100C_1v60 (slow), plus max_ss (slow, max RC) in results/harden_results.csv. Sign-off "clean" requires all nine corners clean.
+
 ## Patches
 | Core | Patch | Reason |
 |---|---|---|

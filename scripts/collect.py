@@ -25,7 +25,9 @@ SIM_CSV = os.path.join(REPO, "results", "sim_results.csv")
 SIM_COLUMNS = ["core", "config", "bench", "exit", "cycles", "marked_cycles", "iterations",
                "coremark_per_mhz", "dhrystone_cycles_per_run", "dmips_per_mhz", "log_path"]
 HARDEN_CSV = os.path.join(REPO, "results", "harden_results.csv")
-HARDEN_COLUMNS = ["core", "config", "top", "clock_target_mhz", "run_id", "magic_drc", "klayout_drc", "lvs_errors",
+HARDEN_COLUMNS = ["core", "config", "top", "clock_target_mhz", "run_id", "settings",
+                  "r2r_slack_tt_ns", "fmax_tt_mhz", "r2r_slack_ss_ns", "fmax_ss_mhz",
+                  "r2r_slack_ss_maxrc_ns", "fmax_ss_maxrc_mhz", "magic_drc", "klayout_drc", "lvs_errors",
                   "antenna_nets", "route_drc", "setup_ws_tt_ns", "setup_ws_ss_ns", "setup_ws_ff_ns",
                   "setup_ws_worst_ns", "setup_vio_count", "hold_ws_worst_ns", "hold_vio_count",
                   "max_slew_vio", "max_cap_vio", "die_area_um2", "core_area_um2", "stdcells",
@@ -186,6 +188,16 @@ def collect_harden():
             "stdcells": g("design__instance__count__stdcell"), "power_total_w": g("power__total"),
             "report_path": os.path.relpath(d, REPO),
         }
+        r["settings"] = info.get("harden_settings", "")
+        period = 1000.0 / float(info["clk_mhz"])
+        for key, corner in (("tt", "nom_tt_025C_1v80"), ("ss", "nom_ss_100C_1v60"), ("ss_maxrc", "max_ss_100C_1v60")):
+            rp = os.path.join(d, "sta_postpnr", corner, "r2r.rpt")
+            if os.path.exists(rp):
+                sl = parse_r2r(rp)[corner][0]
+                r[f"r2r_slack_{key}_ns"] = round(sl, 3)
+                r[f"fmax_{key}_mhz"] = round(1000.0 / (period - sl), 1)
+            else:
+                r[f"r2r_slack_{key}_ns"] = r[f"fmax_{key}_mhz"] = ""
         r["signoff_clean"] = all(r[k] == 0 for k in ("magic_drc", "klayout_drc", "lvs_errors", "antenna_nets",
                                                      "setup_vio_count", "hold_vio_count", "max_slew_vio", "max_cap_vio"))
         rows.append(r)
@@ -194,11 +206,14 @@ def collect_harden():
 
 def md_harden(rows):
     names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
-    out = ["| Core | Clock (MHz) | DRC (Magic/KLayout) | LVS | Antenna | Setup WS tt / ss / ff (ns) | Setup viol. | "
-           "Hold WS (ns) | Slew / cap viol. | Core area (µm²) | Std cells | Power (mW) | Sign-off clean |",
-           "|---|---:|---|---:|---:|---|---:|---:|---|---:|---:|---:|---|"]
-    for r in sorted(rows, key=lambda r: (r["core"], float(r["clock_target_mhz"]))):
-        out.append(f"| {names.get(r['core'], r['core'])} | {r['clock_target_mhz']} | {r['magic_drc']}/{r['klayout_drc']} | "
+    out = ["| Core | Clock (MHz) | Flow settings | fmax tt / ss (MHz) | DRC (Magic/KLayout) | LVS | Antenna | "
+           "Setup WS tt / ss / ff (ns) | Setup viol. | Hold WS (ns) | Slew / cap viol. | Core area (µm²) | Std cells | "
+           "Power (mW) | Sign-off clean (all corners) |",
+           "|---|---:|---|---|---|---:|---:|---|---:|---:|---|---:|---:|---:|---|"]
+    for r in sorted(rows, key=lambda r: (r["core"], float(r["clock_target_mhz"]), r["run_id"])):
+        fm = f"{r['fmax_tt_mhz']} / {r['fmax_ss_mhz']}" if r["fmax_tt_mhz"] != "" else "n/a"
+        out.append(f"| {names.get(r['core'], r['core'])} | {r['clock_target_mhz']} | {r['settings'] or 'n/a'} | {fm} | "
+                   f"{r['magic_drc']}/{r['klayout_drc']} | "
                    f"{r['lvs_errors']} | {r['antenna_nets']} | {r['setup_ws_tt_ns']:+.2f} / {r['setup_ws_ss_ns']:+.2f} / "
                    f"{r['setup_ws_ff_ns']:+.2f} | {r['setup_vio_count']} | {r['hold_ws_worst_ns']:+.2f} | "
                    f"{r['max_slew_vio']} / {r['max_cap_vio']} | {r['core_area_um2']:,.0f} | {r['stdcells']:,} | "
