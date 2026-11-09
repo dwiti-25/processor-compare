@@ -16,9 +16,9 @@ _start:
   addi t0, t0, 4
   j 1b
 2:
-  csrw mcountinhibit, zero  // enable mcycle/minstret (Hazard3 resets with them inhibited)
   la t0, trap_entry
   csrw mtvec, t0          // base only: Ibex treats it as vectored, others as direct
+  csrw mcountinhibit, zero  // enable mcycle/minstret (Hazard3 resets with them inhibited)
   call main
   li t0, MMIO_EXIT
   sw a0, 0(t0)

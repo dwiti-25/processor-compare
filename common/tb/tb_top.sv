@@ -11,7 +11,7 @@
 
 module tb_top;
   logic clk = 1'b0;
-  logic rst_n = 1'b0;
+  logic rst_n = 1'b1;  // driven low after time 0 so async resets see a real falling edge
   always #5 clk = ~clk;
 
   logic        i_req, i_gnt, i_rvalid, i_err;
@@ -51,6 +51,7 @@ module tb_top;
     void'($value$plusargs("maxcycles=%d", maxcycles));
     trace = $test$plusargs("trace");
     $readmemh(hex, mem.ram);
+    #1 rst_n = 1'b0;
     repeat (10) @(posedge clk);
     rst_n = 1'b1;
   end
