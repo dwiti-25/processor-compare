@@ -11,10 +11,17 @@ Dwiti Suchak, Ayush. BITS Pilani. Status as of 9 Nov 2026.
 - **Clock target:** 50 MHz (20 ns) for every core.
 - **ISA:** rv32imc_zicsr for all cores; unused features switched off where the core allows it.
 - **Area** is Yosys cell area after technology mapping, before placement (no fill, taps or buffering).
-- **Timing estimate** (tt corner, 25 °C, 1.8 V): the same LibreLane flow continued through floorplan
-  (50 % utilisation), global placement and LibreLane's design-rule repair, then STA with
-  placement-estimated wires and ideal clocks. Est. fmax = 1 / (T − worst register-to-register slack).
-  A second estimate after CTS and post-CTS timing repair (still unrouted) is running and will replace it.
+- **Headline configs:** Hazard3 default, Ibex "small", **VeeR EL2 "min"** (branch predictor off).
+  VeeR "bp" is a sensitivity point only.
+- **Timing estimates** (tt corner, 25 °C, 1.8 V only; LibreLane's mid-PnR STA loads only the
+  default corner). Est. fmax = 1 / (T − worst register-to-register slack). Both estimates continue the
+  same LibreLane run with default settings past synthesis:
+  - **post-CTS (headline):** floorplan (50 % utilisation), placement, CTS and post-CTS timing repair,
+    then STA with placement-estimated wires and the propagated clock tree. Not routed.
+  - **post-GPL (secondary, pessimistic):** global placement and design-rule repair only, with ideal
+    clocks. This is before any timing repair, and slow `clkdlybuf4s25` fanout buffers dominate it.
+  - "pending" means the post-CTS run is still going (VeeR's timing repair takes hours on this
+    machine).
 
 ## Results
 
@@ -22,7 +29,7 @@ Dwiti Suchak, Ayush. BITS Pilani. Status as of 9 Nov 2026.
 | Core | Config | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | Est. fmax, post-CTS, tt (MHz) | Reg-to-reg slack @ target, post-CTS (ns) | Est. fmax, post-GPL, tt (MHz) |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Hazard3 | default | Yosys read_verilog | 12,823 | 152,032 | 1.00× | 1,849 | 0 | pending | pending | 49 |
-| Ibex | default | yosys-slang | 12,173 | 152,431 | 1.00× | 1,950 | 1 | pending | pending | 48 |
+| Ibex | default | yosys-slang | 12,173 | 152,431 | 1.00× | 1,950 | 1 | 72 | +6.21 | 48 |
 | VeeR EL2 | min | yosys-slang | 56,639 | 650,156 | 4.28× | 7,071 | 258 | pending | pending | 25 |
 | VeeR EL2 | bp | yosys-slang | 61,383 | 720,779 | 4.74× | 8,521 | 305 | pending | pending | 20 |
 <!-- END collect.py -->
@@ -48,11 +55,11 @@ SystemVerilog frontend; sv2v isn't needed.
    elaborate (zero-sized arrays in the RTL), so VeeR carries 16 PMP entries and its debug module.
    Hazard3 and Ibex have neither. This inflates VeeR's area; a patch is possible if you want a
    strictly like-for-like comparison.
-2. **Timing numbers are early, pessimistic estimates.** They come before timing repair, at tt only.
-   OpenROAD's design-rule repair uses slow `clkdlybuf4s25` cells as fanout buffers. On VeeR, with its
-   very high-fanout reset and enable nets, these delay cells make up a large part of the critical path,
-   so VeeR's estimate is the least reliable of the three. Post-CTS numbers, then post-route
-   multi-corner numbers from the clock sweep, will replace them.
+2. **Timing numbers are pre-route estimates at tt only.** The post-CTS column is the meaningful one.
+   The post-GPL column comes before timing repair: OpenROAD's design-rule repair uses slow
+   `clkdlybuf4s25` cells as fanout buffers, and on VeeR (very high-fanout reset and enable nets) these
+   make up a large part of the critical path. Post-route multi-corner numbers from the clock sweep
+   will replace both.
 3. **Two small RTL patches** are applied to build copies (vendor submodules untouched, reasons in
    `docs/DECISIONS.md`). Ibex: a lint-only signal rewritten so yosys-slang accepts it. VeeR: tie-off
    of ECC signals left undriven when DCCM is disabled.
@@ -61,7 +68,7 @@ SystemVerilog frontend; sv2v isn't needed.
 
 ## Next steps
 
-1. Post-CTS timing estimates (running), then pick a 3-point clock sweep per core.
+1. Finish the post-CTS estimates (Hazard3, VeeR running), then pick a 3-point clock sweep per core.
 2. Shared testbench and identical thin wrappers. Hello, riscv-tests, Dhrystone and CoreMark in RTL
    simulation, with CoreMark/MHz checked against published figures.
 3. SKY130 core-only RTL-to-GDS for all three cores across the clock sweep (DRC/LVS/antenna clean).

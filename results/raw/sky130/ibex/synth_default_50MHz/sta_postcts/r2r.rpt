@@ -1,0 +1,66 @@
+clocks propagated (post-CTS)
+r2r nom_tt_025C_1v80 slack 6.2102 from _21281_/Q to _21843_/D
+
+======================= nom_tt_025C_1v80 reg-to-reg =======================
+Startpoint: _21281_ (rising edge-triggered flip-flop clocked by clk_i)
+Endpoint: _21843_ (negative level-sensitive latch clocked by clk_i)
+Path Group: clk_i
+Path Type: max
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk_i (rise edge)
+                                  0.000000    0.000000   clock source latency
+     2    0.047002    0.215841    0.159604    0.159604 ^ clk_i (in)
+     1    0.008090    0.034381    0.178986    0.338590 ^ clkbuf_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     1    0.002259    0.026192    0.108572    0.447162 ^ clkbuf_1_0__f_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008393    0.066045    0.147773    0.594935 ^ _12114_/X (sky130_fd_sc_hd__and2_2)
+     4    0.070221    0.087497    0.180254    0.775189 ^ clkbuf_0_clk/X (sky130_fd_sc_hd__clkbuf_16)
+     8    0.096522    0.171702    0.253516    1.028705 ^ clkbuf_2_3_0_clk/X (sky130_fd_sc_hd__clkbuf_8)
+     7    0.043284    0.063754    0.198381    1.227086 ^ clkbuf_5_28__f_clk/X (sky130_fd_sc_hd__clkbuf_16)
+    10    0.024940    0.058518    0.152729    1.379816 ^ clkbuf_leaf_114_clk/X (sky130_fd_sc_hd__clkbuf_8)
+                      0.058518    0.000031    1.379846 ^ _21281_/CLK (sky130_fd_sc_hd__dfrtp_2)
+     4    0.012399    0.062655    0.442371    1.822217 v _21281_/Q (sky130_fd_sc_hd__dfrtp_2)
+     2    0.004193    0.043848    0.253384    2.075601 v _12089_/X (sky130_fd_sc_hd__a22o_2)
+     2    0.014081    0.092039    0.282664    2.358265 ^ _12092_/X (sky130_fd_sc_hd__and3b_2)
+     2    0.015972    0.074766    0.094629    2.452894 v _12098_/Y (sky130_fd_sc_hd__nand2_2)
+     4    0.025284    0.143484    0.597447    3.050341 v _12107_/X (sky130_fd_sc_hd__or3b_2)
+     2    0.010891    0.131067    0.751194    3.801534 v _12110_/X (sky130_fd_sc_hd__or4b_2)
+     4    0.019541    0.096755    0.381660    4.183194 v _12111_/X (sky130_fd_sc_hd__or2_2)
+     1    0.003861    0.080233    0.447137    4.630332 v _12113_/X (sky130_fd_sc_hd__or3_2)
+                      0.080233    0.000031    4.630363 v _21843_/D (sky130_fd_sc_hd__dlxtn_1)
+                                              4.630363   data arrival time
+
+                                 10.000000   10.000000   clock clk_i (fall edge)
+                                  0.000000   10.000000   clock source latency
+     2    0.045014    0.100891    0.067200   10.067200 v clk_i (in)
+     1    0.007833    0.028488    0.154941   10.222140 v delaybuf_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008130    0.028621    0.123545   10.345686 v delaybuf_1_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008115    0.028612    0.123607   10.469293 v delaybuf_2_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007353    0.028186    0.123012   10.592304 v delaybuf_3_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007429    0.028229    0.122863   10.715167 v delaybuf_4_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007630    0.028342    0.123034   10.838201 v clkbuf_regs_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+     2    0.015369    0.032536    0.129042   10.967242 v clkbuf_0_clk_i_regs/X (sky130_fd_sc_hd__clkbuf_16)
+     2    0.006000    0.027132    0.123303   11.090546 v clkbuf_1_1__f_clk_i_regs/X (sky130_fd_sc_hd__clkbuf_16)
+                      0.027132    0.000015   11.090561 v _21843_/GATE_N (sky130_fd_sc_hd__dlxtn_1)
+                                 -0.250000   10.840561   clock uncertainty
+                                  0.000000   10.840561   clock reconvergence pessimism
+                                  0.000000   10.840561   time borrowed from endpoint
+                                             10.840561   data required time
+---------------------------------------------------------------------------------------------
+                                             10.840561   data required time
+                                             -4.630363   data arrival time
+---------------------------------------------------------------------------------------------
+                                              6.210198   slack (MET)
+
+Time Borrowing Information
+------------------------------------------------
+clk_i nominal pulse width              10.000000
+clock latency difference               -0.046231
+library setup time                     -0.130991
+------------------------------------------------
+max time borrow                         9.822778
+actual time borrow                      0.000000
+------------------------------------------------
+
+

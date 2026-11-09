@@ -7,6 +7,7 @@ usage:
   scripts/collect.py              # rebuild results/results.csv
   scripts/collect.py --md synth   # also print the synthesis table as Markdown
   scripts/collect.py --update-report reports/initial_synthesis.md
+  scripts/collect.py --headline --update-report reports/email_prof_draft.md
                                   # rewrite the table between the BEGIN/END collect.py markers
 """
 import argparse
@@ -143,10 +144,29 @@ def md_synth(rows):
     return "\n".join(out)
 
 
+HEADLINE = {"hazard3": "default", "ibex": "default", "veer_el2": "min"}
+
+
+def md_headline(rows):
+    """Short table for emails: one headline config per core, post-CTS estimate only."""
+    names = {"hazard3": "Hazard3", "ibex": "Ibex (small)", "veer_el2": "VeeR EL2 (min)"}
+    rows = [r for c, cfg in HEADLINE.items() for r in rows if r["core"] == c and r["config"] == cfg]
+    base = next((r["area_um2"] for r in rows if r["core"] == "hazard3"), None)
+    fmt = lambda v, f: format(v, f) if v != "" else "pending"
+    out = ["| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Est. fmax, tt (MHz)* |",
+           "|---|---:|---:|---:|---:|---:|"]
+    for r in rows:
+        out.append(f"| {names[r['core']]} | {r['cells']:,} | {r['area_um2']:,.0f} | "
+                   f"{fmt(r['area_um2'] / base if base else '', '.2f')}× | {r['flops']:,} | "
+                   f"{fmt(r['fmax_est_mhz_postcts_tt'], '.0f')} |")
+    return "\n".join(out)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--md", choices=["synth"], help="print a Markdown table to stdout")
     ap.add_argument("--update-report", metavar="MD", help="replace the synth table inside MD's markers")
+    ap.add_argument("--headline", action="store_true", help="use the short one-config-per-core table")
     a = ap.parse_args()
     rows = collect()
     os.makedirs(os.path.dirname(CSV), exist_ok=True)
@@ -155,7 +175,8 @@ def main():
         w.writeheader()
         w.writerows(rows)
     print(f"[collect] wrote {len(rows)} rows to {os.path.relpath(CSV, REPO)}", file=sys.stderr)
-    table = md_synth([r for r in rows if r["stage"] == "synth"])
+    synth = [r for r in rows if r["stage"] == "synth"]
+    table = md_headline(synth) if a.headline else md_synth(synth)
     if a.md == "synth":
         print(table)
     if a.update_report:

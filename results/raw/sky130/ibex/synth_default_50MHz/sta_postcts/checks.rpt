@@ -1,0 +1,947 @@
+
+===========================================================================
+report_checks -unconstrained
+===========================================================================
+======================= nom_tt_025C_1v80 Corner ===================================
+
+Startpoint: rst_ni (input port clocked by clk_i)
+Endpoint: _20130_ (recovery check against rising-edge clock clk_i)
+Path Group: asynchronous
+Path Type: max
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk_i (rise edge)
+                                  0.000000    0.000000   clock network delay (propagated)
+                                  4.000000    4.000000 ^ input external delay
+     1    0.002992    0.020558    0.011513    4.011513 ^ rst_ni (in)
+                                                         rst_ni (net)
+                      0.020558    0.000000    4.011513 ^ input156/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     2    0.028474    0.290104    0.431362    4.442874 ^ input156/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net156 (net)
+                      0.290107    0.001549    4.444424 ^ fanout2765/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     5    0.066661    0.663697    0.780352    5.224775 ^ fanout2765/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net2765 (net)
+                      0.663697    0.000009    5.224784 ^ fanout2670/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     5    0.030580    0.310036    0.579343    5.804128 ^ fanout2670/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net2670 (net)
+                      0.310036    0.001064    5.805192 ^ fanout2669/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     5    0.031655    0.320809    0.535704    6.340897 ^ fanout2669/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net2669 (net)
+                      0.320809    0.000042    6.340939 ^ fanout2665/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     2    0.005922    0.072601    0.352448    6.693387 ^ fanout2665/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net2665 (net)
+                      0.072601    0.000027    6.693414 ^ load_slew2666/A (sky130_fd_sc_hd__clkbuf_4)
+     6    0.039280    0.126526    0.215233    6.908647 ^ load_slew2666/X (sky130_fd_sc_hd__clkbuf_4)
+                                                         net2666 (net)
+                      0.126526    0.000265    6.908912 ^ fanout2661/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     9    0.038959    0.392478    0.545076    7.453988 ^ fanout2661/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net2661 (net)
+                      0.392478    0.000004    7.453991 ^ fanout2658/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     2    0.007510    0.090205    0.374681    7.828672 ^ fanout2658/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net2658 (net)
+                      0.090205    0.000037    7.828710 ^ load_slew2659/A (sky130_fd_sc_hd__clkbuf_4)
+     9    0.039140    0.126031    0.222418    8.051127 ^ load_slew2659/X (sky130_fd_sc_hd__clkbuf_4)
+                                                         net2659 (net)
+                      0.126031    0.000476    8.051603 ^ _20130_/RESET_B (sky130_fd_sc_hd__dfrtp_2)
+                                              8.051603   data arrival time
+
+                                 20.000000   20.000000   clock clk_i (rise edge)
+                                  0.000000   20.000000   clock source latency
+     2    0.047002    0.215841    0.144404   20.144403 ^ clk_i (in)
+                                                         clk_i (net)
+                      0.215980    0.000000   20.144403 ^ clkbuf_0_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008090    0.034381    0.161940   20.306343 ^ clkbuf_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_0_clk_i (net)
+                      0.034381    0.000011   20.306355 ^ clkbuf_1_0__f_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.002259    0.026192    0.098222   20.404577 ^ clkbuf_1_0__f_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_1_0__leaf_clk_i (net)
+                      0.026192    0.000007   20.404583 ^ _12114_/A (sky130_fd_sc_hd__and2_2)
+     1    0.008393    0.063378    0.133692   20.538275 ^ _12114_/X (sky130_fd_sc_hd__and2_2)
+                                                         clk (net)
+                      0.063378    0.000020   20.538296 ^ clkbuf_0_clk/A (sky130_fd_sc_hd__clkbuf_16)
+     4    0.070221    0.087496    0.162141   20.700436 ^ clkbuf_0_clk/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_0_clk (net)
+                      0.087504    0.000952   20.701387 ^ clkbuf_2_2_0_clk/A (sky130_fd_sc_hd__clkbuf_8)
+     8    0.097762    0.173726    0.228797   20.930185 ^ clkbuf_2_2_0_clk/X (sky130_fd_sc_hd__clkbuf_8)
+                                                         clknet_2_2_0_clk (net)
+                      0.173737    0.001471   20.931656 ^ clkbuf_5_16__f_clk/A (sky130_fd_sc_hd__clkbuf_16)
+     7    0.045160    0.065454    0.180291   21.111946 ^ clkbuf_5_16__f_clk/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_5_16__leaf_clk (net)
+                      0.065454    0.000204   21.112150 ^ clkbuf_leaf_166_clk/A (sky130_fd_sc_hd__clkbuf_8)
+    10    0.025016    0.058638    0.138785   21.250937 ^ clkbuf_leaf_166_clk/X (sky130_fd_sc_hd__clkbuf_8)
+                                                         clknet_leaf_166_clk (net)
+                      0.058638    0.000046   21.250982 ^ _20130_/CLK (sky130_fd_sc_hd__dfrtp_2)
+                                 -0.250000   21.000982   clock uncertainty
+                                  0.000000   21.000982   clock reconvergence pessimism
+                                  0.199246   21.200230   library recovery time
+                                             21.200230   data required time
+---------------------------------------------------------------------------------------------
+                                             21.200230   data required time
+                                             -8.051603   data arrival time
+---------------------------------------------------------------------------------------------
+                                             13.148626   slack (MET)
+
+
+Startpoint: _21843_ (negative level-sensitive latch clocked by clk_i)
+Endpoint: _12114_ (rising clock gating-check end-point clocked by clk_i)
+Path Group: gated clock
+Path Type: max
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                 10.000000   10.000000   clock clk_i (fall edge)
+                                  0.000000   10.000000   clock source latency
+     2    0.045014    0.100891    0.074274   10.074274 v clk_i (in)
+                                                         clk_i (net)
+                      0.100897    0.000000   10.074274 v delaybuf_0_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007833    0.028488    0.171251   10.245524 v delaybuf_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_0_clk_i (net)
+                      0.028488    0.000043   10.245567 v delaybuf_1_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008130    0.028621    0.136508   10.382075 v delaybuf_1_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_1_clk_i (net)
+                      0.028622    0.000059   10.382133 v delaybuf_2_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008115    0.028612    0.136560   10.518694 v delaybuf_2_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_2_clk_i (net)
+                      0.028612    0.000048   10.518742 v delaybuf_3_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007353    0.028186    0.135913   10.654655 v delaybuf_3_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_3_clk_i (net)
+                      0.028186    0.000023   10.654677 v delaybuf_4_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007429    0.028229    0.135773   10.790451 v delaybuf_4_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_4_clk_i (net)
+                      0.028229    0.000021   10.790472 v clkbuf_regs_0_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007630    0.028342    0.135963   10.926435 v clkbuf_regs_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clk_i_regs (net)
+                      0.028342    0.000032   10.926467 v clkbuf_0_clk_i_regs/A (sky130_fd_sc_hd__clkbuf_16)
+     2    0.015369    0.032536    0.142593   11.069059 v clkbuf_0_clk_i_regs/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_0_clk_i_regs (net)
+                      0.032536    0.000020   11.069080 v clkbuf_1_1__f_clk_i_regs/A (sky130_fd_sc_hd__clkbuf_16)
+     2    0.006000    0.027132    0.136263   11.205342 v clkbuf_1_1__f_clk_i_regs/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_1_1__leaf_clk_i_regs (net)
+                      0.027132    0.000017   11.205359 v _21843_/GATE_N (sky130_fd_sc_hd__dlxtn_1)
+     1    0.031197    0.293809    0.590394   11.795753 ^ _21843_/Q (sky130_fd_sc_hd__dlxtn_1)
+                                                         core_clock_gate_i.en_latch (net)
+                      0.293829    0.003041   11.798795 ^ _12114_/B (sky130_fd_sc_hd__and2_2)
+                                             11.798795   data arrival time
+
+                                 20.000000   20.000000   clock clk_i (rise edge)
+                                  0.000000   20.000000   clock source latency
+     2    0.047002    0.215841    0.144404   20.144403 ^ clk_i (in)
+                                                         clk_i (net)
+                      0.215980    0.000000   20.144403 ^ clkbuf_0_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008090    0.034381    0.161940   20.306343 ^ clkbuf_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_0_clk_i (net)
+                      0.034381    0.000011   20.306355 ^ clkbuf_1_0__f_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.002259    0.026192    0.098222   20.404577 ^ clkbuf_1_0__f_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_1_0__leaf_clk_i (net)
+                      0.026192    0.000007   20.404583 ^ _12114_/A (sky130_fd_sc_hd__and2_2)
+                                 -0.250000   20.154585   clock uncertainty
+                                  0.000000   20.154585   clock reconvergence pessimism
+                                  0.000000   20.154585   clock gating setup time
+                                             20.154585   data required time
+---------------------------------------------------------------------------------------------
+                                             20.154585   data required time
+                                            -11.798795   data arrival time
+---------------------------------------------------------------------------------------------
+                                              8.355790   slack (MET)
+
+
+Startpoint: irq_fast_i[4] (input port clocked by clk_i)
+Endpoint: _21843_ (negative level-sensitive latch clocked by clk_i)
+Path Group: clk_i
+Path Type: max
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                                  0.000000    0.000000   clock clk_i (rise edge)
+                                  0.000000    0.000000   clock network delay (propagated)
+                                  4.000000    4.000000 v input external delay
+     1    0.005468    0.014633    0.009313    4.009314 v irq_fast_i[4] (in)
+                                                         irq_fast_i[4] (net)
+                      0.014633    0.000000    4.009314 v input143/A (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     3    0.017754    0.139717    0.329655    4.338969 v input143/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+                                                         net143 (net)
+                      0.139718    0.000608    4.339576 v _12089_/A2 (sky130_fd_sc_hd__a22o_2)
+     2    0.004193    0.043848    0.309220    4.648797 v _12089_/X (sky130_fd_sc_hd__a22o_2)
+                                                         _06524_ (net)
+                      0.043848    0.000011    4.648808 v _12092_/A_N (sky130_fd_sc_hd__and3b_2)
+     2    0.014081    0.092039    0.282653    4.931461 ^ _12092_/X (sky130_fd_sc_hd__and3b_2)
+                                                         _06527_ (net)
+                      0.092039    0.000249    4.931709 ^ _12098_/A (sky130_fd_sc_hd__nand2_2)
+     2    0.015972    0.074766    0.094380    5.026090 v _12098_/Y (sky130_fd_sc_hd__nand2_2)
+                                                         _06533_ (net)
+                      0.074766    0.000026    5.026115 v _12107_/A (sky130_fd_sc_hd__or3b_2)
+     4    0.025284    0.143484    0.597421    5.623537 v _12107_/X (sky130_fd_sc_hd__or3b_2)
+                                                         _06542_ (net)
+                      0.143485    0.000822    5.624358 v _12110_/B (sky130_fd_sc_hd__or4b_2)
+     2    0.010891    0.131067    0.750372    6.374730 v _12110_/X (sky130_fd_sc_hd__or4b_2)
+                                                         _06545_ (net)
+                      0.131067    0.000218    6.374948 v _12111_/B (sky130_fd_sc_hd__or2_2)
+     4    0.019541    0.096755    0.381442    6.756390 v _12111_/X (sky130_fd_sc_hd__or2_2)
+                                                         _06546_ (net)
+                      0.096755    0.000224    6.756615 v _12113_/C (sky130_fd_sc_hd__or3_2)
+     1    0.003861    0.080233    0.446913    7.203527 v _12113_/X (sky130_fd_sc_hd__or3_2)
+                                                         _00000_ (net)
+                      0.080233    0.000031    7.203558 v _21843_/D (sky130_fd_sc_hd__dlxtn_1)
+                                              7.203558   data arrival time
+
+                                 10.000000   10.000000   clock clk_i (fall edge)
+                                  0.000000   10.000000   clock source latency
+     2    0.045014    0.100891    0.067200   10.067200 v clk_i (in)
+                                                         clk_i (net)
+                      0.100897    0.000000   10.067200 v delaybuf_0_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007833    0.028488    0.154941   10.222140 v delaybuf_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_0_clk_i (net)
+                      0.028488    0.000038   10.222179 v delaybuf_1_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008130    0.028621    0.123507   10.345686 v delaybuf_1_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_1_clk_i (net)
+                      0.028622    0.000052   10.345737 v delaybuf_2_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.008115    0.028612    0.123555   10.469293 v delaybuf_2_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_2_clk_i (net)
+                      0.028612    0.000044   10.469336 v delaybuf_3_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007353    0.028186    0.122968   10.592304 v delaybuf_3_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_3_clk_i (net)
+                      0.028186    0.000020   10.592324 v delaybuf_4_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007429    0.028229    0.122842   10.715167 v delaybuf_4_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         delaynet_4_clk_i (net)
+                      0.028229    0.000020   10.715186 v clkbuf_regs_0_clk_i/A (sky130_fd_sc_hd__clkbuf_16)
+     1    0.007630    0.028342    0.123014   10.838201 v clkbuf_regs_0_clk_i/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clk_i_regs (net)
+                      0.028342    0.000029   10.838230 v clkbuf_0_clk_i_regs/A (sky130_fd_sc_hd__clkbuf_16)
+     2    0.015369    0.032536    0.129012   10.967242 v clkbuf_0_clk_i_regs/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_0_clk_i_regs (net)
+                      0.032536    0.000019   10.967261 v clkbuf_1_1__f_clk_i_regs/A (sky130_fd_sc_hd__clkbuf_16)
+     2    0.006000    0.027132    0.123284   11.090546 v clkbuf_1_1__f_clk_i_regs/X (sky130_fd_sc_hd__clkbuf_16)
+                                                         clknet_1_1__leaf_clk_i_regs (net)
+                      0.027132    0.000015   11.090561 v _21843_/GATE_N (sky130_fd_sc_hd__dlxtn_1)
+                                 -0.250000   10.840561   clock uncertainty
+                                  0.000000   10.840561   clock reconvergence pessimism
+                                  0.000000   10.840561   time borrowed from endpoint
+                                             10.840561   data required time
+---------------------------------------------------------------------------------------------
+                                             10.840561   data required time
+                                             -7.203558   data arrival time
+---------------------------------------------------------------------------------------------
+                                              3.637002   slack (MET)
+
+Time Borrowing Information
+------------------------------------------------
+clk_i nominal pulse width              10.000000
+clock latency difference               -0.046231
+library setup time                     -0.130991
+------------------------------------------------
+max time borrow                         9.822778
+actual time borrow                      0.000000
+------------------------------------------------
+
+
+
+
+===========================================================================
+report_checks --slack_max -0.01
+============================================================================
+======================= nom_tt_025C_1v80 Corner ===================================
+
+No paths found.
+
+
+===========================================================================
+ report_check_types -max_slew -max_cap -max_fanout -violators
+============================================================================
+======================= nom_tt_025C_1v80 Corner ===================================
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+clkbuf_leaf_117_clk/X                    10     12     -2 (VIOLATED)
+clkbuf_leaf_157_clk/X                    10     12     -2 (VIOLATED)
+clkbuf_leaf_160_clk/X                    10     12     -2 (VIOLATED)
+clkbuf_leaf_172_clk/X                    10     12     -2 (VIOLATED)
+clkbuf_leaf_176_clk/X                    10     12     -2 (VIOLATED)
+clkbuf_leaf_177_clk/X                    10     12     -2 (VIOLATED)
+clkbuf_leaf_33_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_53_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_67_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_69_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_71_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_74_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_75_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_77_clk/X                     10     12     -2 (VIOLATED)
+clkbuf_leaf_104_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_108_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_133_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_154_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_155_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_162_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_173_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_179_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_187_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_189_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_190_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_192_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_196_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_197_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_202_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_204_clk/X                    10     11        (VIOLATED)
+clkbuf_leaf_32_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_36_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_3_clk/X                      10     11        (VIOLATED)
+clkbuf_leaf_50_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_52_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_65_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_66_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_6_clk/X                      10     11        (VIOLATED)
+clkbuf_leaf_76_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_80_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_83_clk/X                     10     11        (VIOLATED)
+clkbuf_leaf_96_clk/X                     10     11        (VIOLATED)
+
+
+
+===========================================================================
+report_parasitic_annotation -report_unannotated
+============================================================================
+Found 628 unannotated drivers.
+ boot_addr_i[0]
+ boot_addr_i[1]
+ boot_addr_i[2]
+ boot_addr_i[3]
+ boot_addr_i[4]
+ boot_addr_i[5]
+ boot_addr_i[6]
+ boot_addr_i[7]
+ data_rdata_intg_i[0]
+ data_rdata_intg_i[1]
+ data_rdata_intg_i[2]
+ data_rdata_intg_i[3]
+ data_rdata_intg_i[4]
+ data_rdata_intg_i[5]
+ data_rdata_intg_i[6]
+ data_tag_i
+ fetch_enable_i[1]
+ fetch_enable_i[2]
+ fetch_enable_i[3]
+ instr_rdata_intg_i[0]
+ instr_rdata_intg_i[1]
+ instr_rdata_intg_i[2]
+ instr_rdata_intg_i[3]
+ instr_rdata_intg_i[4]
+ instr_rdata_intg_i[5]
+ instr_rdata_intg_i[6]
+ ram_cfg_icache_data_i[0]
+ ram_cfg_icache_data_i[10]
+ ram_cfg_icache_data_i[11]
+ ram_cfg_icache_data_i[12]
+ ram_cfg_icache_data_i[13]
+ ram_cfg_icache_data_i[14]
+ ram_cfg_icache_data_i[15]
+ ram_cfg_icache_data_i[16]
+ ram_cfg_icache_data_i[17]
+ ram_cfg_icache_data_i[18]
+ ram_cfg_icache_data_i[19]
+ ram_cfg_icache_data_i[1]
+ ram_cfg_icache_data_i[20]
+ ram_cfg_icache_data_i[21]
+ ram_cfg_icache_data_i[22]
+ ram_cfg_icache_data_i[23]
+ ram_cfg_icache_data_i[2]
+ ram_cfg_icache_data_i[3]
+ ram_cfg_icache_data_i[4]
+ ram_cfg_icache_data_i[5]
+ ram_cfg_icache_data_i[6]
+ ram_cfg_icache_data_i[7]
+ ram_cfg_icache_data_i[8]
+ ram_cfg_icache_data_i[9]
+ ram_cfg_icache_tag_i[0]
+ ram_cfg_icache_tag_i[10]
+ ram_cfg_icache_tag_i[11]
+ ram_cfg_icache_tag_i[12]
+ ram_cfg_icache_tag_i[13]
+ ram_cfg_icache_tag_i[14]
+ ram_cfg_icache_tag_i[15]
+ ram_cfg_icache_tag_i[16]
+ ram_cfg_icache_tag_i[17]
+ ram_cfg_icache_tag_i[18]
+ ram_cfg_icache_tag_i[19]
+ ram_cfg_icache_tag_i[1]
+ ram_cfg_icache_tag_i[20]
+ ram_cfg_icache_tag_i[21]
+ ram_cfg_icache_tag_i[22]
+ ram_cfg_icache_tag_i[23]
+ ram_cfg_icache_tag_i[2]
+ ram_cfg_icache_tag_i[3]
+ ram_cfg_icache_tag_i[4]
+ ram_cfg_icache_tag_i[5]
+ ram_cfg_icache_tag_i[6]
+ ram_cfg_icache_tag_i[7]
+ ram_cfg_icache_tag_i[8]
+ ram_cfg_icache_tag_i[9]
+ scan_rst_ni
+ scramble_key_i[0]
+ scramble_key_i[100]
+ scramble_key_i[101]
+ scramble_key_i[102]
+ scramble_key_i[103]
+ scramble_key_i[104]
+ scramble_key_i[105]
+ scramble_key_i[106]
+ scramble_key_i[107]
+ scramble_key_i[108]
+ scramble_key_i[109]
+ scramble_key_i[10]
+ scramble_key_i[110]
+ scramble_key_i[111]
+ scramble_key_i[112]
+ scramble_key_i[113]
+ scramble_key_i[114]
+ scramble_key_i[115]
+ scramble_key_i[116]
+ scramble_key_i[117]
+ scramble_key_i[118]
+ scramble_key_i[119]
+ scramble_key_i[11]
+ scramble_key_i[120]
+ scramble_key_i[121]
+ scramble_key_i[122]
+ scramble_key_i[123]
+ scramble_key_i[124]
+ scramble_key_i[125]
+ scramble_key_i[126]
+ scramble_key_i[127]
+ scramble_key_i[12]
+ scramble_key_i[13]
+ scramble_key_i[14]
+ scramble_key_i[15]
+ scramble_key_i[16]
+ scramble_key_i[17]
+ scramble_key_i[18]
+ scramble_key_i[19]
+ scramble_key_i[1]
+ scramble_key_i[20]
+ scramble_key_i[21]
+ scramble_key_i[22]
+ scramble_key_i[23]
+ scramble_key_i[24]
+ scramble_key_i[25]
+ scramble_key_i[26]
+ scramble_key_i[27]
+ scramble_key_i[28]
+ scramble_key_i[29]
+ scramble_key_i[2]
+ scramble_key_i[30]
+ scramble_key_i[31]
+ scramble_key_i[32]
+ scramble_key_i[33]
+ scramble_key_i[34]
+ scramble_key_i[35]
+ scramble_key_i[36]
+ scramble_key_i[37]
+ scramble_key_i[38]
+ scramble_key_i[39]
+ scramble_key_i[3]
+ scramble_key_i[40]
+ scramble_key_i[41]
+ scramble_key_i[42]
+ scramble_key_i[43]
+ scramble_key_i[44]
+ scramble_key_i[45]
+ scramble_key_i[46]
+ scramble_key_i[47]
+ scramble_key_i[48]
+ scramble_key_i[49]
+ scramble_key_i[4]
+ scramble_key_i[50]
+ scramble_key_i[51]
+ scramble_key_i[52]
+ scramble_key_i[53]
+ scramble_key_i[54]
+ scramble_key_i[55]
+ scramble_key_i[56]
+ scramble_key_i[57]
+ scramble_key_i[58]
+ scramble_key_i[59]
+ scramble_key_i[5]
+ scramble_key_i[60]
+ scramble_key_i[61]
+ scramble_key_i[62]
+ scramble_key_i[63]
+ scramble_key_i[64]
+ scramble_key_i[65]
+ scramble_key_i[66]
+ scramble_key_i[67]
+ scramble_key_i[68]
+ scramble_key_i[69]
+ scramble_key_i[6]
+ scramble_key_i[70]
+ scramble_key_i[71]
+ scramble_key_i[72]
+ scramble_key_i[73]
+ scramble_key_i[74]
+ scramble_key_i[75]
+ scramble_key_i[76]
+ scramble_key_i[77]
+ scramble_key_i[78]
+ scramble_key_i[79]
+ scramble_key_i[7]
+ scramble_key_i[80]
+ scramble_key_i[81]
+ scramble_key_i[82]
+ scramble_key_i[83]
+ scramble_key_i[84]
+ scramble_key_i[85]
+ scramble_key_i[86]
+ scramble_key_i[87]
+ scramble_key_i[88]
+ scramble_key_i[89]
+ scramble_key_i[8]
+ scramble_key_i[90]
+ scramble_key_i[91]
+ scramble_key_i[92]
+ scramble_key_i[93]
+ scramble_key_i[94]
+ scramble_key_i[95]
+ scramble_key_i[96]
+ scramble_key_i[97]
+ scramble_key_i[98]
+ scramble_key_i[99]
+ scramble_key_i[9]
+ scramble_key_valid_i
+ scramble_nonce_i[0]
+ scramble_nonce_i[10]
+ scramble_nonce_i[11]
+ scramble_nonce_i[12]
+ scramble_nonce_i[13]
+ scramble_nonce_i[14]
+ scramble_nonce_i[15]
+ scramble_nonce_i[16]
+ scramble_nonce_i[17]
+ scramble_nonce_i[18]
+ scramble_nonce_i[19]
+ scramble_nonce_i[1]
+ scramble_nonce_i[20]
+ scramble_nonce_i[21]
+ scramble_nonce_i[22]
+ scramble_nonce_i[23]
+ scramble_nonce_i[24]
+ scramble_nonce_i[25]
+ scramble_nonce_i[26]
+ scramble_nonce_i[27]
+ scramble_nonce_i[28]
+ scramble_nonce_i[29]
+ scramble_nonce_i[2]
+ scramble_nonce_i[30]
+ scramble_nonce_i[31]
+ scramble_nonce_i[32]
+ scramble_nonce_i[33]
+ scramble_nonce_i[34]
+ scramble_nonce_i[35]
+ scramble_nonce_i[36]
+ scramble_nonce_i[37]
+ scramble_nonce_i[38]
+ scramble_nonce_i[39]
+ scramble_nonce_i[3]
+ scramble_nonce_i[40]
+ scramble_nonce_i[41]
+ scramble_nonce_i[42]
+ scramble_nonce_i[43]
+ scramble_nonce_i[44]
+ scramble_nonce_i[45]
+ scramble_nonce_i[46]
+ scramble_nonce_i[47]
+ scramble_nonce_i[48]
+ scramble_nonce_i[49]
+ scramble_nonce_i[4]
+ scramble_nonce_i[50]
+ scramble_nonce_i[51]
+ scramble_nonce_i[52]
+ scramble_nonce_i[53]
+ scramble_nonce_i[54]
+ scramble_nonce_i[55]
+ scramble_nonce_i[56]
+ scramble_nonce_i[57]
+ scramble_nonce_i[58]
+ scramble_nonce_i[59]
+ scramble_nonce_i[5]
+ scramble_nonce_i[60]
+ scramble_nonce_i[61]
+ scramble_nonce_i[62]
+ scramble_nonce_i[63]
+ scramble_nonce_i[6]
+ scramble_nonce_i[7]
+ scramble_nonce_i[8]
+ scramble_nonce_i[9]
+ trvk_heap_base_addr_i[0]
+ trvk_heap_base_addr_i[10]
+ trvk_heap_base_addr_i[11]
+ trvk_heap_base_addr_i[12]
+ trvk_heap_base_addr_i[13]
+ trvk_heap_base_addr_i[14]
+ trvk_heap_base_addr_i[15]
+ trvk_heap_base_addr_i[16]
+ trvk_heap_base_addr_i[17]
+ trvk_heap_base_addr_i[18]
+ trvk_heap_base_addr_i[19]
+ trvk_heap_base_addr_i[1]
+ trvk_heap_base_addr_i[20]
+ trvk_heap_base_addr_i[21]
+ trvk_heap_base_addr_i[22]
+ trvk_heap_base_addr_i[23]
+ trvk_heap_base_addr_i[24]
+ trvk_heap_base_addr_i[25]
+ trvk_heap_base_addr_i[26]
+ trvk_heap_base_addr_i[27]
+ trvk_heap_base_addr_i[28]
+ trvk_heap_base_addr_i[29]
+ trvk_heap_base_addr_i[2]
+ trvk_heap_base_addr_i[30]
+ trvk_heap_base_addr_i[31]
+ trvk_heap_base_addr_i[3]
+ trvk_heap_base_addr_i[4]
+ trvk_heap_base_addr_i[5]
+ trvk_heap_base_addr_i[6]
+ trvk_heap_base_addr_i[7]
+ trvk_heap_base_addr_i[8]
+ trvk_heap_base_addr_i[9]
+ trvk_revbm_err_i
+ trvk_revbm_gnt_i
+ trvk_revbm_rdata_i[0]
+ trvk_revbm_rdata_i[10]
+ trvk_revbm_rdata_i[11]
+ trvk_revbm_rdata_i[12]
+ trvk_revbm_rdata_i[13]
+ trvk_revbm_rdata_i[14]
+ trvk_revbm_rdata_i[15]
+ trvk_revbm_rdata_i[16]
+ trvk_revbm_rdata_i[17]
+ trvk_revbm_rdata_i[18]
+ trvk_revbm_rdata_i[19]
+ trvk_revbm_rdata_i[1]
+ trvk_revbm_rdata_i[20]
+ trvk_revbm_rdata_i[21]
+ trvk_revbm_rdata_i[22]
+ trvk_revbm_rdata_i[23]
+ trvk_revbm_rdata_i[24]
+ trvk_revbm_rdata_i[25]
+ trvk_revbm_rdata_i[26]
+ trvk_revbm_rdata_i[27]
+ trvk_revbm_rdata_i[28]
+ trvk_revbm_rdata_i[29]
+ trvk_revbm_rdata_i[2]
+ trvk_revbm_rdata_i[30]
+ trvk_revbm_rdata_i[31]
+ trvk_revbm_rdata_i[3]
+ trvk_revbm_rdata_i[4]
+ trvk_revbm_rdata_i[5]
+ trvk_revbm_rdata_i[6]
+ trvk_revbm_rdata_i[7]
+ trvk_revbm_rdata_i[8]
+ trvk_revbm_rdata_i[9]
+ trvk_revbm_rdata_intg_i[0]
+ trvk_revbm_rdata_intg_i[1]
+ trvk_revbm_rdata_intg_i[2]
+ trvk_revbm_rdata_intg_i[3]
+ trvk_revbm_rdata_intg_i[4]
+ trvk_revbm_rdata_intg_i[5]
+ trvk_revbm_rdata_intg_i[6]
+ trvk_revbm_rvalid_i
+ _21795__2933/HI
+ _21826__2766/HI
+ clkload0/X
+ clkload1/X
+ clkload10/X
+ clkload100/X
+ clkload101/X
+ clkload102/Y
+ clkload103/X
+ clkload104/X
+ clkload105/X
+ clkload106/X
+ clkload107/X
+ clkload108/X
+ clkload109/Y
+ clkload11/X
+ clkload110/X
+ clkload111/X
+ clkload112/X
+ clkload113/X
+ clkload114/X
+ clkload12/X
+ clkload13/X
+ clkload14/X
+ clkload15/X
+ clkload16/X
+ clkload17/X
+ clkload18/X
+ clkload19/X
+ clkload2/X
+ clkload20/X
+ clkload21/X
+ clkload22/X
+ clkload23/X
+ clkload24/X
+ clkload25/X
+ clkload26/X
+ clkload27/X
+ clkload28/X
+ clkload29/X
+ clkload3/X
+ clkload30/Y
+ clkload31/X
+ clkload32/Y
+ clkload33/X
+ clkload34/Y
+ clkload35/X
+ clkload36/X
+ clkload37/X
+ clkload38/X
+ clkload39/X
+ clkload4/X
+ clkload40/Y
+ clkload41/X
+ clkload42/X
+ clkload43/Y
+ clkload44/Y
+ clkload45/X
+ clkload46/X
+ clkload47/Y
+ clkload48/Y
+ clkload49/X
+ clkload5/X
+ clkload50/X
+ clkload51/Y
+ clkload52/X
+ clkload53/X
+ clkload54/X
+ clkload55/X
+ clkload56/Y
+ clkload57/X
+ clkload58/Y
+ clkload59/X
+ clkload6/X
+ clkload60/Y
+ clkload61/Y
+ clkload62/X
+ clkload63/Y
+ clkload64/X
+ clkload65/X
+ clkload66/Y
+ clkload67/Y
+ clkload68/X
+ clkload69/Y
+ clkload7/X
+ clkload70/X
+ clkload71/Y
+ clkload72/Y
+ clkload73/Y
+ clkload74/X
+ clkload75/X
+ clkload76/Y
+ clkload77/Y
+ clkload78/X
+ clkload79/X
+ clkload8/X
+ clkload80/X
+ clkload81/Y
+ clkload82/Y
+ clkload83/X
+ clkload84/X
+ clkload85/X
+ clkload86/X
+ clkload87/Y
+ clkload88/Y
+ clkload89/Y
+ clkload9/X
+ clkload90/X
+ clkload91/Y
+ clkload92/Y
+ clkload93/X
+ clkload94/X
+ clkload95/X
+ clkload96/X
+ clkload97/X
+ clkload98/X
+ clkload99/X
+ ibex_top/HI
+ ibex_top_2767/HI
+ ibex_top_2768/HI
+ ibex_top_2769/HI
+ ibex_top_2770/HI
+ ibex_top_2771/HI
+ ibex_top_2772/HI
+ ibex_top_2773/HI
+ ibex_top_2774/HI
+ ibex_top_2775/HI
+ ibex_top_2776/HI
+ ibex_top_2777/HI
+ ibex_top_2778/HI
+ ibex_top_2779/HI
+ ibex_top_2780/HI
+ ibex_top_2781/HI
+ ibex_top_2782/HI
+ ibex_top_2783/HI
+ ibex_top_2784/HI
+ ibex_top_2785/HI
+ ibex_top_2786/HI
+ ibex_top_2787/HI
+ ibex_top_2788/HI
+ ibex_top_2789/HI
+ ibex_top_2790/HI
+ ibex_top_2791/HI
+ ibex_top_2792/HI
+ ibex_top_2793/HI
+ ibex_top_2794/HI
+ ibex_top_2795/HI
+ ibex_top_2796/HI
+ ibex_top_2797/HI
+ ibex_top_2798/HI
+ ibex_top_2799/HI
+ ibex_top_2800/HI
+ ibex_top_2801/HI
+ ibex_top_2802/HI
+ ibex_top_2803/HI
+ ibex_top_2804/HI
+ ibex_top_2805/HI
+ ibex_top_2806/HI
+ ibex_top_2807/HI
+ ibex_top_2808/HI
+ ibex_top_2809/HI
+ ibex_top_2810/HI
+ ibex_top_2811/HI
+ ibex_top_2812/HI
+ ibex_top_2813/HI
+ ibex_top_2814/HI
+ ibex_top_2815/HI
+ ibex_top_2816/HI
+ ibex_top_2817/HI
+ ibex_top_2818/HI
+ ibex_top_2819/HI
+ ibex_top_2820/HI
+ ibex_top_2821/HI
+ ibex_top_2822/HI
+ ibex_top_2823/HI
+ ibex_top_2824/HI
+ ibex_top_2825/HI
+ ibex_top_2826/HI
+ ibex_top_2827/HI
+ ibex_top_2828/HI
+ ibex_top_2829/HI
+ ibex_top_2830/HI
+ ibex_top_2831/HI
+ ibex_top_2832/HI
+ ibex_top_2833/HI
+ ibex_top_2834/HI
+ ibex_top_2835/HI
+ ibex_top_2836/HI
+ ibex_top_2837/HI
+ ibex_top_2838/HI
+ ibex_top_2839/HI
+ ibex_top_2840/HI
+ ibex_top_2841/HI
+ ibex_top_2842/HI
+ ibex_top_2843/HI
+ ibex_top_2844/HI
+ ibex_top_2845/HI
+ ibex_top_2846/HI
+ ibex_top_2847/HI
+ ibex_top_2848/HI
+ ibex_top_2849/HI
+ ibex_top_2850/HI
+ ibex_top_2851/HI
+ ibex_top_2852/HI
+ ibex_top_2853/HI
+ ibex_top_2854/HI
+ ibex_top_2855/HI
+ ibex_top_2856/HI
+ ibex_top_2857/HI
+ ibex_top_2858/HI
+ ibex_top_2859/HI
+ ibex_top_2860/HI
+ ibex_top_2861/HI
+ ibex_top_2862/HI
+ ibex_top_2863/HI
+ ibex_top_2864/HI
+ ibex_top_2865/HI
+ ibex_top_2866/HI
+ ibex_top_2867/HI
+ ibex_top_2868/HI
+ ibex_top_2869/HI
+ ibex_top_2870/HI
+ ibex_top_2871/HI
+ ibex_top_2872/HI
+ ibex_top_2873/HI
+ ibex_top_2874/HI
+ ibex_top_2875/HI
+ ibex_top_2876/HI
+ ibex_top_2877/HI
+ ibex_top_2878/HI
+ ibex_top_2879/HI
+ ibex_top_2880/HI
+ ibex_top_2881/HI
+ ibex_top_2882/HI
+ ibex_top_2883/HI
+ ibex_top_2884/HI
+ ibex_top_2885/HI
+ ibex_top_2886/HI
+ ibex_top_2887/HI
+ ibex_top_2888/HI
+ ibex_top_2889/HI
+ ibex_top_2890/HI
+ ibex_top_2891/HI
+ ibex_top_2892/HI
+ ibex_top_2893/HI
+ ibex_top_2894/HI
+ ibex_top_2895/HI
+ ibex_top_2896/HI
+ ibex_top_2897/HI
+ ibex_top_2898/HI
+ ibex_top_2899/HI
+ ibex_top_2900/HI
+ ibex_top_2901/HI
+ ibex_top_2902/HI
+ ibex_top_2903/HI
+ ibex_top_2904/HI
+ ibex_top_2905/HI
+ ibex_top_2906/HI
+ ibex_top_2907/HI
+ ibex_top_2908/HI
+ ibex_top_2909/HI
+ ibex_top_2910/HI
+ ibex_top_2911/HI
+ ibex_top_2912/HI
+ ibex_top_2913/HI
+ ibex_top_2914/HI
+ ibex_top_2915/HI
+ ibex_top_2916/HI
+ ibex_top_2917/HI
+ ibex_top_2918/HI
+ ibex_top_2919/HI
+ ibex_top_2920/HI
+ ibex_top_2921/HI
+ ibex_top_2922/HI
+ ibex_top_2923/HI
+ ibex_top_2924/HI
+ ibex_top_2925/HI
+ ibex_top_2926/HI
+ ibex_top_2927/HI
+ ibex_top_2928/HI
+ ibex_top_2929/HI
+ ibex_top_2930/HI
+ ibex_top_2931/HI
+ ibex_top_2932/HI
+ ibex_top_2934/LO
+ ibex_top_2935/LO
+Found 0 partially unannotated drivers.
+
+===========================================================================
+max slew violation count 0
+Writing metric design__max_slew_violation__count__corner:nom_tt_025C_1v80: 0
+max fanout violation count 42
+Writing metric design__max_fanout_violation__count__corner:nom_tt_025C_1v80: 42
+max cap violation count 0
+Writing metric design__max_cap_violation__count__corner:nom_tt_025C_1v80: 0
+============================================================================
+
+===========================================================================
+check_setup -verbose -unconstrained_endpoints -multiple_clock -no_clock -no_input_delay -loops -generated_clocks
+===========================================================================

@@ -10,21 +10,25 @@ Yosys, OpenROAD, sky130_fd_sc_hd standard cells), the same 50 MHz clock target, 
 configurations with unused features disabled.
 
 <!-- BEGIN collect.py --md synth -->
-| Core | Config | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | Est. fmax, post-CTS, tt (MHz) | Reg-to-reg slack @ target, post-CTS (ns) | Est. fmax, post-GPL, tt (MHz) |
-|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Hazard3 | default | Yosys read_verilog | 12,823 | 152,032 | 1.00× | 1,849 | 0 | pending | pending | 49 |
-| Ibex | default | yosys-slang | 12,173 | 152,431 | 1.00× | 1,950 | 1 | pending | pending | 48 |
-| VeeR EL2 | min | yosys-slang | 56,639 | 650,156 | 4.28× | 7,071 | 258 | pending | pending | 25 |
-| VeeR EL2 | bp | yosys-slang | 61,383 | 720,779 | 4.74× | 8,521 | 305 | pending | pending | 20 |
+| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Est. fmax, tt (MHz)* |
+|---|---:|---:|---:|---:|---:|
+| Hazard3 | 12,823 | 152,032 | 1.00× | 1,849 | pending |
+| Ibex (small) | 12,173 | 152,431 | 1.00× | 1,950 | 72 |
+| VeeR EL2 (min) | 56,639 | 650,156 | 4.28× | 7,071 | pending |
 <!-- END collect.py -->
 
+\* Pre-route estimate at the typical corner (25 °C, 1.8 V): after placement, clock-tree synthesis and
+timing optimisation, but before routing. The remaining estimates are still running and will
+follow; signed-off post-route numbers will come from the full RTL-to-GDS runs.
+
 Notes:
-- Area is standard-cell area after synthesis. The fmax figures are early, pessimistic estimates
-  (after placement but before timing optimisation, typical corner). Numbers after clock-tree
-  synthesis and timing optimisation will follow in a few days, and full RTL-to-GDS results after that.
-- VeeR EL2 "min" has its branch predictor off, to match Hazard3 and Ibex; "bp" keeps VeeR's
-  standard predictor. VeeR's configuration cannot remove its PMP unit (16 entries) or its debug
-  module, which partly explains its larger area. We have documented this as a limitation.
+- Area is standard-cell area after synthesis (before placement).
+- VeeR EL2 is shown with its branch predictor off, to match Hazard3 and Ibex, which have none.
+  With VeeR's standard predictor on, its area grows further; we will report that as a separate
+  data point.
+- VeeR's configuration cannot remove its PMP unit (16 entries) or its debug module, which partly
+  explains its larger area. We have documented this as a limitation and can patch it out for a
+  strictly like-for-like comparison if you prefer.
 - Next: benchmark simulation (CoreMark, Dhrystone) on all three cores, then core-only RTL-to-GDS
   on SKY130, then the padded chip top.
 
