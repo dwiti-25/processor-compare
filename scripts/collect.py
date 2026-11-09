@@ -21,6 +21,11 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(REPO, "results", "raw")
 CSV = os.path.join(REPO, "results", "results.csv")
+SIM_CSV = os.path.join(REPO, "results", "sim_results.csv")
+SIM_COLUMNS = ["core", "config", "bench", "exit", "cycles", "marked_cycles", "iterations",
+               "coremark_per_mhz", "dhrystone_cycles_per_run", "dmips_per_mhz", "log_path"]
+COREMARK_ITER = 10      # common/bench/Makefile COREMARK_ITER
+DHRYSTONE_RUNS = 500    # riscv-tests dhrystone.h NUMBER_OF_RUNS
 
 COLUMNS = [
     "core", "core_commit", "config", "top", "technology", "scope", "stage", "clock_target_mhz", "run_id",
@@ -139,6 +144,48 @@ def prefer_wrapped(rows):
     return list(best.values())
 
 
+def collect_sim():
+    """RTL simulation results: one row per (core config, benchmark) from results/raw/sim logs."""
+    rows = []
+    for log in sorted(glob.glob(os.path.join(RAW, "sim", "*", "*.log"))):
+        cfgdir = os.path.basename(os.path.dirname(log))
+        core, _, config = cfgdir.rpartition("_")
+        bench = os.path.splitext(os.path.basename(log))[0]
+        m = re.search(r"TB_RESULT core=\S+ exit=(\S+) cycles=(\d+) marked_cycles=(\d+)", open(log, errors="replace").read())
+        if not m:
+            continue
+        exit_, cycles, marked = m.group(1), int(m.group(2)), int(m.group(3))
+        r = {"core": core, "config": CONFIG_LABELS.get((core, config), config), "bench": bench,
+             "exit": exit_, "cycles": cycles, "marked_cycles": marked, "iterations": "",
+             "coremark_per_mhz": "", "dhrystone_cycles_per_run": "", "dmips_per_mhz": "",
+             "log_path": os.path.relpath(log, REPO)}
+        if bench == "coremark" and exit_ == "0" and marked:
+            r["iterations"] = COREMARK_ITER
+            r["coremark_per_mhz"] = round(COREMARK_ITER * 1e6 / marked, 3)
+        if bench == "dhrystone" and exit_ == "0" and marked:
+            r["iterations"] = DHRYSTONE_RUNS
+            per = marked / DHRYSTONE_RUNS
+            r["dhrystone_cycles_per_run"] = round(per, 1)
+            r["dmips_per_mhz"] = round(1e6 / per / 1757, 3)
+        rows.append(r)
+    return rows
+
+
+def md_sim(rows):
+    names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
+    out = ["| Core | Config | Tests passed | CoreMark/MHz | Dhrystone cycles/run | DMIPS/MHz |",
+           "|---|---|---:|---:|---:|---:|"]
+    for core in ("hazard3", "ibex", "veer_el2"):
+        for cfg in sorted({r["config"] for r in rows if r["core"] == core}):
+            rs = [r for r in rows if r["core"] == core and r["config"] == cfg]
+            cm = next((r for r in rs if r["bench"] == "coremark"), {})
+            dh = next((r for r in rs if r["bench"] == "dhrystone"), {})
+            passed = sum(r["exit"] == "0" for r in rs)
+            out.append(f"| {names[core]} | {cfg} | {passed}/{len(rs)} | {cm.get('coremark_per_mhz', '')} | "
+                       f"{dh.get('dhrystone_cycles_per_run', '')} | {dh.get('dmips_per_mhz', '')} |")
+    return "\n".join(out)
+
+
 def md_synth(rows):
     order = {"hazard3": 0, "ibex": 1, "veer_el2": 2}
     names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
@@ -181,7 +228,7 @@ def md_headline(rows):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--md", choices=["synth"], help="print a Markdown table to stdout")
+    ap.add_argument("--md", choices=["synth", "sim"], help="print a Markdown table to stdout")
     ap.add_argument("--update-report", metavar="MD", help="replace the synth table inside MD's markers")
     ap.add_argument("--headline", action="store_true", help="use the short one-config-per-core table")
     a = ap.parse_args()
@@ -192,6 +239,15 @@ def main():
         w.writeheader()
         w.writerows(rows)
     print(f"[collect] wrote {len(rows)} rows to {os.path.relpath(CSV, REPO)}", file=sys.stderr)
+    sim = collect_sim()
+    with open(SIM_CSV, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=SIM_COLUMNS)
+        w.writeheader()
+        w.writerows(sim)
+    print(f"[collect] wrote {len(sim)} rows to {os.path.relpath(SIM_CSV, REPO)}", file=sys.stderr)
+    if a.md == "sim":
+        print(md_sim(sim))
+        return
     synth = prefer_wrapped([r for r in rows if r["stage"] == "synth"])
     table = md_headline(synth) if a.headline else md_synth(synth)
     if a.md == "synth":

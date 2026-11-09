@@ -8,7 +8,7 @@ Update at the start and end of every Claude Code session.
   - VeeR min post-CTS estimate, old vendor top (`build/postcts.console.log`).
   - Wrapped Hazard3 then Ibex: placement + post-GPL + post-CTS estimates (`build/wrap_est.console.log`).
 - Stopped by Claude: old-top Hazard3 post-CTS and queued old-top VeeR bp post-CTS. Both superseded by the core + wrapper runs.
-- Blocked on: VeeR RTL sim waits for host memory (swap nearly full while Docker jobs run). No layout runs (Prompt 5) until Dwiti raises Docker memory.
+- Blocked on: decision on VeeR TCMs/I-cache (LIMITATIONS.md). No layout runs (Prompt 5) until Dwiti raises Docker memory.
 
 ## Plan for P1 (2026-11-09): benchmarks in RTL sim
 1. Shared memory map: RAM at 0x0 (entry 0x80), MMIO at 0x8000_0000: putchar, exit, cycle-count start/stop markers.
@@ -42,3 +42,5 @@ clock sweep (3 cores × 3 points) a Linux x86 box with ≥16 GB RAM and ≥8 cor
 cloud VM) would be much faster. Raising Docker Desktop's memory limit to ~6 GB is the cheap fix here.
 - 2026-11-09: Wrapped (core + thin wrapper) synthesis for Hazard3 and Ibex; the report now prefers wrapped rows. VeeR wrapped synthesis is still to run.
 - 2026-11-09: P1: common wrappers, testbench and benchmarks built. Hazard3 and Ibex pass all 52 programs (hello, Dhrystone, CoreMark, 49 riscv-tests). The Ibex hang was a TB bug: rst_n started at 0 with no falling edge, so Ibex's async-reset flops behind its clock gate never reset (priv level came up as U-mode). Fixed in tb_top.
+- 2026-11-10: VeeR wrapper fixed (mpc_reset_run_req=1; generator handles multi-dim ports and the ifdef'd regfile port). All three cores pass all 52 programs, and CoreMark CRCs match the official 2K performance values on all three. CoreMark/MHz and DMIPS/MHz come from `scripts/collect.py --md sim` (results/sim_results.csv). VeeR is ~5× below its usual published CoreMark/MHz because TCMs/I-cache are off; see LIMITATIONS.md. Needs a decision.
+- 2026-11-10: Old-top VeeR min and wrapped Ibex post-CTS estimates stopped (Dwiti); timing will come from the layout runs. Report/PDF/email use wrapped synthesis for all three headline cores.
