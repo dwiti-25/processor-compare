@@ -1,0 +1,47 @@
+197. Printing statistics.
+
+=== veer_el2_wrap ===
+
+        +----------Local Count, excluding submodules.
+        | 
+    80647 wires
+    91229 wire bits
+     1648 public wires
+    12209 public wire bits
+       20 ports
+      278 port bits
+    89940 cells
+    32715   $_ANDNOT_
+     2689   $_AND_
+       25   $_DFFE_PN0N_
+      413   $_DFFE_PN0P_
+      532   $_DFFE_PP_
+     5416   $_DFF_PN0_
+        1   $_DFF_PN1_
+      224   $_DLATCH_N_
+     6478   $_MUX_
+     2040   $_NAND_
+     5284   $_NOR_
+     3719   $_NOT_
+     2681   $_ORNOT_
+    16959   $_OR_
+     2219   $_XNOR_
+     8545   $_XOR_
+
+   Area for cell type $_ANDNOT_ is unknown!
+   Area for cell type $_AND_ is unknown!
+   Area for cell type $_DFFE_PN0N_ is unknown!
+   Area for cell type $_DFFE_PN0P_ is unknown!
+   Area for cell type $_DFFE_PP_ is unknown!
+   Area for cell type $_DFF_PN0_ is unknown!
+   Area for cell type $_DFF_PN1_ is unknown!
+   Area for cell type $_DLATCH_N_ is unknown!
+   Area for cell type $_MUX_ is unknown!
+   Area for cell type $_NAND_ is unknown!
+   Area for cell type $_NOR_ is unknown!
+   Area for cell type $_NOT_ is unknown!
+   Area for cell type $_ORNOT_ is unknown!
+   Area for cell type $_OR_ is unknown!
+   Area for cell type $_XNOR_ is unknown!
+   Area for cell type $_XOR_ is unknown!
+

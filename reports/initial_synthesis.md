@@ -8,7 +8,9 @@ Dwiti Suchak, Ayush. BITS Pilani. Status as of 9 Nov 2026.
   core-only scope is the core plus a thin wrapper with identical ports for all three cores
   (adapters to a common 64-bit memory interface, unused inputs tied to constants). Rows marked
   "core + wrapper" use it. Rows marked "vendor top (old)" are the first synthesis of the core's own
-  top, with unused inputs left as free ports, and will be replaced (VeeR still to run).
+  top, with unused inputs left as free ports (only VeeR "bp" is left; it is a sensitivity point).
+  Wrapping removes logic that only serves unused interfaces (e.g. VeeR's DMA slave and debug
+  system bus, trace outputs), the same way for every core.
 - **Flow:** LibreLane 3.0.17 (Docker image), sky130A (open_pdks `8afc8346`), `sky130_fd_sc_hd`, LibreLane
   default synthesis settings (`SYNTH_STRATEGY = AREA 0`, flattened). Same flow and versions for all
   three cores (see `docs/VERSIONS.md`).
@@ -24,8 +26,8 @@ Dwiti Suchak, Ayush. BITS Pilani. Status as of 9 Nov 2026.
       then STA with placement-estimated wires and the propagated clock tree. Not routed.
     - **post-GPL (secondary, pessimistic):** global placement and design-rule repair only, with ideal
       clocks. This is before any timing repair, and slow `clkdlybuf4s25` fanout buffers dominate it.
-    - "pending" means that estimate hasn't run yet for that row. Wrapped rows are re-running
-      after the VeeR post-CTS job frees Docker memory; VeeR's timing repair takes hours on this machine.
+    - "pending": not run for that row. Signed-off timing will come from the full layout runs, so
+      these pre-route estimates are not being chased further.
 
 ## Results
 
@@ -34,7 +36,7 @@ Dwiti Suchak, Ayush. BITS Pilani. Status as of 9 Nov 2026.
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Hazard3 | default | core + wrapper | Yosys read_verilog | 13,152 | 156,519 | 1.00× | 1,940 | 0 | 78 | +7.12 | 48 |
 | Ibex | small | core + wrapper | yosys-slang | 11,922 | 150,477 | 0.96× | 1,924 | 1 | pending | pending | 49 |
-| VeeR EL2 | min | vendor top (old) | yosys-slang | 56,639 | 650,156 | 4.15× | 7,071 | 258 | pending | pending | 25 |
+| VeeR EL2 | min | core + wrapper | yosys-slang | 50,523 | 577,762 | 3.69× | 6,387 | 224 | pending | pending | pending |
 | VeeR EL2 | bp | vendor top (old) | yosys-slang | 61,383 | 720,779 | 4.61× | 8,521 | 305 | pending | pending | 20 |
 <!-- END collect.py -->
 

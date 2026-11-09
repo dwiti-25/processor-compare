@@ -42,8 +42,10 @@ hdr = hdr[hdr.index("module el2_veer\n"):]
 hdr = hdr[:hdr.index(");")]
 hdr = re.sub(r"//.*", "", hdr)
 hdr = re.sub(r"/\*.*?\*/", "", hdr, flags=re.S)
-ports = []  # (dir, width_expr, name)
-for m in re.finditer(r"\b(input|output)\s+(?:logic|wire)?\s*(\[[^\]]*\])?\s*(\w+)", hdr):
+# ports inside `ifdef blocks (only the lockstep regfile interface, which our config disables)
+hdr = re.sub(r"`ifdef\s+\w+.*?`endif", "", hdr, flags=re.S)
+ports = []  # (dir, width_expr, name); any number of packed dimensions
+for m in re.finditer(r"\b(input|output)\s+(?:logic|wire)?\s*((?:\[[^\]]*\]\s*)*)(\w+)", hdr):
     ports.append((m.group(1), m.group(2) or "", m.group(3)))
 
 conns = []
@@ -97,10 +99,8 @@ for ch, tag in (("lsu", "pt.LSU_BUS_TAG"), ("ifu", "pt.IFU_BUS_TAG")):
   logic [63:0]         {ch}_axi_wdata, {ch}_axi_rdata;
   logic [1:0]          {ch}_axi_bresp, {ch}_axi_rresp;""")
 print("""
-  el2_regfile_if regfile ();
-
   el2_veer #(.pt(pt)) u_core (""")
-print(",\n".join(conns + ["    .regfile                     (regfile)"]))
+print(",\n".join(conns))
 print("""  );
 
   logic [7:0]  i_be_unused;

@@ -47,8 +47,6 @@ import el2_pkg::*;
   logic [63:0]         ifu_axi_wdata, ifu_axi_rdata;
   logic [1:0]          ifu_axi_bresp, ifu_axi_rresp;
 
-  el2_regfile_if regfile ();
-
   el2_veer #(.pt(pt)) u_core (
     .clk                         (clk),
     .rst_l                       (rst_n),
@@ -109,7 +107,7 @@ import el2_pkg::*;
     .ic_tag_valid                (),
     .ic_wr_en                    (),
     .ic_rd_en                    (),
-    .logic                       (),
+    .ic_wr_data                  (),
     .ic_rd_data                  ('0),
     .ic_rd_addr_lo               ('0),
     .ic_rd_bank_check_en         ('0),
@@ -333,8 +331,7 @@ import el2_pkg::*;
     .extintsrc_req               (irq_ext),
     .timer_int                   (irq_timer),
     .soft_int                    (irq_soft),
-    .scan_mode                   (1'b0),
-    .regfile                     (regfile)
+    .scan_mode                   (1'b0)
   );
 
   logic [7:0]  i_be_unused;
