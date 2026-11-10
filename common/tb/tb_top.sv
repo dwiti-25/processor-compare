@@ -2,6 +2,9 @@
 // Plusargs: +hex=<file>       program image ($readmemh, byte-wide, from objcopy -O verilog)
 //           +maxcycles=<n>    timeout (default 200M)
 //           +trace            print every bus request/response (debug)
+//           +saif=<file>      (build with TB_SAIF + verilator --trace-saif) dump switching activity of
+//                             the core wrapper (dut) from the first cycle-count start marker to the
+//                             next stop marker, then end the run (power activity, flows/sim.sh SAIF=1)
 // Prints the program's putchar output, then one summary line that scripts parse:
 //   TB_RESULT core=<name> exit=<code> cycles=<total> marked_cycles=<start..stop>
 `ifndef CORE_WRAP
@@ -45,11 +48,14 @@ module tb_top;
   bit              marking = 0;
   bit              trace = 0;
   string           hex;
+  string           saif = "";
+  bit              saif_on = 0;
 
   initial begin
     if (!$value$plusargs("hex=%s", hex)) $fatal(1, "TB: +hex=<file> required");
     void'($value$plusargs("maxcycles=%d", maxcycles));
     trace = $test$plusargs("trace");
+    void'($value$plusargs("saif=%s", saif));
     $readmemh(hex, mem.ram);
     #1 rst_n = 1'b0;
     repeat (10) @(posedge clk);
@@ -69,6 +75,21 @@ module tb_top;
       if (mark_value != 0) begin marking <= 1; mark_start <= cycles; end
       else if (marking)   begin marking <= 0; marked <= marked + (cycles - mark_start); end
     end
+`ifdef TB_SAIF
+    if (saif != "" && mark_valid) begin
+      if (mark_value != 0 && !saif_on) begin
+        saif_on <= 1;
+        $dumpfile(saif);
+        $dumpvars(0, dut);
+        $display("\nTB: SAIF window start at cycle %0d", cycles);
+      end else if (mark_value == 0 && saif_on) begin
+        $dumpflush;
+        $display("\nTB_RESULT core=%s exit=saif_window cycles=%0d marked_cycles=%0d",
+                 `STR(`CORE_WRAP), cycles, cycles - mark_start);
+        $finish;
+      end
+    end
+`endif
     if (i_err || d_err) begin
       $display("\nTB: bus error (i_err=%0d d_err=%0d i_addr=%h d_addr=%h) at cycle %0d",
                i_err, d_err, i_addr, d_addr, cycles);

@@ -27,3 +27,5 @@ results/raw/**/yosys_reports/pre_techmap.json
 results/raw/**/yosys_reports/post_dff.json
 results/raw/**/librelane*.log
 results/raw/**/yosys-synthesis.log
+# switching activity dumps are reproducible (SAIF=1 flows/sim.sh <core> coremark_pwr)
+*.saif

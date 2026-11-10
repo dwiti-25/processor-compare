@@ -36,8 +36,13 @@ ISA    := $(addprefix rv32ui-,$(ISA_UI)) $(addprefix rv32um-,$(ISA_UM)) $(addpre
 ISA_INC := -Iisa_env -Iriscv-tests/isa/macros/scalar -Isw/include
 
 ALL := hello dhrystone coremark $(ISA)
-.PHONY: all list clean
+# Power-activity CoreMark: identical source and flags, 1 iteration (short SAIF window). Not part of
+# ALL (not a pass/fail benchmark). make -C common/bench power
+POWER := coremark_pwr
+POWER_ITER := 1
+.PHONY: all list clean power
 all: $(addprefix $(OUT)/,$(addsuffix .hex,$(ALL)))
+power: $(addprefix $(OUT)/,$(addsuffix .hex,$(POWER)))
 list:
 	@echo $(ALL)
 
@@ -50,6 +55,9 @@ $(OUT)/hello.elf: hello/hello.c $(RT) | $(OUT)
 
 $(OUT)/coremark.elf: $(COREMARK_SRC) $(RT) | $(OUT)
 	$(CC) $(CFLAGS) $(COREMARK_FLAGS) $(LDFLAGS) -o $@ $(RT) $(COREMARK_SRC) $(LIBS)
+
+$(OUT)/coremark_pwr.elf: $(COREMARK_SRC) $(RT) | $(OUT)
+	$(CC) $(CFLAGS) $(subst -DITERATIONS=$(COREMARK_ITER),-DITERATIONS=$(POWER_ITER),$(COREMARK_FLAGS)) $(LDFLAGS) -o $@ $(RT) $(COREMARK_SRC) $(LIBS)
 
 $(OUT)/dhrystone.elf: $(DHRY_SRC) $(RT) | $(OUT)
 	$(CC) $(CFLAGS) $(DHRY_FLAGS) $(LDFLAGS) -o $@ $(RT) $(DHRY_SRC) $(LIBS)

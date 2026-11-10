@@ -4,6 +4,8 @@
 #   core : hazard3 | ibex | veer_el2   (VeeR config via CFG=min|bp, default min)
 # Builds build/sim/<core>_<cfg>/Vtb_top once, runs each build/bench/<bench>.hex and writes
 # results/raw/sim/<core>_<cfg>/<bench>.log (the last line is the testbench's TB_RESULT line).
+# SAIF=1: separate build with --trace-saif; each run dumps switching activity of the core wrapper over
+#         the benchmark's timed window (start..stop marker) to results/raw/power/<core>_<cfg>/<bench>.saif
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO"
@@ -18,6 +20,12 @@ source "cores/$CORE/sky130/synth.conf"
 NAME=${CORE}_${CFG}
 SIMDIR=build/sim/$NAME
 LOGDIR=results/raw/sim/$NAME
+TRACEARGS=""
+if [ "${SAIF:-0}" = 1 ]; then
+  SIMDIR=build/sim/${NAME}_saif
+  LOGDIR=results/raw/power/$NAME
+  TRACEARGS="--trace-saif +define+TB_SAIF"
+fi
 mkdir -p "$SIMDIR" "$LOGDIR"
 
 # same sources (and patches) as synthesis
@@ -51,7 +59,7 @@ DEFARGS=""; for d in $DEFINES; do [ "$d" = SYNTHESIS ] || DEFARGS="$DEFARGS +def
 
 if [ ! -x "$SIMDIR/Vtb_top" ] || [ -n "${REBUILD:-}" ]; then
   echo "[sim] building $NAME"
-  verilator --binary --timing -j 4 -O3 --x-assign fast --x-initial fast \
+  verilator --binary --timing -j 4 -O3 $TRACEARGS --x-assign fast --x-initial fast \
     -Wno-fatal -Wno-lint -Wno-style -Wno-TIMESCALEMOD -Wno-MULTIDRIVEN -Wno-UNOPTFLAT \
     -Wno-IMPLICITSTATIC -Wno-INITIALDLY -Wno-SIDEEFFECT -Wno-ASCRANGE -Wno-LATCH \
     --top-module tb_top +define+CORE_WRAP=$WRAPMOD $DEFARGS $INCARGS \
@@ -62,10 +70,11 @@ if [ ! -x "$SIMDIR/Vtb_top" ] || [ -n "${REBUILD:-}" ]; then
 fi
 
 BENCHES=${*:-$(make -s -C common/bench list)}
-make -s -C common/bench > /dev/null
+make -s -C common/bench all power > /dev/null
 for b in $BENCHES; do
   hex=build/bench/$b.hex
   [ -f "$hex" ] || { echo "[sim] missing $hex"; exit 1; }
-  "$SIMDIR/Vtb_top" +hex="$hex" > "$LOGDIR/$b.log" 2>&1 || true
+  PLUS=""; [ "${SAIF:-0}" = 1 ] && PLUS="+saif=$LOGDIR/$b.saif"
+  "$SIMDIR/Vtb_top" +hex="$hex" $PLUS > "$LOGDIR/$b.log" 2>&1 || true
   echo "[sim] $NAME $b: $(grep TB_RESULT "$LOGDIR/$b.log" || echo 'no TB_RESULT (crash?)')"
 done
