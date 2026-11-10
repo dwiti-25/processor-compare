@@ -1,0 +1,290 @@
+Reading timing models for corner max_tt_025C_1v80…
+Reading timing library for the 'max_tt_025C_1v80' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib'…
+Reading timing models for corner min_ss_100C_1v60…
+Reading timing library for the 'min_ss_100C_1v60' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib'…
+Reading timing models for corner nom_tt_025C_1v80…
+Reading timing library for the 'nom_tt_025C_1v80' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib'…
+[WARNING STA-1140] /Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib line 1, library sky130_fd_sc_hd__tt_025C_1v80 already exists.
+Reading timing models for corner max_ff_n40C_1v95…
+Reading timing library for the 'max_ff_n40C_1v95' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib'…
+Reading timing models for corner nom_ff_n40C_1v95…
+Reading timing library for the 'nom_ff_n40C_1v95' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib'…
+[WARNING STA-1140] /Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib line 1, library sky130_fd_sc_hd__ff_n40C_1v95 already exists.
+Reading timing models for corner max_ss_100C_1v60…
+Reading timing library for the 'max_ss_100C_1v60' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib'…
+[WARNING STA-1140] /Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib line 1, library sky130_fd_sc_hd__ss_100C_1v60 already exists.
+Reading timing models for corner min_tt_025C_1v80…
+Reading timing library for the 'min_tt_025C_1v80' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib'…
+[WARNING STA-1140] /Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib line 1, library sky130_fd_sc_hd__tt_025C_1v80 already exists.
+Reading timing models for corner nom_ss_100C_1v60…
+Reading timing library for the 'nom_ss_100C_1v60' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib'…
+[WARNING STA-1140] /Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib line 1, library sky130_fd_sc_hd__ss_100C_1v60 already exists.
+Reading timing models for corner min_ff_n40C_1v95…
+Reading timing library for the 'min_ff_n40C_1v95' corner at '/Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib'…
+[WARNING STA-1140] /Users/dwitisuchak/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib line 1, library sky130_fd_sc_hd__ff_n40C_1v95 already exists.
+Reading OpenROAD database at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/42-openroad-detailedrouting/hazard3_wrap.odb'…
+Reading design constraints file at '/nix/store/f5hfihqp8c0ndd7qd4061yhsk0v6yj4n-python3-3.13.9-env/lib/python3.13/site-packages/librelane/scripts/base.sdc'…
+[INFO] Using clock clk…
+[INFO] Setting output delay to: 6.66666
+[INFO] Setting input delay to: 6.66666
+[INFO] Setting load to: 0.033442
+[INFO] Setting clock uncertainty to: 0.25
+[INFO] Setting clock transition to: 0.1499999999999999944488848768742172978818416595458984375
+[INFO] Setting timing derate to: 5.0%
+Reading extracted parasitics for corner 'nom_tt_025C_1v80' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/nom/hazard3_wrap.nom.spef'…
+Reading extracted parasitics for corner 'nom_ss_100C_1v60' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/nom/hazard3_wrap.nom.spef'…
+Reading extracted parasitics for corner 'nom_ff_n40C_1v95' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/nom/hazard3_wrap.nom.spef'…
+Reading extracted parasitics for corner 'min_tt_025C_1v80' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/min/hazard3_wrap.min.spef'…
+Reading extracted parasitics for corner 'min_ss_100C_1v60' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/min/hazard3_wrap.min.spef'…
+Reading extracted parasitics for corner 'min_ff_n40C_1v95' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/min/hazard3_wrap.min.spef'…
+Reading extracted parasitics for corner 'max_tt_025C_1v80' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/max/hazard3_wrap.max.spef'…
+Reading extracted parasitics for corner 'max_ss_100C_1v60' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/max/hazard3_wrap.max.spef'…
+Reading extracted parasitics for corner 'max_ff_n40C_1v95' at '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/43-openroad-rcx/max/hazard3_wrap.max.spef'…
+PRR before (RCX parasitics): max_slew_vio=3190 max_cap_vio=5 max_fanout_vio=3 setup_ws=-6.268 setup_tns=-391.731 hold_ws=0.064
++ repair_design -verbose -max_wire_length 400.0 -slew_margin 30.0 -cap_margin 30.0
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[WARNING RSZ-0065] max wire length less than 6130u increases wire delays.
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |     18143
+     1000 |     +0.0% |       5 |       0 |            10 |     17143
+     2000 |     +0.0% |      67 |       8 |            94 |     16143
+     3000 |     +0.1% |     135 |      14 |           177 |     15143
+     4000 |     +0.1% |     172 |      15 |           243 |     14143
+     5000 |     +0.1% |     202 |      20 |           296 |     13143
+     6000 |     +0.1% |     253 |      21 |           355 |     12143
+     7000 |     +0.1% |     289 |      24 |           413 |     11143
+     8000 |     +0.2% |     323 |      25 |           474 |     10143
+     9000 |     +0.2% |     374 |      31 |           540 |      9143
+    10000 |     +0.2% |     445 |      36 |           658 |      8143
+    11000 |     +0.2% |     492 |      41 |           716 |      7143
+    12000 |     +0.3% |     518 |      46 |           771 |      6143
+    13000 |     +0.3% |     574 |      57 |           878 |      5143
+    14000 |     +0.4% |     658 |      65 |           975 |      4143
+    15000 |     +0.4% |     658 |      65 |           975 |      3143
+    16000 |     +0.4% |     770 |      72 |          1097 |      2143
+    17000 |     +0.4% |     771 |      73 |          1108 |      1143
+    18000 |     +0.4% |     792 |      76 |          1133 |       143
+    final |     +0.4% |     792 |      76 |          1133 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 1172 slew violations.
+[INFO RSZ-0035] Found 3 fanout violations.
+[INFO RSZ-0036] Found 3 capacitance violations.
+[INFO RSZ-0037] Found 2 long wires.
+[INFO RSZ-0039] Resized 792 instances.
+[INFO RSZ-0038] Inserted 76 buffers in 1133 nets.
+PRR after repair_design: max_slew_vio=664 max_cap_vio=0 max_fanout_vio=0 setup_ws=-4.467 setup_tns=-201.687 hold_ws=0.064
++ repair_timing -verbose -setup -setup_margin 0.025000000000000001387778780781445675529539585113525390625 -max_buffer_percent 50.0
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0094] Found 86 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 86 out of 86 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   TNS      |  Viol  | Worst
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            | Endpts | Endpt
+--------------------------------------------------------------------------------------------------------------
+        0 |       0 |       0 |        0 |      0 |     0 |    +0.0% |   -4.467 |     -201.7 |     86 | _24094_/D
+       10 |       0 |       9 |        0 |      0 |     0 |    +0.0% |   -3.685 |     -159.6 |     86 | _24094_/D
+       20 |       0 |      19 |        0 |      0 |     0 |    +0.0% |   -2.862 |     -107.8 |     86 | _24094_/D
+       30 |       0 |      28 |        0 |      0 |     1 |    +0.0% |   -2.633 |      -92.6 |     86 | _24094_/D
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+       40 |       0 |      38 |        0 |      0 |     1 |    +0.0% |   -1.898 |      -48.8 |     86 | _24094_/D
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+       50 |       0 |      48 |        0 |      0 |     1 |    +0.0% |   -1.616 |      -40.4 |     86 | i_addr[31]
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+       60 |       0 |      58 |        0 |      0 |     1 |    +0.1% |   -1.212 |      -33.5 |     86 | _24108_/D
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+       70 |       0 |      67 |        0 |      0 |     2 |    +0.1% |   -0.952 |      -21.5 |     86 | _24094_/D
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _23366_/Q
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+       80 |       0 |      77 |        0 |      0 |     2 |    +0.1% |   -0.775 |      -15.3 |     86 | i_addr[31]
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _23366_/Q
+[WARNING RSZ-0075] makeBufferedNet failed for driver fanout2006/X
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _23366_/Q
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _23366_/Q
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+       90 |       0 |      86 |        0 |      1 |     2 |    +0.1% |   -0.540 |       -6.6 |     86 | i_addr[31]
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _23366_/Q
+[WARNING RSZ-0075] makeBufferedNet failed for driver fanout2006/X
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _23366_/Q
+[WARNING RSZ-0075] makeBufferedNet failed for driver fanout2006/X
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver fanout2006/X
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver fanout2006/X
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+      100 |       0 |      96 |        0 |      1 |     2 |    +0.1% |   -0.285 |       -2.4 |     86 | _24094_/D
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11208_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver _11270_/Y
+[WARNING RSZ-0075] makeBufferedNet failed for driver fanout2006/X
+      103 |       0 |      99 |        0 |      1 |     2 |    +0.1% |   -0.222 |       -1.3 |     84 | _24094_/D
+      108 |       0 |     103 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     82 | _24094_/D
+      109 |       0 |     103 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     81 | _24094_/D
+      110 |       0 |     103 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     81 | _24094_/D
+      110 |       0 |     103 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     80 | _24094_/D
+      112 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     78 | _24094_/D
+      113 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     77 | _24094_/D
+      114 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     76 | _24094_/D
+      115 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     75 | _24094_/D
+      116 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     74 | _24094_/D
+      117 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     73 | _24094_/D
+      118 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     72 | _24094_/D
+      119 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     71 | _24094_/D
+      120 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     71 | _24094_/D
+      120 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     70 | _24094_/D
+      121 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     69 | _24094_/D
+      122 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     68 | _24094_/D
+      123 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     67 | _24094_/D
+      124 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     66 | _24094_/D
+      125 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     65 | _24094_/D
+      126 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     64 | _24094_/D
+      127 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     63 | _24094_/D
+      128 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     62 | _24094_/D
+      129 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     61 | _24094_/D
+      130 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     61 | _24094_/D
+      130 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     60 | _24094_/D
+      131 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     59 | _24094_/D
+      132 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     58 | _24094_/D
+      133 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     57 | _24094_/D
+      134 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     56 | _24094_/D
+      135 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     55 | _24094_/D
+      136 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     54 | _24094_/D
+      137 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     53 | _24094_/D
+      138 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     52 | _24094_/D
+      139 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     51 | _24094_/D
+      140 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     51 | _24094_/D
+      140 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     50 | _24094_/D
+      141 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     49 | _24094_/D
+      142 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     48 | _24094_/D
+      143 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     47 | _24094_/D
+      144 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     46 | _24094_/D
+      145 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     45 | _24094_/D
+      146 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     44 | _24094_/D
+      147 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     43 | _24094_/D
+      148 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     42 | _24094_/D
+      149 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     41 | _24094_/D
+      150 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     41 | _24094_/D
+      150 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     40 | _24094_/D
+      151 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     39 | _24094_/D
+      152 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     38 | _24094_/D
+      153 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     37 | _24094_/D
+      154 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     36 | _24094_/D
+      155 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     35 | _24094_/D
+      156 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     34 | _24094_/D
+      157 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     33 | _24094_/D
+      158 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     32 | _24094_/D
+      159 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     31 | _24094_/D
+      160 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     31 | _24094_/D
+      160 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     30 | _24094_/D
+      161 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     29 | _24094_/D
+      162 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     28 | _24094_/D
+      163 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     27 | _24094_/D
+      164 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     26 | _24094_/D
+      165 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     25 | _24094_/D
+      166 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     24 | _24094_/D
+      167 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     23 | _24094_/D
+      168 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     22 | _24094_/D
+      169 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     21 | _24094_/D
+      170 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     21 | _24094_/D
+      170 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     20 | _24094_/D
+      171 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     19 | _24094_/D
+      172 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     18 | _24094_/D
+      173 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     17 | _24094_/D
+      174 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     16 | _24094_/D
+      175 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     15 | _24094_/D
+      176 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     14 | _24094_/D
+      177 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     13 | _24094_/D
+      178 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     12 | _24094_/D
+      179 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     11 | _24094_/D
+      180 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     11 | _24094_/D
+      180 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |     10 | _24094_/D
+      181 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      9 | _24094_/D
+      182 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      8 | _24094_/D
+      183 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      7 | _24094_/D
+      184 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      6 | _24094_/D
+      185 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      5 | _24094_/D
+      186 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      4 | _24094_/D
+      187 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      3 | _24094_/D
+      188 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      2 | _24094_/D
+      189 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      1 | _24094_/D
+      190 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      1 | _24094_/D
+      190 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      0 | _24094_/D
+      191 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      0 | _24094_/D
+      192 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      0 | _24094_/D
+      193 |       0 |     104 |        0 |      1 |     2 |    +0.1% |   -0.037 |       -0.0 |      0 | _24094_/D
+     195* |       0 |     105 |        0 |      1 |     2 |    +0.1% |    0.026 |        0.0 |      0 | _24094_/D
+    final |       0 |     105 |        0 |      1 |     2 |    +0.1% |    0.026 |        0.0 |      0 | _24094_/D
+--------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0051] Resized 105 instances: 105 up, 0 up match, 0 down, 0 VT
+[INFO RSZ-0043] Swapped pins on 2 instances.
+[INFO RSZ-0049] Cloned 1 instances.
++ repair_timing -verbose -hold -setup_margin 0.025000000000000001387778780781445675529539585113525390625 -hold_margin 0.05000000000000000277555756156289135105907917022705078125 -max_buffer_percent 50.0
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0033] No hold violations found.
+PRR after repair_timing (stale for changed nets until re-route): max_slew_vio=634 max_cap_vio=0 max_fanout_vio=0 setup_ws=0.026 setup_tns=0.000 hold_ws=0.064
++ detailed_placement -max_displacement  500 100 
+Placement Analysis
+---------------------------------
+total displacement       1015.7 u
+average displacement        0.0 u
+max displacement           10.5 u
+original HPWL          633983.4 u
+legalized HPWL         634577.2 u
+delta HPWL                    0 %
+
+[INFO DPL-0020] Mirrored 6938 instances
+[INFO DPL-0021] HPWL before          634577.2 u
+[INFO DPL-0022] HPWL after           621149.5 u
+[INFO DPL-0023] HPWL delta               -2.1 %
+PRR removed routing of 17947 signal nets
+Setting global connections for newly added cells…
+[INFO] Setting global connections...
+[INFO ODB-0403] 308 connections made, 0 conflicts skipped.
+Updating metrics…
+Cell type report:                       Count       Area
+  Fill cell                               410    1538.98
+  Tap cell                               4450    5567.84
+  Antenna cell                            115     287.78
+  Buffer                                   64     280.27
+  Clock buffer                            368    5292.58
+  Timing Repair Buffer                   4438   29084.14
+  Inverter                                188     710.68
+  Clock inverter                          120    1551.49
+  Sequential cell                        1940   45215.87
+  Multi-Input combinational cell        10960  110718.69
+  Total                                 23053  200248.30
+Writing OpenROAD database to '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/44-postroute-repair/hazard3_wrap.odb'…
+Writing netlist to '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/44-postroute-repair/hazard3_wrap.nl.v'…
+Writing powered netlist to '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/44-postroute-repair/hazard3_wrap.pnl.v'…
+Writing layout to '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/44-postroute-repair/hazard3_wrap.def'…
+Writing timing constraints to '/Users/dwitisuchak/processor-compare/build/librelane/hazard3/harden_default_wrap_30MHz_postroute/runs/run/44-postroute-repair/hazard3_wrap.sdc'…

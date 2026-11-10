@@ -1,0 +1,3 @@
+saif=results/raw/power/hazard3_default/coremark_pwr.saif
+saif_sha1=6a6ca289765fc440ea4c24b2813f64a1d12dafd0
+corner=nom_tt_025C_1v80

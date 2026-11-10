@@ -1,0 +1,9 @@
+register_output_pins 1940
+register_output_pins_annotated 1939
+window_cycles 363252
+clock_mhz 30
+rtl_nets 40090
+annotated_driver_pins 2141
+annotated_input_ports 138
+rtl_nets_not_in_netlist 37811
+rtl_nets_without_driver 0
