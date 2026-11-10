@@ -31,7 +31,8 @@ HARDEN_COLUMNS = ["core", "config", "top", "clock_target_mhz", "run_id", "settin
                   "antenna_nets", "route_drc", "setup_ws_tt_ns", "setup_ws_ss_ns", "setup_ws_ff_ns",
                   "setup_ws_worst_ns", "setup_vio_count", "hold_ws_worst_ns", "hold_vio_count",
                   "max_slew_vio", "max_cap_vio", "die_area_um2", "core_area_um2", "stdcells",
-                  "power_total_w", "signoff_clean", "report_path"]
+                  "power_total_w", "power_coremark_tt_w", "power_coremark_reg_annot", "signoff_clean",
+                  "report_path"]
 COREMARK_ITER = 10      # common/bench/Makefile COREMARK_ITER
 # Published CoreMark/MHz (source, configuration it was measured with)
 PUBLISHED = {
@@ -67,6 +68,16 @@ def read_kv(path):
                 continue
             k, _, v = line.partition("=") if "=" in line.split(" ", 1)[0] else line.partition(" ")
             out[k.strip()] = v.strip()
+    return out
+
+
+def read_kv_space(path):
+    out = {}
+    if os.path.exists(path):
+        for line in open(path):
+            f = line.split()
+            if len(f) == 2:
+                out[f[0]] = f[1]
     return out
 
 
@@ -189,6 +200,17 @@ def collect_harden():
             "report_path": os.path.relpath(d, REPO),
         }
         r["settings"] = info.get("harden_settings", "")
+        # CoreMark-activity power (flows/power.sh): OpenSTA report_power Total, nom_tt, RCX SPEF
+        r["power_coremark_tt_w"] = r["power_coremark_reg_annot"] = ""
+        pr = os.path.join(d, "power_coremark", "power.rpt")
+        if os.path.exists(pr):
+            for line in open(pr):
+                f = line.split()
+                if f and f[0] == "Total" and len(f) >= 5:
+                    r["power_coremark_tt_w"] = float(f[4])
+            ann = read_kv_space(os.path.join(d, "power_coremark", "annotation.txt"))
+            if "register_output_pins" in ann:
+                r["power_coremark_reg_annot"] = f"{ann['register_output_pins_annotated']}/{ann['register_output_pins']}"
         period = 1000.0 / float(info["clk_mhz"])
         for key, corner in (("tt", "nom_tt_025C_1v80"), ("ss", "nom_ss_100C_1v60"), ("ss_maxrc", "max_ss_100C_1v60")):
             rp = os.path.join(d, "sta_postpnr", corner, "r2r.rpt")

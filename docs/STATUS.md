@@ -9,6 +9,11 @@ Update at the start and end of every Claude Code session.
 3. While layouts run: realistic power prep: switching activity (SAIF) from a short CoreMark run per core (RTL sim, CoreMark timed window), plus an OpenSTA power script for the final netlist + SPEF; reports annotation coverage. No power numbers quoted until the layouts are final.
 4. Pad ring: not started tonight; plan below.
 
+### Progress tonight
+- 17:00 Post-route repair step written and bench-tested on the Hazard3 @40 `_margin` design (DECISIONS.md). Approved cleanup of old build/ run dirs (diagnostics + vendor-top synth; reports kept in results/raw): 8.7 → 20 GiB free.
+- 19:13 Power prep done: `SAIF=1 flows/sim.sh <core> coremark_pwr` (CoreMark, 1 iteration, SAIF over the timed window: Hazard3 363,251 / Ibex 448,506 / VeeR min 1,464,345 cycles, consistent with the RTL CoreMark/MHz); `flows/power.sh <core> <run>` = OpenSTA on final netlist + nom RCX SPEF at nom_tt, activity scaled to the run's clock; `collect.py` adds `power_coremark_tt_w` and register-annotation coverage. Tested on the old Hazard3 @40 layout: 1,939/1,940 register outputs annotated (number not quoted; that layout is superseded).
+- 19:14 Running: Hazard3 @30 MHz post-route flow (`flows/run_layout.sh`, log `results/raw/sky130/queue.log`). Docker still 3.83 GiB: VeeR runs only if Docker ≥ 5.5 GiB by then (`run_layout.sh veer_el2 30 5.5`), else skipped and logged.
+
 ### Pad-ring plan (P4, not started)
 1. Shared chip top in `common/chiptop/`: core wrapper + small on-chip SRAM (OpenRAM sky130 macro, e.g. 2× `sky130_sram_1kbyte_1rw1r_32x256_8`) + UART + 8 GPIO + clk/rst; ≤32 signal pads, identical for every core.
 2. I/O: `sky130_fd_io` signal pads (`sky130_ef_io__gpiov2_pad_wrapped`), vccd/vssd/vddio/vssio power pads, corner and filler cells, placed with OpenROAD's pad placement (ICeWall, LibreLane `pad.tcl`). Pad-limited die, same die and pad order for all three cores.
