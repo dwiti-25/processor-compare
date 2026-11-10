@@ -11,7 +11,10 @@
 #             scope; tie-offs such as Ibex cheriot_enable_i are constants) instead of the vendor top
 # SYNTH_ONLY=1: stop after Yosys synthesis (no placement/timing estimate; low memory)
 # HARDEN=1  : run the full LibreLane Classic flow to GDS + DRC/LVS/STA sign-off (core-only layout);
-#             output in results/raw/sky130/<core>/harden_<cfg>[_wrap]_<clk>MHz/
+#             output in results/raw/sky130/<core>/harden_<cfg>[_wrap]_<clk>MHz[_<TAG>]/
+# POSTROUTE=1 (with HARDEN=1): flow ClassicPostRouteRepair (flows/llplugins): after detailed
+#             routing, RCX -> repair_design + repair_timing on extracted parasitics -> re-route
+# TAG=name  : suffix for the run name, so a run never overwrites an earlier one
 # Output: results/raw/sky130/<core>/synth_<cfg>_<clk>MHz/  (LibreLane run dir under build/, gitignored)
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
@@ -33,6 +36,7 @@ if [ "${WRAP:-0}" = 1 ]; then
   PARAMS=""   # configuration parameters are set inside the wrapper
 fi
 [ "${HARDEN:-0}" = 1 ] && RUN=${RUN/synth_/harden_}
+[ -n "${TAG:-}" ] && RUN=${RUN}_$TAG
 OUT=results/raw/sky130/$CORE/$RUN
 BUILD=build/librelane/$CORE/$RUN
 rm -rf "$OUT" "$BUILD"; mkdir -p "$OUT" "$BUILD"
@@ -57,7 +61,7 @@ done
 
 # LibreLane config (absolute paths; repo is mounted at the same path in the container)
 REPO="$REPO" TOP="$TOP" CLK_PORT="$CLK_PORT" CLK_MHZ="$CLK_MHZ" SRCS="$SRCS" INCS="$INCS" \
-DEFINES="$DEFINES" PARAMS="$PARAMS" FRONTEND="${FRONTEND:-slang}" python3 - > "$BUILD/config.json" <<'EOF'
+DEFINES="$DEFINES" PARAMS="$PARAMS" POSTROUTE="${POSTROUTE:-0}" FRONTEND="${FRONTEND:-slang}" python3 - > "$BUILD/config.json" <<'EOF'
 import json, os
 e = os.environ
 ab = lambda p: os.path.join(e["REPO"], p)
@@ -97,6 +101,10 @@ if e.get("HARDEN") == "1":
         cfg["GRT_DESIGN_REPAIR_MAX_SLEW_PCT"] = 30
         cfg["GRT_DESIGN_REPAIR_MAX_CAP_PCT"] = 30
         cfg["CTS_SINK_CLUSTERING_SIZE"] = 10
+    if e.get("POSTROUTE") == "1":
+        # Repair on RCX parasitics after detailed routing, then re-route (custom flow, same for
+        # every core; see flows/llplugins/librelane_plugin_postroute and DECISIONS.md).
+        cfg["meta"]["flow"] = "ClassicPostRouteRepair"
     if e.get("MULTICORNER") == "1":
         # LibreLane uses PNR_CORNERS or, if unset, only DEFAULT_CORNER (nom_tt) for every PnR step
         # (repair, CTS, timing repair), despite its docs saying STA_CORNERS. Give PnR the corners
@@ -116,7 +124,7 @@ EOF
   echo "clk_mhz=$CLK_MHZ"; echo "frontend=${FRONTEND:-slang}"
   echo "patches=$(cd cores/$CORE/patches && ls *.patch 2>/dev/null | tr '\n' ' ')"
   echo "librelane_image=$LIBRELANE_IMAGE"
-  echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}${REPAIR_MARGIN:+, wire-length 400um + 30% repair margin + CTS cluster 10}${MULTICORNER:+, multi-corner PnR (tt/ss/ff)}"
+  echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}${REPAIR_MARGIN:+, wire-length 400um + 30% repair margin + CTS cluster 10}${MULTICORNER:+, multi-corner PnR (tt/ss/ff)}${POSTROUTE:+, post-route repair (RCX) + re-route}"
   echo "pdk=$PDK"; echo "pdk_version=$(basename "$(dirname "$(readlink "$PDK_ROOT/$PDK")")")"
   echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 } > "$OUT/run.info"
@@ -145,6 +153,10 @@ if [ "${HARDEN:-0}" = 1 ]; then
     src=$(ls -d "$LR"/*-"$d" 2>/dev/null | tail -1) || true
     [ -n "$src" ] && mkdir -p "$OUT/$d" && cp -R "$src"/*.rpt "$src"/reports "$src"/*summary* "$OUT/$d/" 2>/dev/null || true
   done
+  # post-route repair evidence (PRR before/after lines, resizer log)
+  src=$(ls -d "$LR"/*-postroute-repair 2>/dev/null | tail -1) || true
+  [ -n "$src" ] && mkdir -p "$OUT/postroute-repair" && cp "$src"/*.log "$OUT/postroute-repair/" 2>/dev/null || true
+  flows/harvest_sta.sh "$OUT" "$BUILD"
   echo "[harden] done: $OUT (GDS: $LR/final/gds)"
   exit 0
 fi

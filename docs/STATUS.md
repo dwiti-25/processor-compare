@@ -2,7 +2,20 @@
 
 Update at the start and end of every Claude Code session.
 
-## Current (end of session, 2026-11-10 morning)
+## Current (session 2026-11-10 evening → overnight, unattended)
+### Plan (Dwiti's decisions, 2026-11-10 17:30)
+1. Slew fix = post-route repair step (DECISIONS.md 2026-11-10): RCX → repair_design + repair_timing on extracted parasitics → re-route. Same for all cores. Verified on the Hazard3 @40 `_margin` design before launching.
+2. Layout queue, one at a time, flow `HARDEN=1 PGRT=1 REPAIR_MARGIN=1 POSTROUTE=1 TAG=postroute`: Hazard3 @30 MHz → Ibex @30 MHz → VeeR EL2 min @30 MHz. Report fmax at tt (nom_tt_025C_1v80) and ss (nom_ss_100C_1v60). STATUS update + commit after each run.
+3. While layouts run: realistic power prep: switching activity (SAIF) from a short CoreMark run per core (RTL sim, CoreMark timed window), plus an OpenSTA power script for the final netlist + SPEF; reports annotation coverage. No power numbers quoted until the layouts are final.
+4. Pad ring: not started tonight; plan below.
+
+### Pad-ring plan (P4, not started)
+1. Shared chip top in `common/chiptop/`: core wrapper + small on-chip SRAM (OpenRAM sky130 macro, e.g. 2× `sky130_sram_1kbyte_1rw1r_32x256_8`) + UART + 8 GPIO + clk/rst; ≤32 signal pads, identical for every core.
+2. I/O: `sky130_fd_io` signal pads (`sky130_ef_io__gpiov2_pad_wrapped`), vccd/vssd/vddio/vssio power pads, corner and filler cells, placed with OpenROAD's pad placement (ICeWall, LibreLane `pad.tcl`). Pad-limited die, same die and pad order for all three cores.
+3. Prove on Hazard3 first (DRC/LVS/antenna clean, GLS hello through the pads), then reuse unchanged for Ibex and VeeR.
+4. Still open with the professor: own pad ring vs Caravel harness (decides whether step 2 is needed at all).
+
+## Previous (end of session, 2026-11-10 morning)
 - Phase: P1 done (RTL benchmarks); P2 (SKY130 core-only layout) in progress. FPGA and SCL 180 deferred.
 - Running: nothing. Docker idle.
 - Email to the professor: `reports/email_final.md` + `reports/initial_synthesis.pdf` (data 2026-11-10 02:02 IST). Ready for Dwiti to check against the tool reports and send. Not sent.
