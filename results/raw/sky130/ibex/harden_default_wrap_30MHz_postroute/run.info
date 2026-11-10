@@ -1,0 +1,13 @@
+core=ibex
+config=default
+top=ibex_wrap
+params=
+core_commit=626034d7557ab85a6d989b13011b44296bad26fa
+clk_mhz=30
+frontend=slang
+patches=0001-ibex_top-unused-scramble-assign.patch 
+librelane_image=ghcr.io/librelane/librelane:3.0.17
+harden_settings=exclude clkdlybuf4s*, post-GRT repair, wire-length 400um + 30% repair margin + CTS cluster 10, post-route repair (RCX) + re-route
+pdk=sky130A
+pdk_version=8afc8346a57fe1ab7934ba5a6056ea8b43078e71
+date=2026-11-10T16:22:22Z

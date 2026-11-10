@@ -14,7 +14,24 @@ Update at the start and end of every Claude Code session.
 - 19:13 Power prep done: `SAIF=1 flows/sim.sh <core> coremark_pwr` (CoreMark, 1 iteration, SAIF over the timed window: Hazard3 363,251 / Ibex 448,506 / VeeR min 1,464,345 cycles, consistent with the RTL CoreMark/MHz); `flows/power.sh <core> <run>` = OpenSTA on final netlist + nom RCX SPEF at nom_tt, activity scaled to the run's clock; `collect.py` adds `power_coremark_tt_w` and register-annotation coverage. Tested on the old Hazard3 @40 layout: 1,939/1,940 register outputs annotated (number not quoted; that layout is superseded).
 - 19:14 Running: Hazard3 @30 MHz post-route flow (`flows/run_layout.sh`, log `results/raw/sky130/queue.log`). Docker still 3.83 GiB: VeeR runs only if Docker ≥ 5.5 GiB by then (`run_layout.sh veer_el2 30 5.5`), else skipped and logged.
 - 21:51 **Hazard3 @30 MHz, post-route flow** (`harden_default_wrap_30MHz_postroute`, 2 h 37 min; `collect.py`): fmax tt / ss / ss-maxRC = **61.0 / 30.5 / 29.9 MHz** (was 52.0 / 25.9 at the same target without the step). DRC 0/0, LVS 0, antenna 0, route DRC 0, hold met everywhere (+0.06 ns, ff). Setup met at nom_ss (+0.58 ns) and min_ss (+1.00); **max_ss_100C_1v60 still fails by −0.078 ns (4 paths)**. Max-slew 3,190 → 595 at the worst corner (max_ss; nom_ss 235, nom_tt 29), max-cap 5 → 2. **Not sign-off clean.** Repair step log (RCX view): slew 3,190 → 634 estimated, ss setup −6.27 → +0.03 ns; the remaining slews are on nets the one repair pass could not fix and on nets re-routed differently. CoreMark-activity power (nom_tt, 30 MHz, 1,939/1,940 register outputs annotated): **10.2 mW** (LibreLane default-activity figure for the same layout: 20.8 mW). Flow left unchanged for the other cores, so the comparison stays fair.
-- 21:52 Running: Ibex @30 MHz, same flow.
+- 21:52 Ibex @30 MHz started, same flow.
+- 23:24 **Ibex @30 MHz, post-route flow** (`harden_default_wrap_30MHz_postroute`, 1 h 32 min): fmax tt / ss / ss-maxRC = **52.7 / 29.6 / 28.9 MHz** (Ibex @40 without the step: 63.6 / 33.3, at a different target; see the fmax-vs-target note below). DRC 0/0, LVS 0, antenna 0, route DRC 0, hold met everywhere (+0.09 ns, ff). **Setup fails at nom_ss (−0.40 ns, 54 paths) and max_ss (−1.22 ns, 220 paths)**; min_ss passes (+0.21). Max-slew 4,020 → 881 at max_ss (nom_ss 345, nom_tt 51), cap 4. **Not sign-off clean.** Repair log: estimated ss setup −5.44 → +0.03 ns before re-route, so the re-route gives back ~0.4-1.2 ns. CoreMark-activity power (nom_tt, 30 MHz): **20.4 mW**, but only **1,775/1,924 register outputs annotated** (92%; the other 149 get OpenSTA's default activity), so check before quoting. LibreLane default-activity figure: 50.9 mW.
+- 23:25 **VeeR EL2 min skipped**: Docker still 3.83 GiB (< 5.5 GiB gate). Nothing running.
+
+### Summary for the morning (Dwiti)
+| Core @30 MHz, post-route flow | fmax tt / ss (MHz) | Worst setup WS | Slew viol. (worst corner) | DRC/LVS/antenna/hold | CoreMark power, tt |
+|---|---|---|---|---|---|
+| Hazard3 | 61.0 / 30.5 | −0.08 ns (max_ss) | 595 | clean | 10.2 mW (1,939/1,940 regs annotated) |
+| Ibex | 52.7 / 29.6 | −1.22 ns (max_ss) | 881 | clean | 20.4 mW (1,775/1,924, check) |
+
+All from `scripts/collect.py` (`results/harden_results.csv`). The post-route step works: it took ss setup from about −5 ns to within ~0.1-1.2 ns, and slew to about one fifth. Neither core is sign-off clean yet.
+
+Decisions needed:
+1. **Close the rest**: (a) a second repair pass (RCX → repair → re-route ×2), the same for all cores; costs ~1 h extra per core; most likely to close Hazard3, probably Ibex. (b) Sign off at a lower clock (e.g. 25 MHz). Note: the ss slews don't depend on the clock, so (b) alone may still leave slew violations. (c) Report the current numbers with the ss slew/setup gap as a limitation of the open flow.
+2. **Docker memory** to ≥ 6 GB for VeeR (still 3.83 GiB tonight). Then `flows/run_layout.sh veer_el2 30 5.5`, then `flows/power.sh veer_el2 harden_min_wrap_30MHz_postroute` (SAIF already dumped).
+3. **Ibex power annotation**: 149 Ibex registers don't match RTL names (probably renamed/merged in synthesis). Options: match them by netlist name mapping, or use gate-level-sim activity (P6). Don't quote Ibex power until then.
+
+Also: fmax depends on the target clock (timing repair stops at the target), so the final fmax should come from a sweep point near each core's ss fmax.
 
 ### Pad-ring plan (P4, not started)
 1. Shared chip top in `common/chiptop/`: core wrapper + small on-chip SRAM (OpenRAM sky130 macro, e.g. 2× `sky130_sram_1kbyte_1rw1r_32x256_8`) + UART + 8 GPIO + clk/rst; ≤32 signal pads, identical for every core.
