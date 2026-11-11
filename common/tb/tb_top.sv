@@ -5,6 +5,10 @@
 //           +saif=<file>      (build with TB_SAIF + verilator --trace-saif) dump switching activity of
 //                             the core wrapper (dut) from the first cycle-count start marker to the
 //                             next stop marker, then end the run (power activity, flows/sim.sh SAIF=1)
+//                             (a --trace build writes VCD instead; flows/sim.sh TRACE=vcd)
+//           +dumplimit=<n>    end the dump window after n cycles (e.g. 1: VCD header with declared ranges)
+// `TB_PWR_MON (file)          optional generated include: FSM state monitor over the dump window
+//                             (flows/actmap.py --gen-mon), prints PWRMON lines at window end
 // Prints the program's putchar output, then one summary line that scripts parse:
 //   TB_RESULT core=<name> exit=<code> cycles=<total> marked_cycles=<start..stop>
 `ifndef CORE_WRAP
@@ -50,12 +54,14 @@ module tb_top;
   string           hex;
   string           saif = "";
   bit              saif_on = 0;
+  longint unsigned dumplimit = 0, saif_start = 0;
 
   initial begin
     if (!$value$plusargs("hex=%s", hex)) $fatal(1, "TB: +hex=<file> required");
     void'($value$plusargs("maxcycles=%d", maxcycles));
     trace = $test$plusargs("trace");
     void'($value$plusargs("saif=%s", saif));
+    void'($value$plusargs("dumplimit=%d", dumplimit));
     $readmemh(hex, mem.ram);
     #1 rst_n = 1'b0;
     repeat (10) @(posedge clk);
@@ -79,15 +85,24 @@ module tb_top;
     if (saif != "" && mark_valid) begin
       if (mark_value != 0 && !saif_on) begin
         saif_on <= 1;
+        saif_start <= cycles;
         $dumpfile(saif);
         $dumpvars(0, dut);
         $display("\nTB: SAIF window start at cycle %0d", cycles);
       end else if (mark_value == 0 && saif_on) begin
+`ifdef TB_PWR_MON
+        pwr_mon_report();
+`endif
         $dumpflush;
         $display("\nTB_RESULT core=%s exit=saif_window cycles=%0d marked_cycles=%0d",
                  `STR(`CORE_WRAP), cycles, cycles - mark_start);
         $finish;
       end
+    end
+    if (saif_on && dumplimit != 0 && cycles - saif_start >= dumplimit) begin
+      $dumpflush;
+      $display("\nTB_RESULT core=%s exit=dumplimit cycles=%0d", `STR(`CORE_WRAP), cycles);
+      $finish;
     end
 `endif
     if (i_err || d_err) begin
@@ -105,4 +120,7 @@ module tb_top;
       $finish;
     end
   end
+`ifdef TB_PWR_MON
+  `include `TB_PWR_MON
+`endif
 endmodule

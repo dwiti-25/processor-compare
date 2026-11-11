@@ -1,8 +1,23 @@
 
 TB: SAIF window start at cycle 19783
+PWRMON fsm=u_core.u_ibex_core.ex_block_i.gen_multdiv_fast.multdiv_i.gen_mult_fast.mult_state_q state=0 cycles=429714
+PWRMON fsm=u_core.u_ibex_core.ex_block_i.gen_multdiv_fast.multdiv_i.gen_mult_fast.mult_state_q from=0 to=1 count=9396
+PWRMON fsm=u_core.u_ibex_core.ex_block_i.gen_multdiv_fast.multdiv_i.gen_mult_fast.mult_state_q state=1 cycles=9396
+PWRMON fsm=u_core.u_ibex_core.ex_block_i.gen_multdiv_fast.multdiv_i.gen_mult_fast.mult_state_q from=1 to=2 count=9396
+PWRMON fsm=u_core.u_ibex_core.ex_block_i.gen_multdiv_fast.multdiv_i.gen_mult_fast.mult_state_q state=2 cycles=9396
+PWRMON fsm=u_core.u_ibex_core.ex_block_i.gen_multdiv_fast.multdiv_i.gen_mult_fast.mult_state_q from=2 to=0 count=9396
+PWRMON fsm=u_core.u_ibex_core.ex_block_i.gen_multdiv_fast.multdiv_i.md_state_q state=0 cycles=448506
+PWRMON fsm=u_core.u_ibex_core.id_stage_i.controller_i.ctrl_fsm_cs state=5 cycles=448506
+PWRMON fsm=u_core.u_ibex_core.load_store_unit_i.data_type_q state=0 cycles=186288
+PWRMON fsm=u_core.u_ibex_core.load_store_unit_i.data_type_q from=0 to=1 count=4699
+PWRMON fsm=u_core.u_ibex_core.load_store_unit_i.data_type_q from=0 to=2 count=7055
+PWRMON fsm=u_core.u_ibex_core.load_store_unit_i.data_type_q state=1 cycles=169420
+PWRMON fsm=u_core.u_ibex_core.load_store_unit_i.data_type_q from=1 to=0 count=4699
+PWRMON fsm=u_core.u_ibex_core.load_store_unit_i.data_type_q state=2 cycles=92798
+PWRMON fsm=u_core.u_ibex_core.load_store_unit_i.data_type_q from=2 to=0 count=7055
 
 TB_RESULT core=ibex_wrap exit=saif_window cycles=468289 marked_cycles=448506
-- common/tb/tb_top.sv:89: Verilog $finish
+- common/tb/tb_top.sv:99: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
-- Verilator: $finish at 5us; walltime 2.385 s; speed 1.963 us/s
-- Verilator: cpu 2.367 s on 1 threads; allocated 4 MB
+- Verilator: $finish at 5us; walltime 1.509 s; speed 3.103 us/s
+- Verilator: cpu 1.508 s on 1 threads; allocated 4 MB

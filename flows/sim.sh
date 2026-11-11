@@ -6,6 +6,9 @@
 # results/raw/sim/<core>_<cfg>/<bench>.log (the last line is the testbench's TB_RESULT line).
 # SAIF=1: separate build with --trace-saif; each run dumps switching activity of the core wrapper over
 #         the benchmark's timed window (start..stop marker) to results/raw/power/<core>_<cfg>/<bench>.saif
+#   TRACE=vcd   with SAIF=1: VCD instead of SAIF (use with DUMPLIMIT=1 for a header with declared ranges)
+#   DUMPLIMIT=n end the dump window after n cycles
+#   PWRMON=file include a generated FSM state monitor (flows/actmap.py --gen-mon); own build dir
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO"
@@ -25,6 +28,12 @@ if [ "${SAIF:-0}" = 1 ]; then
   SIMDIR=build/sim/${NAME}_saif
   LOGDIR=results/raw/power/$NAME
   TRACEARGS="--trace-saif +define+TB_SAIF"
+  EXT=saif
+  if [ "${TRACE:-saif}" = vcd ]; then SIMDIR=build/sim/${NAME}_vcd; TRACEARGS="--trace +define+TB_SAIF"; EXT=vcd; fi
+  if [ -n "${PWRMON:-}" ]; then
+    SIMDIR=${SIMDIR}_mon
+    TRACEARGS="$TRACEARGS +define+TB_PWR_MON=\"$REPO/$PWRMON\""
+  fi
 fi
 mkdir -p "$SIMDIR" "$LOGDIR"
 
@@ -74,7 +83,8 @@ make -s -C common/bench all power > /dev/null
 for b in $BENCHES; do
   hex=build/bench/$b.hex
   [ -f "$hex" ] || { echo "[sim] missing $hex"; exit 1; }
-  PLUS=""; [ "${SAIF:-0}" = 1 ] && PLUS="+saif=$LOGDIR/$b.saif"
+  PLUS=""; [ "${SAIF:-0}" = 1 ] && PLUS="+saif=$LOGDIR/$b${TRACE:+_$TRACE}.${EXT}"
+  [ -n "${DUMPLIMIT:-}" ] && PLUS="$PLUS +dumplimit=$DUMPLIMIT"
   "$SIMDIR/Vtb_top" +hex="$hex" $PLUS > "$LOGDIR/$b.log" 2>&1 || true
   echo "[sim] $NAME $b: $(grep TB_RESULT "$LOGDIR/$b.log" || echo 'no TB_RESULT (crash?)')"
 done

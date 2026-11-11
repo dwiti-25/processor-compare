@@ -1,3 +1,4 @@
 saif=results/raw/power/ibex_default/coremark_pwr.saif
-saif_sha1=c475ba57ceae7e15ebb6303e686793f6382b672b
+saif_sha1=690e50d1e13d38b0e37f172d95bcc87a82fb3a91
 corner=nom_tt_025C_1v80
+mapping=actmap
