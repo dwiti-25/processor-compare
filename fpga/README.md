@@ -52,7 +52,7 @@ fpga/
   uses no pins, so there's no pin XDC and the bitstream is the same for PYNQ-Z1 and PYNQ-Z2
   (both `xc7z020clg400-1`). The PS7 constrains FCLK_CLK0 itself.
 
-### What differs from the ASIC flow (`docs/DECISIONS.md`, 2026-11-18, waiting for Dwiti's confirmation)
+### What differs from the ASIC flow (`docs/DECISIONS.md`, 2026-11-18, approved by Dwiti)
 
 The only FPGA-specific change is how clock gating is mapped. Function and cycle counts are
 unchanged:

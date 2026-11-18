@@ -156,8 +156,8 @@ Everything for the PYNQ board is in **`fpga/`**. Exact steps are in `fpga/README
 
 The FPGA designs reuse the ASIC flow's wrappers, configurations, patches and benchmark images.
 The only FPGA-specific change is how clock gating is mapped for Ibex and VeeR (same function,
-same cycle counts). It's recorded in `docs/DECISIONS.md` (2026-11-18) and still needs Dwiti's
-confirmation.
+same cycle counts). It's recorded in `docs/DECISIONS.md` (2026-11-18) and was approved by
+Dwiti on 2026-11-18.
 
 Still blank in `docs/PROJECT_FACTS.md`: the board (Z1 or Z2; same part, same bitstream), the
 PYNQ image version, the Vivado machine and the Vivado version. Fill these in, and add Vivado to

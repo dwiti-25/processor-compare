@@ -12,7 +12,7 @@ Update at the start and end of every Claude Code session.
 - VeeR config `min_fpga` (= min + VeeR's fpga_optimize): RTL sim 52/52 identical to `min`, cycles included (DECISIONS.md 2026-11-18).
 - FPGA sim (`fpga/sim/run_sim.sh <core>`): **Hazard3 52/52, Ibex 52/52, VeeR EL2 52/52** identical to RTL sim (exit, console, total and marked cycles). `results/raw/fpga/sim/<core>/summary.txt`.
 - Written but **not run** (no Vivado on the Mac): `fpga/vivado/build.tcl`, `fpga/pynq/processor_compare.ipynb` (+ `runner.py`; its hex loader checked against `objcopy -O binary`), `scripts/collect.py --md fpga` (parsers tested only on synthetic report snippets).
-- Open: the board (Z1/Z2) and Vivado version are still blank in PROJECT_FACTS.md (same part, same bitstream either way). Dwiti to confirm the two clock-gating mappings (Ibex BUFGCE, VeeR min_fpga).
+- Open: the board (Z1/Z2) and Vivado version are still blank in PROJECT_FACTS.md (same part, same bitstream either way). The two clock-gating mappings (Ibex BUFGCE, VeeR min_fpga) were approved by Dwiti on 2026-11-18.
 
 ## Previous (session 2026-11-10 evening → overnight, unattended)
 ### Plan (Dwiti's decisions, 2026-11-10 17:30)
