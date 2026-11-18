@@ -29,3 +29,5 @@ results/raw/**/librelane*.log
 results/raw/**/yosys-synthesis.log
 # switching activity dumps are reproducible (SAIF=1 flows/sim.sh <core> coremark_pwr)
 *.saif
+# FPGA overlays (bitstreams are large and reproducible: fpga/vivado/build.tcl)
+fpga/out/

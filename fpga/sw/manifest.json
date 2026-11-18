@@ -1,0 +1,1410 @@
+{
+ "generated_by": "fpga/sw/export.py",
+ "source": "build/bench (common/bench/Makefile)",
+ "benches": {
+  "hello": {
+   "hex": "hex/hello.hex",
+   "sha256": "bd3eaf04cca9f81e6ac45533daab4ec101d52f939438e08a25dc97e5492b4d5e",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 5355,
+     "marked_cycles": 0,
+     "console": "Hello from RISC-V! 7*6=42 sum=5734",
+     "log": "results/raw/sim/hazard3_default/hello.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 5922,
+     "marked_cycles": 0,
+     "console": "Hello from RISC-V! 7*6=42 sum=5734",
+     "log": "results/raw/sim/ibex_default/hello.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 7140,
+     "marked_cycles": 0,
+     "console": "Hello from RISC-V! 7*6=42 sum=5734",
+     "log": "results/raw/sim/veer_el2_min/hello.log"
+    }
+   }
+  },
+  "dhrystone": {
+   "hex": "hex/dhrystone.hex",
+   "sha256": "251d25397db0a5e94e402310a88c1e1918cc17c1eacf0e26e222f3dc342052b9",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 285045,
+     "marked_cycles": 264034,
+     "console": "STATS mcycle=264019 minstret=196023\nMicroseconds for one run through Dhrystone: 528\nDhrystones per Second:                      1893",
+     "log": "results/raw/sim/hazard3_default/dhrystone.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 368219,
+     "marked_cycles": 343540,
+     "console": "STATS mcycle=343522 minstret=196023\nMicroseconds for one run through Dhrystone: 687\nDhrystones per Second:                      1455",
+     "log": "results/raw/sim/ibex_default/dhrystone.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1079324,
+     "marked_cycles": 1005172,
+     "console": "STATS mcycle=1005088 minstret=196023\nMicroseconds for one run through Dhrystone: 2010\nDhrystones per Second:                      497",
+     "log": "results/raw/sim/veer_el2_min/dhrystone.log"
+    }
+   }
+  },
+  "coremark": {
+   "hex": "hex/coremark.hex",
+   "sha256": "fe0ad340dce80ddee5c4f3814b054762f1c2d90b29265f74539dc54db6a5202e",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 3664004,
+     "marked_cycles": 3632492,
+     "console": "2K performance run parameters for coremark.\nCoreMark Size    : 666\nTotal ticks      : 3632488\nTotal time (secs): 3\nIterations/Sec   : 3\nERROR! Must execute for at least 10 secs for a valid result!\nIterations       : 10\nCompiler version : GCC15.2.0\nCompiler flags   : -march=rv32imc_zicsr -mabi=ilp32 -O2 -g -static -std=gnu99 -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns -Isw/include\nMemory location  : STACK\nseedcrc          : 0xe9f5\n[0]crclist       : 0xe714\n[0]crcmatrix     : 0x1fd7\n[0]crcstate      : 0x8e3a\n[0]crcfinal      : 0xfcaf\nErrors detected",
+     "log": "results/raw/sim/hazard3_default/coremark.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 4524383,
+     "marked_cycles": 4484990,
+     "console": "2K performance run parameters for coremark.\nCoreMark Size    : 666\nTotal ticks      : 4484984\nTotal time (secs): 4\nIterations/Sec   : 2\nERROR! Must execute for at least 10 secs for a valid result!\nIterations       : 10\nCompiler version : GCC15.2.0\nCompiler flags   : -march=rv32imc_zicsr -mabi=ilp32 -O2 -g -static -std=gnu99 -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns -Isw/include\nMemory location  : STACK\nseedcrc          : 0xe9f5\n[0]crclist       : 0xe714\n[0]crcmatrix     : 0x1fd7\n[0]crcstate      : 0x8e3a\n[0]crcfinal      : 0xfcaf\nErrors detected",
+     "log": "results/raw/sim/ibex_default/coremark.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 14763450,
+     "marked_cycles": 14642602,
+     "console": "2K performance run parameters for coremark.\nCoreMark Size    : 666\nTotal ticks      : 14642571\nTotal time (secs): 14\nIterations/Sec   : 0\nIterations       : 10\nCompiler version : GCC15.2.0\nCompiler flags   : -march=rv32imc_zicsr -mabi=ilp32 -O2 -g -static -std=gnu99 -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns -Isw/include\nMemory location  : STACK\nseedcrc          : 0xe9f5\n[0]crclist       : 0xe714\n[0]crcmatrix     : 0x1fd7\n[0]crcstate      : 0x8e3a\n[0]crcfinal      : 0xfcaf\nCorrect operation validated. See README.md for run and reporting rules.",
+     "log": "results/raw/sim/veer_el2_min/coremark.log"
+    }
+   }
+  },
+  "rv32ui-add": {
+   "hex": "hex/rv32ui-add.hex",
+   "sha256": "1a9986350b99a3baef79082588d1b2c4f6abf17216e5f159d0348ca3ef44b5b2",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 455,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-add.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 473,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-add.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1945,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-add.log"
+    }
+   }
+  },
+  "rv32ui-addi": {
+   "hex": "hex/rv32ui-addi.hex",
+   "sha256": "dfa4c15f451abd1fdc7346be57b2837fb06b7dd893349d6f549b8bf4ac475e19",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 223,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-addi.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 232,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-addi.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1025,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-addi.log"
+    }
+   }
+  },
+  "rv32ui-and": {
+   "hex": "hex/rv32ui-and.hex",
+   "sha256": "951e0b55d8ae4d95ab830f2218a63c353afc5466c713ddafbaeb243c697e3a8a",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 482,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-and.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 500,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-and.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2418,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-and.log"
+    }
+   }
+  },
+  "rv32ui-andi": {
+   "hex": "hex/rv32ui-andi.hex",
+   "sha256": "d70a5fb0842d6da853fdc073c89e52f323f89134d622f334668110722d73a2f9",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 183,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-andi.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 192,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-andi.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 864,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-andi.log"
+    }
+   }
+  },
+  "rv32ui-auipc": {
+   "hex": "hex/rv32ui-auipc.hex",
+   "sha256": "64780a3886090ff3ff01437a6725c0dfbcba7fa2fe7e8a695287e7b95e0f7286",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 37,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-auipc.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 40,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-auipc.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 178,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-auipc.log"
+    }
+   }
+  },
+  "rv32ui-beq": {
+   "hex": "hex/rv32ui-beq.hex",
+   "sha256": "ef221ab1387d5a36faf69c125edbf39cf14a42b381e1dd1d7e44acf331aefc3e",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 297,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-beq.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 326,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-beq.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1172,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-beq.log"
+    }
+   }
+  },
+  "rv32ui-bge": {
+   "hex": "hex/rv32ui-bge.hex",
+   "sha256": "60268e7cdf90c2eb33984f4a05b88b3b88b27869d50a8e8e3fed7f00b6be38e4",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 327,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-bge.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 365,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-bge.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1289,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-bge.log"
+    }
+   }
+  },
+  "rv32ui-bgeu": {
+   "hex": "hex/rv32ui-bgeu.hex",
+   "sha256": "ff9b828d99e1e57c66e2cff3ed176731306faaf6ca2d5d1d7eedbfc0659449f2",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 356,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-bgeu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 394,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-bgeu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1533,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-bgeu.log"
+    }
+   }
+  },
+  "rv32ui-blt": {
+   "hex": "hex/rv32ui-blt.hex",
+   "sha256": "e99ebcb77dd09154afe10281fdb540a3ff261bc613d4de400ebfc2dec3a9dda6",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 297,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-blt.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 326,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-blt.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1172,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-blt.log"
+    }
+   }
+  },
+  "rv32ui-bltu": {
+   "hex": "hex/rv32ui-bltu.hex",
+   "sha256": "ce5f59f060433355c9964e52077c3f630d022d291f73a9533cfa5e0f6204171c",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 330,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-bltu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 359,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-bltu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1436,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-bltu.log"
+    }
+   }
+  },
+  "rv32ui-bne": {
+   "hex": "hex/rv32ui-bne.hex",
+   "sha256": "b47ef7b64ef008b6ab74085b684feae2d480d21310f8e6faf485e6fda755a952",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 300,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-bne.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 331,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-bne.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1167,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-bne.log"
+    }
+   }
+  },
+  "rv32ui-jal": {
+   "hex": "hex/rv32ui-jal.hex",
+   "sha256": "f4be8ad2b7bc6b84ee26fd92dee693daddddb15512ed3a9feb71c58aa566ab7c",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 33,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-jal.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 36,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-jal.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 153,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-jal.log"
+    }
+   }
+  },
+  "rv32ui-jalr": {
+   "hex": "hex/rv32ui-jalr.hex",
+   "sha256": "72eaab47d873eca16bb05d6e0e55647f3868310933804c4f635b48f5e70797fe",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 104,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-jalr.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 110,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-jalr.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 502,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-jalr.log"
+    }
+   }
+  },
+  "rv32ui-lb": {
+   "hex": "hex/rv32ui-lb.hex",
+   "sha256": "82b2797b10d4e6b083a93e34add01cc9cf927d925246e5317aa26d689cd9d560",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 238,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-lb.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 269,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-lb.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1151,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-lb.log"
+    }
+   }
+  },
+  "rv32ui-lbu": {
+   "hex": "hex/rv32ui-lbu.hex",
+   "sha256": "1d31e547d6841568fa03ccb998478295c264909dc5b298dd80e179c169c2fe13",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 237,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-lbu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 268,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-lbu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1170,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-lbu.log"
+    }
+   }
+  },
+  "rv32ui-ld_st": {
+   "hex": "hex/rv32ui-ld_st.hex",
+   "sha256": "14f26fba30e46688a67d529e8f94fbfb5e8518ec774ba34f16c6a822bf5c436a",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 1179,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-ld_st.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 1328,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-ld_st.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 5339,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-ld_st.log"
+    }
+   }
+  },
+  "rv32ui-lh": {
+   "hex": "hex/rv32ui-lh.hex",
+   "sha256": "0b2f014601e4f27e386fe47e80e3ddf34383d35f1bd0e9894e56666049e9cafe",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 256,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-lh.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 287,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-lh.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1232,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-lh.log"
+    }
+   }
+  },
+  "rv32ui-lhu": {
+   "hex": "hex/rv32ui-lhu.hex",
+   "sha256": "2f580ec50b040736164d68199e8be425d6b18bf5b3a5e5c0d7e559cade5d9045",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 265,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-lhu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 296,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-lhu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1271,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-lhu.log"
+    }
+   }
+  },
+  "rv32ui-lui": {
+   "hex": "hex/rv32ui-lui.hex",
+   "sha256": "d901063fc80fc1216c5da36b6c493cc9dccc00db49811bfdeb969760df5f0b72",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 41,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-lui.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 44,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-lui.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 217,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-lui.log"
+    }
+   }
+  },
+  "rv32ui-lw": {
+   "hex": "hex/rv32ui-lw.hex",
+   "sha256": "5f8a3d7cf78af71f563336f1d7483db62bb97639ced3086e73cc8a3f5b8864a5",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 270,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-lw.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 301,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-lw.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1327,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-lw.log"
+    }
+   }
+  },
+  "rv32ui-or": {
+   "hex": "hex/rv32ui-or.hex",
+   "sha256": "7ac6e5e3b68f920b77ee099ea412c817f0951be2e77bb581d34acfe36389405f",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 489,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-or.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 507,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-or.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2433,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-or.log"
+    }
+   }
+  },
+  "rv32ui-ori": {
+   "hex": "hex/rv32ui-ori.hex",
+   "sha256": "9ad1963cf021062054069dfe1c46a7d1777d110239f776f754d2cbdcfe69c1a0",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 190,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-ori.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 199,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-ori.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 912,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-ori.log"
+    }
+   }
+  },
+  "rv32ui-sb": {
+   "hex": "hex/rv32ui-sb.hex",
+   "sha256": "c2448acf42b79430cbf6d7550934e2f5ae2bc15e3e39ec20875532e47531b287",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 478,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sb.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 537,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sb.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2338,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sb.log"
+    }
+   }
+  },
+  "rv32ui-sh": {
+   "hex": "hex/rv32ui-sh.hex",
+   "sha256": "2a2656b5ace52948977580e7ab086928477689bad88d3438e07a3f25b170aadb",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 533,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sh.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 592,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sh.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2541,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sh.log"
+    }
+   }
+  },
+  "rv32ui-simple": {
+   "hex": "hex/rv32ui-simple.hex",
+   "sha256": "39ed10de9c17567f10d968e55e40b9f83cd4d1d302810b07ac2e339e923bcb2b",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 15,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-simple.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 17,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-simple.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 81,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-simple.log"
+    }
+   }
+  },
+  "rv32ui-sll": {
+   "hex": "hex/rv32ui-sll.hex",
+   "sha256": "fddfc5f03400d016e11b4bea69b99ac6453e028845c5f18ad1f0291b76a4a2a7",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 484,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sll.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 502,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sll.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2241,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sll.log"
+    }
+   }
+  },
+  "rv32ui-slli": {
+   "hex": "hex/rv32ui-slli.hex",
+   "sha256": "2e3d73d05bbf0302fe12e9c18b31231fdffb9d4c110abc4eda264cf37983f4e7",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 223,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-slli.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 232,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-slli.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1073,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-slli.log"
+    }
+   }
+  },
+  "rv32ui-slt": {
+   "hex": "hex/rv32ui-slt.hex",
+   "sha256": "3345d01d11d8d4276dd4c0f3f07b82c83abc738d59af7c494e5d2a1da375ebfc",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 449,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-slt.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 467,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-slt.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1911,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-slt.log"
+    }
+   }
+  },
+  "rv32ui-slti": {
+   "hex": "hex/rv32ui-slti.hex",
+   "sha256": "7e0fdc997f25999ce19ca8e5ee90dabeaf27ecb8d235bc604dcdc1b84a1612a3",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 219,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-slti.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 228,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-slti.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 978,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-slti.log"
+    }
+   }
+  },
+  "rv32ui-sltiu": {
+   "hex": "hex/rv32ui-sltiu.hex",
+   "sha256": "c42f7a9c4603306229351c694263fe6a66d7c3bea1d2fd2ff729e5678278a207",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 219,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sltiu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 228,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sltiu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 978,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sltiu.log"
+    }
+   }
+  },
+  "rv32ui-sltu": {
+   "hex": "hex/rv32ui-sltu.hex",
+   "sha256": "478bbba45574ba37fba8bf4082f260952f3381d226126098ec048f04c07bb671",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 449,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sltu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 467,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sltu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1911,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sltu.log"
+    }
+   }
+  },
+  "rv32ui-sra": {
+   "hex": "hex/rv32ui-sra.hex",
+   "sha256": "83e01ba39905ada66c1c140376c0211b4c4a4c1f750541998afb23852f8d1168",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 505,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sra.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 523,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sra.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2453,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sra.log"
+    }
+   }
+  },
+  "rv32ui-srai": {
+   "hex": "hex/rv32ui-srai.hex",
+   "sha256": "6e79e552d40b6fd3de5be828d9d62db4fae1da7c03f5fa307aadbfa37a6c3520",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 242,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-srai.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 251,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-srai.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1177,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-srai.log"
+    }
+   }
+  },
+  "rv32ui-srl": {
+   "hex": "hex/rv32ui-srl.hex",
+   "sha256": "7208b75753415043bbe96563618b5f7adef8a8d5ae171381287aca1db6b4c53a",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 502,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-srl.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 520,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-srl.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2413,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-srl.log"
+    }
+   }
+  },
+  "rv32ui-srli": {
+   "hex": "hex/rv32ui-srli.hex",
+   "sha256": "202185160ea8a8bec89cb78d80119c614fed9957dad5feae0c7bef6c614a8ba1",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 235,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-srli.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 244,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-srli.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1169,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-srli.log"
+    }
+   }
+  },
+  "rv32ui-st_ld": {
+   "hex": "hex/rv32ui-st_ld.hex",
+   "sha256": "0134bfe823de0ffadad7c7914ae91f78b6df20ca7a7fa2de2f739cee6adf8502",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 507,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-st_ld.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 560,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-st_ld.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2616,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-st_ld.log"
+    }
+   }
+  },
+  "rv32ui-sub": {
+   "hex": "hex/rv32ui-sub.hex",
+   "sha256": "4e5357106a2a5bef06b82e0c06429935980962fa13d3eba01093489477ee2c13",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 447,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sub.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 465,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sub.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1909,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sub.log"
+    }
+   }
+  },
+  "rv32ui-sw": {
+   "hex": "hex/rv32ui-sw.hex",
+   "sha256": "c649e81c6a01455d9e16dc6b9078ed5d3b3ebd8913c05234fbc01d374b156dde",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 540,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-sw.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 598,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-sw.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2566,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-sw.log"
+    }
+   }
+  },
+  "rv32ui-xor": {
+   "hex": "hex/rv32ui-xor.hex",
+   "sha256": "7425bf7eea5b829981096ef0bca16a9a951dfa8b267c7e6d514e1c1558fb8ef6",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 485,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-xor.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 503,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-xor.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2396,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-xor.log"
+    }
+   }
+  },
+  "rv32ui-xori": {
+   "hex": "hex/rv32ui-xori.hex",
+   "sha256": "3c89e983f15792370941dffe2c37229092fa8af99eaec2921abba7f175dd4f8f",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 191,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32ui-xori.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 200,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32ui-xori.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 920,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32ui-xori.log"
+    }
+   }
+  },
+  "rv32um-div": {
+   "hex": "hex/rv32um-div.hex",
+   "sha256": "3df5216dd26054909f3289dceab1ef3190997816deffa16de3d8c853837ee8ae",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 382,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-div.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 293,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-div.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 367,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-div.log"
+    }
+   }
+  },
+  "rv32um-divu": {
+   "hex": "hex/rv32um-divu.hex",
+   "sha256": "9abae6e6aa8f74a33ddc5bf02500c79fcd221e3a36df8ee62fc2aa10f8417f3a",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 378,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-divu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 294,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-divu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 367,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-divu.log"
+    }
+   }
+  },
+  "rv32um-mul": {
+   "hex": "hex/rv32um-mul.hex",
+   "sha256": "d9c8493ed0e8766f22de3c5b7fe731f764b197665cd491f20819364812adb344",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 451,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-mul.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 569,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-mul.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2045,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-mul.log"
+    }
+   }
+  },
+  "rv32um-mulh": {
+   "hex": "hex/rv32um-mulh.hex",
+   "sha256": "a6f253a8b189567fd475121bdb616b109f9cd703d5a29b309ab7e0aced3c3db4",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 2094,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-mulh.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 622,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-mulh.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2198,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-mulh.log"
+    }
+   }
+  },
+  "rv32um-mulhsu": {
+   "hex": "hex/rv32um-mulhsu.hex",
+   "sha256": "00c60d05c86a1949a082b1f941e46cb58eea0dad2116c9ed2a00b61c0cec21f7",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 2092,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-mulhsu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 622,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-mulhsu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2211,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-mulhsu.log"
+    }
+   }
+  },
+  "rv32um-mulhu": {
+   "hex": "hex/rv32um-mulhu.hex",
+   "sha256": "0553ee669de64f7355009f7afa1049f439f9db4a0c045642b3744d6b254ff891",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 2074,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-mulhu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 622,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-mulhu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 2211,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-mulhu.log"
+    }
+   }
+  },
+  "rv32um-rem": {
+   "hex": "hex/rv32um-rem.hex",
+   "sha256": "056477105909964d9027fc31fba41f0d3340f95363b692bb443f18c904f63237",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 382,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-rem.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 293,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-rem.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 354,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-rem.log"
+    }
+   }
+  },
+  "rv32um-remu": {
+   "hex": "hex/rv32um-remu.hex",
+   "sha256": "9b6af9f840c202228d0cbff8383fae3bb559be63661f50b85469576043e9f09b",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 377,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32um-remu.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 293,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32um-remu.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 354,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32um-remu.log"
+    }
+   }
+  },
+  "rv32uc-rvc": {
+   "hex": "hex/rv32uc-rvc.hex",
+   "sha256": "a75f3c1e1b233c4c623c8bce479ccb7fab0f916452490c0b9527b752f0b65b5f",
+   "rtl_sim": {
+    "hazard3": {
+     "exit": "0",
+     "cycles": 217,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/hazard3_default/rv32uc-rvc.log"
+    },
+    "ibex": {
+     "exit": "0",
+     "cycles": 224,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/ibex_default/rv32uc-rvc.log"
+    },
+    "veer_el2": {
+     "exit": "0",
+     "cycles": 1047,
+     "marked_cycles": 0,
+     "console": "",
+     "log": "results/raw/sim/veer_el2_min/rv32uc-rvc.log"
+    }
+   }
+  }
+ }
+}

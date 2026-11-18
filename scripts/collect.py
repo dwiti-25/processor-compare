@@ -5,7 +5,7 @@ Every number in tables, reports, emails or the paper must come from this script.
 
 usage:
   scripts/collect.py              # rebuild results/results.csv
-  scripts/collect.py --md synth   # also print the synthesis table as Markdown
+  scripts/collect.py --md synth   # also print the synthesis table as Markdown (also: sim, harden, fpga)
   scripts/collect.py --update-report reports/initial_synthesis.md
   scripts/collect.py --headline --update-report reports/email_prof_draft.md
                                   # rewrite the table between the BEGIN/END collect.py markers
@@ -25,6 +25,15 @@ SIM_CSV = os.path.join(REPO, "results", "sim_results.csv")
 SIM_COLUMNS = ["core", "config", "bench", "exit", "cycles", "marked_cycles", "iterations",
                "coremark_per_mhz", "dhrystone_cycles_per_run", "dmips_per_mhz", "log_path"]
 HARDEN_CSV = os.path.join(REPO, "results", "harden_results.csv")
+FPGA_CSV = os.path.join(REPO, "results", "fpga_results.csv")
+FPGA_COLUMNS = ["core", "config", "clock_target_mhz", "clock_actual_mhz", "run_id", "vivado", "part", "board_part",
+                "wns_ns", "whs_ns", "fmax_mhz", "setup_failing_endpoints", "hold_failing_endpoints",
+                "core_luts", "core_ffs", "core_lutram", "core_bram36", "core_bram18", "core_dsp",
+                "total_luts", "total_ffs", "total_bram36",
+                "power_total_w", "power_dynamic_w", "power_core_w", "power_activity",
+                "sim_check", "board_programs_passed", "board_identical_to_rtl_sim",
+                "board_coremark_marked_cycles", "board_coremark_per_mhz", "board_dhrystone_marked_cycles",
+                "board_dmips_per_mhz", "report_path", "board_path"]
 HARDEN_COLUMNS = ["core", "config", "top", "clock_target_mhz", "run_id", "settings",
                   "r2r_slack_tt_ns", "fmax_tt_mhz", "r2r_slack_ss_ns", "fmax_ss_mhz",
                   "r2r_slack_ss_maxrc_ns", "fmax_ss_maxrc_mhz", "magic_drc", "klayout_drc", "lvs_errors",
@@ -364,9 +373,132 @@ def fill_markers(path, tables):
     open(path, "w").write("".join(out))
 
 
+# ---------------------------------------------------------------- FPGA (fpga/README.md)
+def _rpt_table_rows(path, first_col):
+    """Rows of a Vivado ASCII table (| a | b |) whose first cell equals first_col, as lists of cells,
+    plus the header row (the first row whose first cell is 'Instance' / 'Name' / 'Site Type')."""
+    header, rows = None, []
+    for line in open(path, errors="replace"):
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if header is None and cells and cells[0] in ("Instance", "Name", "Site Type"):
+            header = cells
+            continue
+        if cells and cells[0].rstrip("*").strip() == first_col:
+            rows.append(cells)
+    return header, rows
+
+
+def _hier_util(path, inst):
+    header, rows = _rpt_table_rows(path, inst)
+    if not header or not rows:
+        return {}
+    return dict(zip(header, rows[0]))
+
+
+def _util_total(path, site):
+    _, rows = _rpt_table_rows(path, site)
+    return rows[0][1] if rows else ""
+
+
+def _power(path):
+    out = {}
+    txt = open(path, errors="replace").read()
+    for key, pat in (("total", r"Total On-Chip Power \(W\)\s*\|\s*([0-9.]+)"),
+                     ("dynamic", r"\|\s*Dynamic \(W\)\s*\|\s*([0-9.]+)")):
+        m = re.search(pat, txt)
+        out[key] = m.group(1) if m else ""
+    m = re.search(r"\n\|\s+u_core\s+\|\s*([<0-9.]+)", txt)
+    out["core"] = m.group(1) if m else ""
+    return out
+
+
+def collect_fpga():
+    rows = []
+    for core in ("hazard3", "ibex", "veer_el2"):
+        base = os.path.join(RAW, "fpga", core)
+        sim_sum = os.path.join(RAW, "fpga", "sim", core, "summary.txt")
+        sim_check = ""
+        if os.path.exists(sim_sum):
+            m = re.search(r"(\d+)/(\d+) benchmarks identical", open(sim_sum).read())
+            sim_check = f"{m.group(1)}/{m.group(2)}" if m else ""
+        runs = sorted(glob.glob(os.path.join(base, "vivado_*", "summary.txt")))
+        boards = sorted(glob.glob(os.path.join(base, "board_*", "*.json")))
+        if not runs and not boards:
+            rows.append({"core": core, "sim_check": sim_check, "run_id": "not built yet"})
+            continue
+        for summ in runs or [None]:
+            r = {"core": core, "sim_check": sim_check}
+            if summ:
+                d = os.path.dirname(summ)
+                kv = read_kv(summ)
+                r.update({"config": kv.get("config", ""), "clock_target_mhz": kv.get("clk_target_mhz", ""),
+                          "clock_actual_mhz": kv.get("clk_actual_mhz", ""), "run_id": os.path.basename(d),
+                          "vivado": kv.get("vivado", ""), "part": kv.get("part", ""),
+                          "board_part": kv.get("board_part", ""), "wns_ns": kv.get("wns_ns", ""),
+                          "whs_ns": kv.get("whs_ns", ""),
+                          "setup_failing_endpoints": kv.get("setup_failing_endpoints", ""),
+                          "hold_failing_endpoints": kv.get("hold_failing_endpoints", ""),
+                          "power_activity": kv.get("power_activity", ""),
+                          "report_path": os.path.relpath(d, REPO)})
+                try:
+                    r["fmax_mhz"] = round(1000.0 / (float(kv["period_ns"]) - float(kv["wns_ns"])), 1)
+                except (KeyError, ValueError, ZeroDivisionError):
+                    pass
+                hu = os.path.join(d, "utilization_hier.rpt")
+                if os.path.exists(hu):
+                    u = _hier_util(hu, "u_core")
+                    r.update({"core_luts": u.get("Total LUTs", ""), "core_ffs": u.get("FFs", ""),
+                              "core_lutram": u.get("LUTRAMs", ""), "core_bram36": u.get("RAMB36", ""),
+                              "core_bram18": u.get("RAMB18", ""), "core_dsp": u.get("DSP48 Blocks", u.get("DSP Blocks", ""))})
+                ut = os.path.join(d, "utilization.rpt")
+                if os.path.exists(ut):
+                    r.update({"total_luts": _util_total(ut, "Slice LUTs"), "total_ffs": _util_total(ut, "Slice Registers"),
+                              "total_bram36": _util_total(ut, "Block RAM Tile")})
+                pw = os.path.join(d, "power.rpt")
+                if os.path.exists(pw):
+                    p = _power(pw)
+                    r.update({"power_total_w": p["total"], "power_dynamic_w": p["dynamic"], "power_core_w": p["core"]})
+            for bj in boards:
+                if summ and r.get("clock_target_mhz") and not os.path.basename(os.path.dirname(bj)).startswith(
+                        "board_%sMHz" % r["clock_target_mhz"]):
+                    continue
+                res = json.load(open(bj))["results"]
+                by = {x["bench"]: x for x in res}
+                r["board_path"] = os.path.relpath(bj, REPO)
+                r["board_programs_passed"] = f"{sum(x.get('exit') == '0' for x in res)}/{len(res)}"
+                r["board_identical_to_rtl_sim"] = f"{sum(bool(x.get('matches_rtl_sim')) for x in res)}/{len(res)}"
+                cm, dh = by.get("coremark", {}), by.get("dhrystone", {})
+                if cm.get("exit") == "0" and cm.get("marked_cycles"):
+                    r["board_coremark_marked_cycles"] = cm["marked_cycles"]
+                    r["board_coremark_per_mhz"] = round(COREMARK_ITER * 1e6 / cm["marked_cycles"], 3)
+                if dh.get("exit") == "0" and dh.get("marked_cycles"):
+                    r["board_dhrystone_marked_cycles"] = dh["marked_cycles"]
+                    r["board_dmips_per_mhz"] = round(1e6 / (dh["marked_cycles"] / DHRYSTONE_RUNS) / 1757, 3)
+            rows.append(r)
+    return rows
+
+
+def md_fpga(rows):
+    names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
+    out = ["| Core | Config | Clock (MHz) | WNS (ns) | fmax (MHz) | Core LUTs | Core FFs | Core BRAM36 | Core DSP | "
+           "Power total / core (W, vectorless) | FPGA sim vs RTL sim | Board: passed / identical to RTL sim | "
+           "Board CoreMark/MHz | Board DMIPS/MHz |",
+           "|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---:|---:|"]
+    for r in rows:
+        g = lambda k: str(r.get(k, "")) or "–"
+        out.append(f"| {names[r['core']]} | {g('config')} | {g('clock_actual_mhz')} | {g('wns_ns')} | {g('fmax_mhz')} | "
+                   f"{g('core_luts')} | {g('core_ffs')} | {g('core_bram36')} | {g('core_dsp')} | "
+                   f"{g('power_total_w')} / {g('power_core_w')} | {g('sim_check')} | "
+                   f"{g('board_programs_passed')} / {g('board_identical_to_rtl_sim')} | "
+                   f"{g('board_coremark_per_mhz')} | {g('board_dmips_per_mhz')} |")
+    return "\n".join(out)
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--md", choices=["synth", "sim", "harden"], help="print a Markdown table to stdout")
+    ap.add_argument("--md", choices=["synth", "sim", "harden", "fpga"], help="print a Markdown table to stdout")
     ap.add_argument("--update-report", metavar="MD", help="replace the synth table inside MD's markers")
     ap.add_argument("--headline", action="store_true", help="use the short one-config-per-core table")
     a = ap.parse_args()
@@ -383,6 +515,15 @@ def main():
         w.writeheader()
         w.writerows(sim)
     print(f"[collect] wrote {len(sim)} rows to {os.path.relpath(SIM_CSV, REPO)}", file=sys.stderr)
+    fpga = collect_fpga()
+    with open(FPGA_CSV, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=FPGA_COLUMNS)
+        w.writeheader()
+        w.writerows(fpga)
+    print(f"[collect] wrote {len(fpga)} rows to {os.path.relpath(FPGA_CSV, REPO)}", file=sys.stderr)
+    if a.md == "fpga":
+        print(md_fpga(fpga))
+        return
     if a.md == "sim":
         print(md_sim(sim))
         return

@@ -20,7 +20,7 @@ elaboration checks only.
 | RISC-V GCC | xPack riscv-none-elf-gcc 15.2.0-1 (darwin-arm64) | tarball in `~/tools/xpack-riscv-none-elf-gcc-15.2.0-1` |
 | Perl | 5.34.1 (macOS system) | system (VeeR `veer.config`) |
 | sky130A PDK (ciel hash) | open_pdks 8afc8346a57fe1ab7934ba5a6056ea8b43078e71 (the hash LibreLane 3.0.17 pins) | `ciel enable` into `~/.ciel` (ciel 2.6.1) |
-| Vivado | n/a (FPGA out of scope this round) | |
+| Vivado | ___ (Ayush: match the PYNQ image; same version for all three cores) | Ayush's x86 machine; `fpga/vivado/build.tcl` writes it to each run's summary.txt |
 | SCL PDK version | n/a (SCL out of scope this round) | |
 
 Host: MacBook Air M3 (arm64), 8 cores, 8 GB RAM, macOS 26.5.1; Docker Desktop 29.7.2 with a

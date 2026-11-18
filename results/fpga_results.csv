@@ -1,0 +1,4 @@
+core,config,clock_target_mhz,clock_actual_mhz,run_id,vivado,part,board_part,wns_ns,whs_ns,fmax_mhz,setup_failing_endpoints,hold_failing_endpoints,core_luts,core_ffs,core_lutram,core_bram36,core_bram18,core_dsp,total_luts,total_ffs,total_bram36,power_total_w,power_dynamic_w,power_core_w,power_activity,sim_check,board_programs_passed,board_identical_to_rtl_sim,board_coremark_marked_cycles,board_coremark_per_mhz,board_dhrystone_marked_cycles,board_dmips_per_mhz,report_path,board_path
+hazard3,,,,not built yet,,,,,,,,,,,,,,,,,,,,,,52/52,,,,,,,,
+ibex,,,,not built yet,,,,,,,,,,,,,,,,,,,,,,52/52,,,,,,,,
+veer_el2,,,,not built yet,,,,,,,,,,,,,,,,,,,,,,52/52,,,,,,,,

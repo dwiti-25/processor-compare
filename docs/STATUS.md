@@ -2,7 +2,19 @@
 
 Update at the start and end of every Claude Code session.
 
-## Current (session 2026-11-10 evening → overnight, unattended)
+## Current (session 2026-11-18): FPGA handoff kit (P3, RUNSHEET Prompt 7)
+### Plan
+1. One PL shell for all cores (BRAM, MMIO and counters identical to the RTL testbench) + a top per core using the ASIC wrappers/configs.
+2. Prove each top in Verilator over AXI4-Lite, the way the PS drives it: all 52 programs must match RTL sim exactly.
+3. Vivado batch Tcl (one command per core), PYNQ notebook, fpga/README.md, collect.py FPGA table. Ayush runs Vivado and the board.
+
+### Progress
+- VeeR config `min_fpga` (= min + VeeR's fpga_optimize): RTL sim 52/52 identical to `min`, cycles included (DECISIONS.md 2026-11-18).
+- FPGA sim (`fpga/sim/run_sim.sh <core>`): **Hazard3 52/52, Ibex 52/52, VeeR EL2 52/52** identical to RTL sim (exit, console, total and marked cycles). `results/raw/fpga/sim/<core>/summary.txt`.
+- Written but **not run** (no Vivado on the Mac): `fpga/vivado/build.tcl`, `fpga/pynq/processor_compare.ipynb` (+ `runner.py`; its hex loader checked against `objcopy -O binary`), `scripts/collect.py --md fpga` (parsers tested only on synthetic report snippets).
+- Open: the board (Z1/Z2) and Vivado version are still blank in PROJECT_FACTS.md (same part, same bitstream either way). Dwiti to confirm the two clock-gating mappings (Ibex BUFGCE, VeeR min_fpga).
+
+## Previous (session 2026-11-10 evening → overnight, unattended)
 ### Plan (Dwiti's decisions, 2026-11-10 17:30)
 1. Slew fix = post-route repair step (DECISIONS.md 2026-11-10): RCX → repair_design + repair_timing on extracted parasitics → re-route. Same for all cores. Verified on the Hazard3 @40 `_margin` design before launching.
 2. Layout queue, one at a time, flow `HARDEN=1 PGRT=1 REPAIR_MARGIN=1 POSTROUTE=1 TAG=postroute`: Hazard3 @30 MHz → Ibex @30 MHz → VeeR EL2 min @30 MHz. Report fmax at tt (nom_tt_025C_1v80) and ss (nom_ss_100C_1v60). STATUS update + commit after each run.
