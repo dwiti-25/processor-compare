@@ -1,0 +1,9 @@
+STATS mcycle=264019 minstret=196023
+Microseconds for one run through Dhrystone: 528
+Dhrystones per Second:                      1893
+
+FPGA_RESULT core=hazard3_fpga exit=0 cycles=285045 marked_cycles=264034 console_len=133 bus_err=0 err_addr=00000000 status=00000003 id=f6a00001 readback_words=1075
+- fpga/sim/tb_fpga.sv:117: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
+- Verilator: $finish at 5us; walltime 0.176 s; speed 27.778 us/s
+- Verilator: cpu 0.175 s on 1 threads; allocated 2 MB

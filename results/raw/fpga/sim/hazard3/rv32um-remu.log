@@ -1,0 +1,6 @@
+
+FPGA_RESULT core=hazard3_fpga exit=0 cycles=377 marked_cycles=0 console_len=0 bus_err=0 err_addr=00000000 status=00000003 id=f6a00001 readback_words=1075
+- fpga/sim/tb_fpga.sv:117: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
+- Verilator: $finish at 2us; walltime 0.072 s; speed 28.044 us/s
+- Verilator: cpu 0.072 s on 1 threads; allocated 2 MB
