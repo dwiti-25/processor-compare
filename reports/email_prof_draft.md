@@ -9,12 +9,12 @@ are synthesized core-only (no memories or pads) with the same open-source flow (
 Yosys, OpenROAD, sky130_fd_sc_hd standard cells), the same 50 MHz clock target, and rv32imc_zicsr
 configurations with unused features disabled.
 
-<!-- BEGIN collect.py --md synth -->
-| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Est. fmax, tt (MHz)* |
-|---|---:|---:|---:|---:|---:|
-| Hazard3 | 13,152 | 156,519 | 1.00× | 1,940 | 78 |
-| Ibex (small) | 11,922 | 150,477 | 0.96× | 1,924 | pending |
-| VeeR EL2 (min) | 50,509 | 578,750 | 3.70× | 6,384 | pending |
+<!-- BEGIN collect.py:headline -->
+| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | fmax |
+|---|---:|---:|---:|---:|---|
+| Hazard3 | 13,152 | 156,519 | 1.00× | 1,940 | pending, will come from full layout |
+| Ibex (small) | 11,922 | 150,477 | 0.96× | 1,924 | pending, will come from full layout |
+| VeeR EL2 (min) | 50,627 | 579,032 | 3.70× | 6,384 | pending, will come from full layout |
 <!-- END collect.py -->
 
 \* Pre-route estimate at the typical corner (25 °C, 1.8 V): after placement, clock-tree synthesis and

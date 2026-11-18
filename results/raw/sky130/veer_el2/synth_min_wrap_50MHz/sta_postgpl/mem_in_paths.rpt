@@ -1,0 +1,123 @@
+# Setup paths from the memory-response ports (i_rdata, d_rdata, i_rvalid, d_rvalid, i_err, d_err) into VeeR,
+# same database/SDC/corner as this run's STAMidPNR step (28-openroad-repairdesignpostgpl odb, base.sdc, nom_tt, ideal clocks,
+# placement parasitics; overall worst slack reproduces the step: -21.306 ns). Diagnostic for the axi2obi64 bypass (DECISIONS.md 2026-11-18).
+MEMIN nom_tt_025C_1v80 worst_overall slack -21.306 from _89759_/Q
+MEMIN nom_tt_025C_1v80 worst_from_mem_ports slack 0.000 from i_rvalid to _87860_/D
+MEMIN nom_tt_025C_1v80 worst_from_any_input slack 0.000 from i_rvalid
+MEMIN ==== mem_ports -> edge-triggered flops
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_84506_/D (sky130_fd_sc_hd__dfrtp_2)   19.65   10.48    9.17 (MET)
+
+MEMIN ==== mem_ports -> any endpoint
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_87860_/D (sky130_fd_sc_hd__dlxtn_1)   11.19   11.19    0.00 (MET)
+
+MEMIN ==== d_rdata -> edge-triggered flops
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_90124_/D (sky130_fd_sc_hd__dfrtp_2)   19.66    5.33   14.33 (MET)
+
+MEMIN ==== d_rdata -> any endpoint
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_90124_/D (sky130_fd_sc_hd__dfrtp_2)   19.66    5.33   14.33 (MET)
+
+MEMIN ==== i_rdata -> edge-triggered flops
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_85787_/D (sky130_fd_sc_hd__dfrtp_2)   19.62    4.81   14.80 (MET)
+
+MEMIN ==== i_rdata -> any endpoint
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_85787_/D (sky130_fd_sc_hd__dfrtp_2)   19.62    4.81   14.80 (MET)
+
+MEMIN ==== valids -> edge-triggered flops
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_84506_/D (sky130_fd_sc_hd__dfrtp_2)   19.65   10.48    9.17 (MET)
+
+MEMIN ==== valids -> any endpoint
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+_87860_/D (sky130_fd_sc_hd__dlxtn_1)   11.19   11.19    0.00 (MET)
+
+
+# Full path, worst memory-port path (ends at a VeeR clock-gate latch, time borrowing):
+Startpoint: i_rvalid (input port clocked by clk)
+Endpoint: _87860_ (negative level-sensitive latch clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout   Delay    Time   Description
+---------------------------------------------------------------
+          0.00    0.00   clock clk (rise edge)
+          0.00    0.00   clock network delay (ideal)
+          4.00    4.00 v input external delay
+     1    0.01    4.01 v i_rvalid (in)
+     6    0.36    4.37 v input134/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     1    0.16    4.53 ^ _53422_/Y (sky130_fd_sc_hd__nor2_2)
+     7    0.24    4.78 ^ _53425_/X (sky130_fd_sc_hd__a211o_2)
+     4    0.11    4.88 v _53426_/Y (sky130_fd_sc_hd__inv_2)
+     4    0.25    5.13 v _53434_/X (sky130_fd_sc_hd__and3_2)
+     4    0.24    5.37 v _53438_/X (sky130_fd_sc_hd__and3_2)
+     2    0.20    5.58 v _53444_/X (sky130_fd_sc_hd__a21o_2)
+     1    0.48    6.06 v _53445_/X (sky130_fd_sc_hd__mux4_2)
+     1    0.31    6.36 v _53457_/X (sky130_fd_sc_hd__o221a_2)
+     3    0.41    6.78 v _53465_/X (sky130_fd_sc_hd__o311a_2)
+     2    0.31    7.09 v _53500_/X (sky130_fd_sc_hd__or2_2)
+     1    0.52    7.61 v _53504_/X (sky130_fd_sc_hd__or3b_2)
+     5    0.40    8.01 v fanout397/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+    10    0.47    8.48 v fanout394/X (sky130_fd_sc_hd__clkdlybuf4s25_1)
+     4    0.24    8.71 v _53531_/X (sky130_fd_sc_hd__o211a_2)
+     1    0.14    8.85 ^ _58556_/Y (sky130_fd_sc_hd__a21oi_2)
+     3    0.16    9.01 ^ _58557_/X (sky130_fd_sc_hd__or2_2)
+     3    0.28    9.29 ^ _58560_/X (sky130_fd_sc_hd__a41o_2)
+     4    0.16    9.45 v _58567_/Y (sky130_fd_sc_hd__o22ai_2)
+     1    0.71   10.16 v _58760_/X (sky130_fd_sc_hd__or4_2)
+     1    0.17   10.33 v _58822_/X (sky130_fd_sc_hd__o311a_2)
+     4    0.16   10.49 ^ _58823_/Y (sky130_fd_sc_hd__nor2_2)
+     1    0.07   10.56 v _78494_/Y (sky130_fd_sc_hd__nand2_2)
+     1    0.36   10.92 v _78527_/X (sky130_fd_sc_hd__a221o_2)
+     1    0.27   11.19 v _78528_/X (sky130_fd_sc_hd__a211o_2)
+          0.00   11.19 v _87860_/D (sky130_fd_sc_hd__dlxtn_1)
+                 11.19   data arrival time
+
+         10.00   10.00   clock clk (fall edge)
+          0.00   10.00   clock network delay (ideal)
+         -0.25    9.75   clock uncertainty
+          0.00    9.75   clock reconvergence pessimism
+                  9.75 v _87860_/GATE_N (sky130_fd_sc_hd__dlxtn_1)
+          1.44   11.19   time borrowed from endpoint
+                 11.19   data required time
+---------------------------------------------------------------
+                 11.19   data required time
+                -11.19   data arrival time
+---------------------------------------------------------------
+                  0.00   slack (MET)

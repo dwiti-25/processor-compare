@@ -5,23 +5,23 @@
         +----------Local Count, excluding submodules.
         |        +-Local Area, excluding submodules.
         |        | 
-    82270        - wires
-    92852        - wire bits
+    82496        - wires
+    93077        - wire bits
      1642        - public wires
-    12203        - public wire bits
+    12202        - public wire bits
        20        - ports
       278        - port bits
-    90891 1.68E+05 cells
-    32717        -   $_ANDNOT_
-     2684        -   $_AND_
-     7447        -   $_MUX_
-     2050        -   $_NAND_
-     5273        -   $_NOR_
-     3687        -   $_NOT_
-     2716        -   $_ORNOT_
-    16947        -   $_OR_
-     2205        -   $_XNOR_
-     8557        -   $_XOR_
+    91117 1.68E+05 cells
+    32725        -   $_ANDNOT_
+     2688        -   $_AND_
+     7585        -   $_MUX_
+     2052        -   $_NAND_
+     5279        -   $_NOR_
+     3753        -   $_NOT_
+     2722        -   $_ORNOT_
+    16945        -   $_OR_
+     2204        -   $_XNOR_
+     8556        -   $_XOR_
      5851 1.54E+05   sky130_fd_sc_hd__dfrtp_2
         1   26.275   sky130_fd_sc_hd__dfstp_2
       532 1.13E+04   sky130_fd_sc_hd__dfxtp_2

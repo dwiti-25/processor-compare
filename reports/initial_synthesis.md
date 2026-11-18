@@ -1,6 +1,6 @@
 # Initial results: Hazard3, Ibex, VeeR EL2 on SKY130 (core-only synthesis + RTL benchmarks)
 
-Dwiti Suchak, Ayush. BITS Pilani. Data as of <!-- BEGIN collect.py:data_time -->2026-11-10 02:02 (IST)<!-- END collect.py -->.
+Dwiti Suchak, Ayush. BITS Pilani. Data as of <!-- BEGIN collect.py:data_time -->2026-11-18 23:40 (IST)<!-- END collect.py -->.
 
 ## What was run
 
@@ -27,7 +27,7 @@ Dwiti Suchak, Ayush. BITS Pilani. Data as of <!-- BEGIN collect.py:data_time -->
 |---|---|---|---|---:|---:|---:|---:|---:|---|
 | Hazard3 | default | core + wrapper | Yosys read_verilog | 13,152 | 156,519 | 1.00× | 1,940 | 0 | pending (full layout) |
 | Ibex | small | core + wrapper | yosys-slang | 11,922 | 150,477 | 0.96× | 1,924 | 1 | pending (full layout) |
-| VeeR EL2 | min | core + wrapper | yosys-slang | 50,509 | 578,750 | 3.70× | 6,384 | 224 | pending (full layout) |
+| VeeR EL2 | min | core + wrapper | yosys-slang | 50,627 | 579,032 | 3.70× | 6,384 | 224 | pending (full layout) |
 | VeeR EL2 | bp | vendor top (old) | yosys-slang | 61,383 | 720,779 | 4.61× | 8,521 | 305 | pending (full layout) |
 <!-- END collect.py -->
 
@@ -43,7 +43,7 @@ and the riscv-tests rv32ui/um/uc subset (failures explained under limitations).
 |---|---|---:|---:|---:|---:|---:|
 | Hazard3 | default | 52/52 | 2.75 | 1.08 | 4.15 | 0.66 |
 | Ibex | small | 52/52 | 2.23 | 0.83 | 2.47 | 0.90 |
-| VeeR EL2 | no TCM (min) | 52/52 | 0.68 | 0.28 | 3.6 | 0.19 |
+| VeeR EL2 | no TCM (min) | 52/52 | 0.81 | 0.34 | 3.6 | 0.22 |
 | VeeR EL2 | ICCM + DCCM (tcm) | 51/52 | 3.07 | 1.25 | 3.6 | 0.85 |
 <!-- END collect.py -->
 
@@ -56,7 +56,7 @@ Published figures and why ours differ:
 - **VeeR EL2** ([source](https://www.westerndigital.com/company/newsroom/press-releases/2019/2019-12-10-western-digital-brings-memory-closer-to-compute-with-new-risc-v-innovations)):
   a simulated vendor figure; VeeR is built to run from its tightly-coupled memories. Without them
   ("min") every fetch goes over the AXI bus and VeeR is far slower. With ICCM + DCCM ("tcm", RTL
-  simulation only) it is <!-- BEGIN collect.py:veer_tcm_ratio -->4.5<!-- END collect.py -->× faster and close to the published figure;
+  simulation only) it is <!-- BEGIN collect.py:veer_tcm_ratio -->3.8<!-- END collect.py -->× faster and close to the published figure;
   the rest is `-O2` and its branch predictor being off.
 
 ## Configurations
