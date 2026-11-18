@@ -22,7 +22,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 7140,
+     "cycles": 6009,
      "marked_cycles": 0,
      "console": "Hello from RISC-V! 7*6=42 sum=5734",
      "log": "results/raw/sim/veer_el2_min/hello.log"
@@ -49,9 +49,9 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1079324,
-     "marked_cycles": 1005172,
-     "console": "STATS mcycle=1005088 minstret=196023\nMicroseconds for one run through Dhrystone: 2010\nDhrystones per Second:                      497",
+     "cycles": 912372,
+     "marked_cycles": 849645,
+     "console": "STATS mcycle=849574 minstret=196023\nMicroseconds for one run through Dhrystone: 1699\nDhrystones per Second:                      588",
      "log": "results/raw/sim/veer_el2_min/dhrystone.log"
     }
    }
@@ -76,9 +76,9 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 14763450,
-     "marked_cycles": 14642602,
-     "console": "2K performance run parameters for coremark.\nCoreMark Size    : 666\nTotal ticks      : 14642571\nTotal time (secs): 14\nIterations/Sec   : 0\nIterations       : 10\nCompiler version : GCC15.2.0\nCompiler flags   : -march=rv32imc_zicsr -mabi=ilp32 -O2 -g -static -std=gnu99 -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns -Isw/include\nMemory location  : STACK\nseedcrc          : 0xe9f5\n[0]crclist       : 0xe714\n[0]crcmatrix     : 0x1fd7\n[0]crcstate      : 0x8e3a\n[0]crcfinal      : 0xfcaf\nCorrect operation validated. See README.md for run and reporting rules.",
+     "cycles": 12471790,
+     "marked_cycles": 12369671,
+     "console": "2K performance run parameters for coremark.\nCoreMark Size    : 666\nTotal ticks      : 12369645\nTotal time (secs): 12\nIterations/Sec   : 0\nIterations       : 10\nCompiler version : GCC15.2.0\nCompiler flags   : -march=rv32imc_zicsr -mabi=ilp32 -O2 -g -static -std=gnu99 -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns -Isw/include\nMemory location  : STACK\nseedcrc          : 0xe9f5\n[0]crclist       : 0xe714\n[0]crcmatrix     : 0x1fd7\n[0]crcstate      : 0x8e3a\n[0]crcfinal      : 0xfcaf\nCorrect operation validated. See README.md for run and reporting rules.",
      "log": "results/raw/sim/veer_el2_min/coremark.log"
     }
    }
@@ -103,7 +103,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1945,
+     "cycles": 1647,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-add.log"
@@ -130,7 +130,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1025,
+     "cycles": 870,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-addi.log"
@@ -157,7 +157,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2418,
+     "cycles": 2047,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-and.log"
@@ -184,7 +184,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 864,
+     "cycles": 734,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-andi.log"
@@ -211,7 +211,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 178,
+     "cycles": 154,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-auipc.log"
@@ -238,7 +238,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1172,
+     "cycles": 994,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-beq.log"
@@ -265,7 +265,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1289,
+     "cycles": 1092,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-bge.log"
@@ -292,7 +292,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1533,
+     "cycles": 1299,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-bgeu.log"
@@ -319,7 +319,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1172,
+     "cycles": 994,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-blt.log"
@@ -346,7 +346,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1436,
+     "cycles": 1216,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-bltu.log"
@@ -373,7 +373,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1167,
+     "cycles": 990,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-bne.log"
@@ -400,7 +400,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 153,
+     "cycles": 133,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-jal.log"
@@ -427,7 +427,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 502,
+     "cycles": 428,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-jalr.log"
@@ -454,7 +454,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1151,
+     "cycles": 977,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-lb.log"
@@ -481,7 +481,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1170,
+     "cycles": 993,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-lbu.log"
@@ -508,7 +508,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 5339,
+     "cycles": 4521,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-ld_st.log"
@@ -535,7 +535,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1232,
+     "cycles": 1045,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-lh.log"
@@ -562,7 +562,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1271,
+     "cycles": 1078,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-lhu.log"
@@ -589,7 +589,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 217,
+     "cycles": 187,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-lui.log"
@@ -616,7 +616,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1327,
+     "cycles": 1125,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-lw.log"
@@ -643,7 +643,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2433,
+     "cycles": 2059,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-or.log"
@@ -670,7 +670,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 912,
+     "cycles": 774,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-ori.log"
@@ -697,7 +697,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2338,
+     "cycles": 1981,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sb.log"
@@ -724,7 +724,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2541,
+     "cycles": 2150,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sh.log"
@@ -751,7 +751,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 81,
+     "cycles": 72,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-simple.log"
@@ -778,7 +778,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2241,
+     "cycles": 1896,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sll.log"
@@ -805,7 +805,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1073,
+     "cycles": 911,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-slli.log"
@@ -832,7 +832,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1911,
+     "cycles": 1618,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-slt.log"
@@ -859,7 +859,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 978,
+     "cycles": 830,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-slti.log"
@@ -886,7 +886,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 978,
+     "cycles": 830,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sltiu.log"
@@ -913,7 +913,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1911,
+     "cycles": 1618,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sltu.log"
@@ -940,7 +940,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2453,
+     "cycles": 2077,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sra.log"
@@ -967,7 +967,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1177,
+     "cycles": 998,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-srai.log"
@@ -994,7 +994,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2413,
+     "cycles": 2042,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-srl.log"
@@ -1021,7 +1021,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1169,
+     "cycles": 992,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-srli.log"
@@ -1048,7 +1048,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2616,
+     "cycles": 2217,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-st_ld.log"
@@ -1075,7 +1075,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1909,
+     "cycles": 1617,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sub.log"
@@ -1102,7 +1102,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2566,
+     "cycles": 2173,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-sw.log"
@@ -1129,7 +1129,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2396,
+     "cycles": 2028,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-xor.log"
@@ -1156,7 +1156,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 920,
+     "cycles": 781,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32ui-xori.log"
@@ -1183,7 +1183,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 367,
+     "cycles": 314,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-div.log"
@@ -1210,7 +1210,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 367,
+     "cycles": 314,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-divu.log"
@@ -1237,7 +1237,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2045,
+     "cycles": 1732,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-mul.log"
@@ -1264,7 +1264,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2198,
+     "cycles": 1861,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-mulh.log"
@@ -1291,7 +1291,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2211,
+     "cycles": 1872,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-mulhsu.log"
@@ -1318,7 +1318,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 2211,
+     "cycles": 1872,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-mulhu.log"
@@ -1345,7 +1345,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 354,
+     "cycles": 303,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-rem.log"
@@ -1372,7 +1372,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 354,
+     "cycles": 303,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32um-remu.log"
@@ -1399,7 +1399,7 @@
     },
     "veer_el2": {
      "exit": "0",
-     "cycles": 1047,
+     "cycles": 889,
      "marked_cycles": 0,
      "console": "",
      "log": "results/raw/sim/veer_el2_min/rv32uc-rvc.log"

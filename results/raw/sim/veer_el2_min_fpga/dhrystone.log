@@ -1,9 +1,9 @@
-STATS mcycle=1005088 minstret=196023
-Microseconds for one run through Dhrystone: 2010
-Dhrystones per Second:                      497
+STATS mcycle=849574 minstret=196023
+Microseconds for one run through Dhrystone: 1699
+Dhrystones per Second:                      588
 
-TB_RESULT core=veer_el2_wrap exit=0 cycles=1079324 marked_cycles=1005172
+TB_RESULT core=veer_el2_wrap exit=0 cycles=912372 marked_cycles=849645
 - common/tb/tb_top.sv:115: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
-- Verilator: $finish at 11us; walltime 1.143 s; speed 9.444 us/s
-- Verilator: cpu 1.143 s on 1 threads; allocated 2 MB
+- Verilator: $finish at 9us; walltime 0.992 s; speed 9.198 us/s
+- Verilator: cpu 0.990 s on 1 threads; allocated 2 MB

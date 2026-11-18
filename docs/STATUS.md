@@ -12,6 +12,7 @@ Update at the start and end of every Claude Code session.
 - VeeR config `min_fpga` (= min + VeeR's fpga_optimize): RTL sim 52/52 identical to `min`, cycles included (DECISIONS.md 2026-11-18).
 - FPGA sim (`fpga/sim/run_sim.sh <core>`): **Hazard3 52/52, Ibex 52/52, VeeR EL2 52/52** identical to RTL sim (exit, console, total and marked cycles). `results/raw/fpga/sim/<core>/summary.txt`.
 - Written but **not run** (no Vivado on the Mac): `fpga/vivado/build.tcl`, `fpga/pynq/processor_compare.ipynb` (+ `runner.py`; its hex loader checked against `objcopy -O binary`), `scripts/collect.py --md fpga` (parsers tested only on synthetic report snippets).
+- VeeR AXI adapter fix (bcb0f10): `axi2obi64` no longer adds a cycle to every response, so VeeR sees the same 1-cycle memory as Hazard3 and Ibex. VeeR min RTL sim 52/52, CoreMark CRCs correct, CoreMark **14,642,602 → 12,369,671** marked cycles (0.683 → 0.808 CoreMark/MHz), Dhrystone 1,005,172 → 849,645 (same 196,023 instructions); min_fpga still identical to min; tcm unchanged (51/52 as before). FPGA sim 52/52 identical with the new counts; notebook reference (`fpga/sw/manifest.json`) regenerated. VeeR CoreMark SAIF window 1,464,345 → 1,237,037 cycles. **Stale:** VeeR wrapped synthesis (`synth_min_wrap_50MHz`) still has the old adapter; rerun before quoting it.
 - Open: the board (Z1/Z2) and Vivado version are still blank in PROJECT_FACTS.md (same part, same bitstream either way). The two clock-gating mappings (Ibex BUFGCE, VeeR min_fpga) were approved by Dwiti on 2026-11-18.
 
 ## Previous (session 2026-11-10 evening → overnight, unattended)
@@ -74,7 +75,7 @@ RTL simulation (`collect.py --md sim`, `results/sim_results.csv`):
 |---|---|---:|---:|---:|---:|
 | Hazard3 | default | 52/52 | 2.753 | 528.1 | 1.078 |
 | Ibex | small | 52/52 | 2.23 | 687.1 | 0.828 |
-| VeeR EL2 | min | 52/52 | 0.683 | 2010.3 | 0.283 |
+| VeeR EL2 | min | 52/52 | 0.808 | 1699.3 | 0.335 |
 | VeeR EL2 | tcm | 51/52 | 3.072 | 454.1 | 1.253 |
 
 Core-only layout (`collect.py --md harden`, `results/harden_results.csv`; abridged columns). The current flow settings are in DECISIONS.md; `_baseline`, `_nodlybuf`, `_pgrt`, `_multicorner` are the diagnostic runs from tonight:

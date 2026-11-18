@@ -1,7 +1,7 @@
 Hello from RISC-V! 7*6=42 sum=5734
 
-TB_RESULT core=veer_el2_wrap exit=0 cycles=7140 marked_cycles=0
+TB_RESULT core=veer_el2_wrap exit=0 cycles=6009 marked_cycles=0
 - common/tb/tb_top.sv:115: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
-- Verilator: $finish at 71ns; walltime 0.031 s; speed 2.316 us/s
-- Verilator: cpu 0.031 s on 1 threads; allocated 2 MB
+- Verilator: $finish at 60ns; walltime 0.009 s; speed 6.757 us/s
+- Verilator: cpu 0.009 s on 1 threads; allocated 2 MB

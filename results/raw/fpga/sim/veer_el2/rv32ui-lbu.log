@@ -1,6 +1,6 @@
 
-FPGA_RESULT core=veer_el2_fpga exit=0 cycles=1170 marked_cycles=0 console_len=0 bus_err=0 err_addr=00000000 status=00000003 id=f6a00003 readback_words=1075
+FPGA_RESULT core=veer_el2_fpga exit=0 cycles=993 marked_cycles=0 console_len=0 bus_err=0 err_addr=00000000 status=00000003 id=f6a00003 readback_words=1075
 - fpga/sim/tb_fpga.sv:117: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
-- Verilator: $finish at 2us; walltime 0.212 s; speed 9.594 us/s
-- Verilator: cpu 0.211 s on 1 threads; allocated 2 MB
+- Verilator: $finish at 2us; walltime 0.206 s; speed 9.874 us/s
+- Verilator: cpu 0.205 s on 1 threads; allocated 2 MB
