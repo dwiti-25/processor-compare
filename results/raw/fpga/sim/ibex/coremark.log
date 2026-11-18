@@ -1,0 +1,22 @@
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 4484984
+Total time (secs): 4
+Iterations/Sec   : 2
+ERROR! Must execute for at least 10 secs for a valid result!
+Iterations       : 10
+Compiler version : GCC15.2.0
+Compiler flags   : -march=rv32imc_zicsr -mabi=ilp32 -O2 -g -static -std=gnu99 -fno-common -fno-builtin-printf -fno-tree-loop-distribute-patterns -Isw/include
+Memory location  : STACK
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0xfcaf
+Errors detected
+
+FPGA_RESULT core=ibex_fpga exit=0 cycles=4524383 marked_cycles=4484990 console_len=577 bus_err=0 err_addr=00000000 status=00000003 id=f6a00002 readback_words=1075
+- fpga/sim/tb_fpga.sv:117: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
+- Verilator: $finish at 47us; walltime 2.183 s; speed 21.650 us/s
+- Verilator: cpu 2.084 s on 1 threads; allocated 2 MB
