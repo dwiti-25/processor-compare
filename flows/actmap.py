@@ -7,7 +7,9 @@ all seen in Ibex (DECISIONS.md, 2026-11-11):
      from 0, the netlist keeps the RTL bit index. Literal matching silently pairs the wrong bits.
      Fix: shift by the declared LSB, taken from a 1-cycle VCD header (VCD keeps declared ranges).
   2. Unpacked arrays (logic [63:0] mhpmcounter [32]): SAIF names them base[e][i], the netlist (Yosys
-     flatten of the slang frontend's packed array) uses one linear index. Fix: linear = (N-1-e)*W + i
+     flatten of the slang frontend's packed array) uses one linear index. Fix: linear = (N-1-e)*W + i.
+     Arrays the netlist keeps as base[e][i] (Yosys' own Verilog frontend, Hazard3's regfile and fetch
+     FIFO) are mapped element by element instead (DECISIONS.md, 2026-11-18)
      (element 0 in the top bits; checked on Ibex: minstret = element 2 -> bits 1856..1919, and the unused
      imd_val_q_i[1][33:32] are exactly the linear bits 32..33 missing from the netlist).
   3. FSM state registers re-encoded by Yosys (fsm_recode, e.g. binary -> one-hot): netlist bit k is not
@@ -166,6 +168,9 @@ def main():
     fsms = parse_recodes(a.yosys_log)
     cyc, tr = parse_mon(a.mon_log)
     nets, regs = netlist_regs(a.netlist)
+    # arrays the netlist keeps two-dimensional (base[e][i]) are mapped element by element; the others
+    # (slang frontend: flattened to one packed vector) through the linear index
+    arrays_2d = {m.group(1) for r in regs for m in [re.match(r"^(.*)\[\d+\]\[\d+\]$", r)] if m}
 
     acts = {}      # netlist name -> (act per cycle, duty, source description)
     naive = {}     # literal SAIF name -> act (what saif2act.py did)
@@ -181,8 +186,14 @@ def main():
             base, e, i = m2.group(1), int(m2.group(2)), int(m2.group(3))
             n, msb, lsb = arrays[base]
             w = abs(msb - lsb) + 1
-            nl = f"{base}[{(n - 1 - e) * w + i}]"
-            kind = "array"
+            if base in arrays_2d:
+                # Yosys' own Verilog frontend (Hazard3) keeps memories as base[e][bit]: element index
+                # unchanged, bit index = declared LSB + SAIF index
+                nl = f"{base}[{e}][{lsb + i}]"
+                kind = "array-2d"
+            else:
+                nl = f"{base}[{(n - 1 - e) * w + i}]"
+                kind = "array"
         elif m1 and m1.group(1) in ranges:
             base, i = m1.group(1), int(m1.group(2))
             msb, lsb = ranges[base]
@@ -217,7 +228,7 @@ def main():
     new = {r for r in reg_names if r in acts}
     fixed_unmatched = sorted(set(reg_names) - old & new)
     still = sorted(set(reg_names) - new)
-    wrong = sorted(r for r in old & new if not acts[r][2].startswith("literal"))
+    wrong = sorted(r for r in old & new if not acts[r][2].endswith(f"SAIF {r}"))   # source bit differs
     R = [f"registers in netlist: {len(reg_names)}",
          f"matched literally before (saif2act.py): {len(old)}",
          f"matched now: {len(new)}",

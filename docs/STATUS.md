@@ -33,7 +33,7 @@ Update at the start and end of every Claude Code session.
 ### Summary for the morning (Dwiti)
 | Core @30 MHz, post-route flow | fmax tt / ss (MHz) | Worst setup WS | Slew viol. (worst corner) | DRC/LVS/antenna/hold | CoreMark power, tt |
 |---|---|---|---|---|---|
-| Hazard3 | 61.0 / 30.5 | −0.08 ns (max_ss) | 595 | clean | 10.2 mW (1,939/1,940 regs, literal matching; rerun with actmap before quoting) |
+| Hazard3 | 61.0 / 30.5 | −0.08 ns (max_ss) | 595 | clean | 10.2 mW (1,940/1,940 regs, register-accurate mapping; rerun 2026-11-18, unchanged from literal matching) |
 | Ibex | 52.7 / 29.6 | −1.22 ns (max_ss) | 881 | clean | 22.1 mW (1,924/1,924 regs, register-accurate mapping; was 20.4 with 1,775) |
 
 All from `scripts/collect.py` (`results/harden_results.csv`). The post-route step works: it took ss setup from about −5 ns to within ~0.1-1.2 ns, and slew to about one fifth. Neither core is sign-off clean yet.
@@ -41,7 +41,7 @@ All from `scripts/collect.py` (`results/harden_results.csv`). The post-route ste
 Decisions needed:
 1. **Close the rest**: (a) a second repair pass (RCX → repair → re-route ×2), the same for all cores; costs ~1 h extra per core; most likely to close Hazard3, probably Ibex. (b) Sign off at a lower clock (e.g. 25 MHz). Note: the ss slews don't depend on the clock, so (b) alone may still leave slew violations. (c) Report the current numbers with the ss slew/setup gap as a limitation of the open flow.
 2. **Docker memory** to ≥ 6 GB for VeeR (still 3.83 GiB tonight). Then `flows/run_layout.sh veer_el2 30 5.5`, then `flows/power.sh veer_el2 harden_min_wrap_30MHz_postroute` (SAIF already dumped).
-3. ~~Ibex power annotation~~ **done 2026-11-11** (`flows/actmap.py`, DECISIONS.md): all 1,924 Ibex registers annotated; Ibex CoreMark power 20.4 → **22.1 mW**. **Hazard3's 10.2 mW still uses literal matching** and has two recoded FSMs: rerun with the VCD header + FSM monitor before quoting (one command each, see DECISIONS.md). Then VeeR the same way.
+3. ~~Ibex power annotation~~ **done 2026-11-11** (`flows/actmap.py`, DECISIONS.md): all 1,924 Ibex registers annotated; Ibex CoreMark power 20.4 → **22.1 mW**. ~~Hazard3~~ **done 2026-11-18**: rerun with the register-accurate mapping, 1,940/1,940 registers annotated, CoreMark power still **10.2 mW** (DECISIONS.md 2026-11-18). VeeR still to do, the same way.
 
 Also: fmax depends on the target clock (timing repair stops at the target), so the final fmax should come from a sweep point near each core's ss fmax.
 

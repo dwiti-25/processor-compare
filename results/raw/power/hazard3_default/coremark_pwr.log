@@ -1,8 +1,13 @@
 
 TB: SAIF window start at cycle 15574
+PWRMON fsm=u_core.bus_gnt_ds_prev state=0 cycles=294114
+PWRMON fsm=u_core.bus_gnt_ds_prev from=0 to=2 count=50714
+PWRMON fsm=u_core.bus_gnt_ds_prev state=2 cycles=69137
+PWRMON fsm=u_core.bus_gnt_ds_prev from=2 to=0 count=50715
+PWRMON fsm=u_core.core.power_ctrl.state state=0 cycles=363251
 
 TB_RESULT core=hazard3_wrap exit=saif_window cycles=378825 marked_cycles=363251
-- common/tb/tb_top.sv:89: Verilog $finish
+- common/tb/tb_top.sv:99: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.053 devel
-- Verilator: $finish at 4us; walltime 1.813 s; speed 2.090 us/s
-- Verilator: cpu 1.812 s on 1 threads; allocated 4 MB
+- Verilator: $finish at 4us; walltime 1.148 s; speed 3.299 us/s
+- Verilator: cpu 1.146 s on 1 threads; allocated 4 MB
