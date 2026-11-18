@@ -1,6 +1,11 @@
 // AXI4 master (single-beat transfers only) -> 64-bit OBI. Writes (AW+W together) have priority
 // over reads (AR). Responses come back from OBI in order and are queued with their AXI ID until the
 // master takes them on B or R. Up to DEPTH transfers are in flight (issued or queued).
+// No added latency: when the response for the head of the queue arrives, it is presented on B/R in
+// the same cycle (bypass), so the master sees the memory's own latency, as Hazard3 and Ibex do through
+// ahbl2obi/obi32to64. If the master doesn't take it that cycle, it is held in the queue and stays
+// valid and stable. Timing: this makes a combinational path from OBI m_rvalid/m_rdata/m_err to
+// rvalid/rdata/bvalid/resp (DECISIONS.md, 2026-11-18).
 module axi2obi64 #(
   parameter int ID_W  = 3,
   parameter int DEPTH = 4
@@ -69,14 +74,19 @@ module axi2obi64 #(
   assign wready  = do_wr && gnt;
   assign arready = do_rd && gnt;
 
-  wire head_ok = (n != 0) && q_full[rp];
+  // Filled entries lie between rp and fp, so an unfilled head means fp == rp: the arriving response
+  // belongs to the head.
+  wire head_q   = (n != 0) && q_full[rp];
+  wire head_byp = (n != 0) && !q_full[rp] && m_rvalid;
+  wire head_ok  = head_q || head_byp;
+  wire head_err = head_q ? q_err[rp] : m_err;
   assign bvalid = head_ok && q_w[rp];
   assign rvalid = head_ok && !q_w[rp];
   assign bid    = q_id[rp];
   assign rid    = q_id[rp];
-  assign rdata  = q_data[rp];
-  assign bresp  = q_err[rp] ? 2'b10 : 2'b00;
-  assign rresp  = q_err[rp] ? 2'b10 : 2'b00;
+  assign rdata  = head_q ? q_data[rp] : m_rdata;
+  assign bresp  = head_err ? 2'b10 : 2'b00;
+  assign rresp  = head_err ? 2'b10 : 2'b00;
   assign rlast  = 1'b1;
 
   wire alloc = req && gnt;
@@ -99,7 +109,10 @@ module axi2obi64 #(
         q_full[fp] <= 1'b1;
         fp         <= fp + 1'b1;
       end
-      if (take) rp <= rp + 1'b1;
+      if (take) begin
+        q_full[rp] <= 1'b0;   // after the fill above: a bypassed response leaves its slot empty
+        rp         <= rp + 1'b1;
+      end
       n <= n + (alloc ? 1'b1 : 1'b0) - (take ? 1'b1 : 1'b0);
     end
   end
@@ -109,6 +122,8 @@ module axi2obi64 #(
     if (awvalid) assert (awlen == 0) else $fatal(1, "axi2obi64: AXI write bursts not supported");
     if (arvalid) assert (arlen == 0) else $fatal(1, "axi2obi64: AXI read bursts not supported");
     if (wvalid)  assert (wlast)      else $fatal(1, "axi2obi64: WLAST expected on single beat");
+    if (m_rvalid) assert (n != 0 && !q_full[fp]) else $fatal(1, "axi2obi64: OBI response with no request waiting");
+    if (head_byp) assert (fp == rp) else $fatal(1, "axi2obi64: bypass not at the queue head");
   end
 `endif
 endmodule
