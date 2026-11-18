@@ -137,8 +137,8 @@ failed, what's running and what decisions are pending. In short:
 - **SKY130 core-only layout**: Hazard3 and Ibex are DRC, LVS and antenna clean with hold met, but
   **not sign-off clean yet**: setup and max-slew still fail at the slow (ss) corners. VeeR EL2's
   layout hasn't run yet; it needs more Docker memory than the Mac currently gives it.
-- **Post-layout power** from CoreMark activity: Ibex uses the register-accurate name mapping
-  (`flows/actmap.py`). Hazard3's figure still uses literal matching and is flagged for a rerun.
+- **Post-layout power** from CoreMark activity: Hazard3 and Ibex both use the register-accurate
+  name mapping (`flows/actmap.py`), with every register annotated. VeeR EL2 waits for its layout.
 - **FPGA**: handoff kit ready in `fpga/`. All three FPGA designs pass the 52 programs in
   simulation, cycle-identical to the RTL simulation. The Vivado builds and board runs haven't
   been done yet (they need an x86 machine).
