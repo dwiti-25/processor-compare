@@ -8,6 +8,7 @@ usage:
   scripts/collect.py --md synth   # also print the synthesis table as Markdown (also: sim, harden, fpga)
   scripts/collect.py --update-report reports/initial_synthesis.md
   scripts/collect.py --headline --update-report reports/email_prof_draft.md
+  scripts/collect.py --update-report reports/report_draft.md
                                   # rewrite the table between the BEGIN/END collect.py markers
 """
 import argparse
@@ -359,6 +360,101 @@ def data_time(paths):
     return datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d %H:%M %Z").strip() + " (IST)"
 
 
+NAMES = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
+CURRENT_FLOW = "post-route repair"   # substring of run.info harden_settings for the current layout flow
+
+
+def md_harden_current(rows):
+    """Layout runs with the current flow settings (DECISIONS.md 2026-11-10): sign-off view per corner."""
+    out = ["| Core | Clock target (MHz) | fmax tt / ss / ss max-RC (MHz) | Setup WS tt / ss / ff / worst (ns) | "
+           "Setup viol. | Hold WS (ns) / viol. | Max slew / cap viol. | DRC Magic / KLayout / route | LVS | Antenna | "
+           "Die area (µm²) | Core area (µm²) | Std cells | Sign-off clean (all 9 corners) |",
+           "|---|---:|---|---|---:|---|---|---|---:|---:|---:|---:|---:|---|"]
+    for r in sorted((r for r in rows if CURRENT_FLOW in r["settings"]),
+                    key=lambda r: (r["core"], float(r["clock_target_mhz"]))):
+        out.append(f"| {NAMES[r['core']]} | {r['clock_target_mhz']} | "
+                   f"{r['fmax_tt_mhz']} / {r['fmax_ss_mhz']} / {r['fmax_ss_maxrc_mhz']} | "
+                   f"{r['setup_ws_tt_ns']:+.2f} / {r['setup_ws_ss_ns']:+.2f} / {r['setup_ws_ff_ns']:+.2f} / "
+                   f"{r['setup_ws_worst_ns']:+.2f} | {r['setup_vio_count']} | "
+                   f"{r['hold_ws_worst_ns']:+.2f} / {r['hold_vio_count']} | {r['max_slew_vio']} / {r['max_cap_vio']} | "
+                   f"{r['magic_drc']} / {r['klayout_drc']} / {r['route_drc']} | {r['lvs_errors']} | {r['antenna_nets']} | "
+                   f"{r['die_area_um2']:,.0f} | {r['core_area_um2']:,.0f} | {r['stdcells']:,} | "
+                   f"{'yes' if r['signoff_clean'] else 'no'} |")
+    return "\n".join(out)
+
+
+def _power_groups(rpt):
+    """OpenSTA report_power: {group: (internal, switching, leakage, total)} in W."""
+    out = {}
+    for line in open(rpt):
+        f = line.split()
+        if len(f) >= 5 and f[0] in ("Sequential", "Combinational", "Clock", "Total"):
+            try:
+                out[f[0]] = tuple(float(x) for x in f[1:5])
+            except ValueError:
+                pass
+    return out
+
+
+def md_power(rows):
+    """CoreMark-activity power (flows/power.sh) next to LibreLane's default-activity figure, same layout."""
+    out = ["| Core | Layout run | Clock (MHz) | Register outputs annotated | CoreMark window (cycles) | "
+           "Power, CoreMark activity (mW) | Sequential / combinational / clock (mW) | Internal / switching (mW) / leakage (µW) | "
+           "Energy per CoreMark iteration (µJ) | Power, LibreLane default activity (mW) |",
+           "|---|---|---:|---:|---:|---:|---|---|---:|---:|"]
+    for r in sorted(rows, key=lambda r: (r["core"], float(r["clock_target_mhz"]))):
+        d = os.path.join(REPO, r["report_path"], "power_coremark")
+        if r["power_coremark_tt_w"] == "":
+            continue
+        g = _power_groups(os.path.join(d, "power.rpt"))
+        ann = read_kv_space(os.path.join(d, "annotation.txt"))
+        cyc, mhz = int(ann["window_cycles"]), float(ann["clock_mhz"])
+        tot = g["Total"]
+        mw = lambda w: f"{w * 1000:.2f}"
+        out.append(f"| {NAMES[r['core']]} | `{r['run_id']}` | {ann['clock_mhz']} | {r['power_coremark_reg_annot']} | "
+                   f"{cyc:,} | {r['power_coremark_tt_w'] * 1000:.1f} | "
+                   f"{mw(g['Sequential'][3])} / {mw(g['Combinational'][3])} / {mw(g['Clock'][3])} | "
+                   f"{mw(tot[0])} / {mw(tot[1])} / {tot[2] * 1e6:.2f} | "
+                   f"{r['power_coremark_tt_w'] * cyc / mhz:.1f} | {r['power_total_w'] * 1000:.1f} |")
+    return "\n".join(out)
+
+
+def md_synth_timing(rows):
+    """Pre-layout timing estimate (post-GPL, tt, ideal clocks; DECISIONS.md 2026-11-09)."""
+    order = {"hazard3": 0, "ibex": 1, "veer_el2": 2}
+    rows = sorted(rows, key=lambda r: (order[r["core"]], {"bp": 1}.get(r["config"], 0), r["top"] != "wrapper"))
+    out = ["| Core | Config | Synthesized top | Target (MHz) | All-path setup WS (ns) | Reg-to-reg slack (ns) | "
+           "Est. fmax, post-GPL tt (MHz) |",
+           "|---|---|---|---:|---:|---:|---:|"]
+    for r in rows:
+        if r["fmax_est_mhz_postgpl_tt"] == "":
+            continue
+        top = "core + wrapper" if r["top"] == "wrapper" else "vendor top"
+        out.append(f"| {NAMES[r['core']]} | {r['config']} | {top} | {r['clock_target_mhz']} | "
+                   f"{float(r['setup_ws_all_ns_postgpl_tt']):+.2f} | {float(r['reg2reg_slack_ns_postgpl_tt']):+.2f} | "
+                   f"{r['fmax_est_mhz_postgpl_tt']} |")
+    return "\n".join(out)
+
+
+def md_veer_mem_in():
+    """Setup paths from the memory-response ports into VeeR (sta_postgpl/mem_in_paths.rpt)."""
+    rpt = os.path.join(RAW, "sky130", "veer_el2", "synth_min_wrap_50MHz", "sta_postgpl", "mem_in_paths.rpt")
+    out = ["| From | To | Worst endpoint (cell) | Required (ns) | Arrival (ns) | Slack (ns) |",
+           "|---|---|---|---:|---:|---:|"]
+    head = None
+    for line in open(rpt):
+        m = re.match(r"MEMIN ==== (\S+) -> (.+)$", line)
+        if m:
+            head = m.groups()
+            continue
+        m = re.match(r"(\S+) \((\S+)\)\s+([-0-9.]+)\s+([-0-9.]+)\s+([-0-9.]+)", line)
+        if m and head:
+            ep, cell, req, act, sl = m.groups()
+            out.append(f"| `{head[0]}` | {head[1].strip()} | `{ep}` ({cell.split('__')[-1]}) | {req} | {act} | {float(sl):+.2f} |")
+            head = None
+    return "\n".join(out)
+
+
 def fill_markers(path, tables):
     """Replace every <!-- BEGIN collect.py:<name> --> ... <!-- END collect.py --> block."""
     text = open(path).read()
@@ -545,7 +641,10 @@ def main():
                [os.path.join(REPO, r["log_path"]) for r in sim]
         tables = {"synth": md_synth(synth), "headline": md_headline(synth), "sim": md_sim(sim),
                   "sim_email": md_sim_email(sim), "veer_tcm_ratio": veer_tcm_ratio(sim),
-                  "data_time": data_time(srcs)}
+                  "data_time": data_time(srcs), "harden": md_harden(harden),
+                  "harden_current": md_harden_current(harden), "power": md_power(harden),
+                  "synth_timing": md_synth_timing([r for r in rows if r["stage"] == "synth"]),
+                  "veer_mem_in": md_veer_mem_in()}
         text = open(a.update_report).read()
         if "<!-- BEGIN collect.py --md synth -->" in text:   # legacy single-table marker
             text = text.replace("<!-- BEGIN collect.py --md synth -->",
