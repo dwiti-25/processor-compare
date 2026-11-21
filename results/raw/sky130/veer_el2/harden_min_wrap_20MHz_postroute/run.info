@@ -1,0 +1,14 @@
+core=veer_el2
+config=min
+top=veer_el2_wrap
+params=
+core_commit=12e7adc30916843b0e46a947bc5eb97e7a798157
+clk_mhz=20
+frontend=slang
+patches=0001-lsu_ecc-tie-off-wdata-ecc-without-dccm.patch 
+librelane_image=ghcr.io/librelane/librelane:3.0.17
+harden_settings=exclude clkdlybuf4s*, post-GRT repair, wire-length 400um + 30% repair margin + CTS cluster 10, post-route repair (RCX) + re-route
+threads=1
+pdk=sky130A
+pdk_version=8afc8346a57fe1ab7934ba5a6056ea8b43078e71
+date=2026-11-21T10:30:52Z

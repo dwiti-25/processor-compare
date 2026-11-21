@@ -3,3 +3,7 @@
 2026-11-10 21:52:21 ibex@30: start (attempt 1, Docker 3.83 GiB)
 2026-11-10 23:24:26 ibex@30: done
 2026-11-10 23:25:38 veer_el2@30: skipped: Docker memory 3.83 GiB < 5.5 GiB
+2026-11-21 15:43:21 veer_el2@20: docker not available after 1 h, giving up
+2026-11-21 16:00:51 veer_el2@20: start (attempt 1, Docker 3.83 GiB)
+2026-11-21 23:07:19 veer_el2@20: peak container memory 2307 MiB
+2026-11-21 23:07:21 veer_el2@20: failed rc=1 (not a Docker restart); see librelane.log
