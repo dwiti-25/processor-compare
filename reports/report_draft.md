@@ -203,7 +203,9 @@ Against published CoreMark/MHz figures:
   - The fetch-stall and CPI breakdown in `docs/LIMITATIONS.md` comes from scratch Verilator probes,
     not from `collect.py`, so it isn't quoted here.
     **[PENDING: commit the probe logs and parse them in `collect.py` if the figures go in the paper]**
-- **Which VeeR configuration headlines the comparison** is an open decision (§7).
+- **VeeR's headline configuration is `min`**; `tcm` is a reference row only (DECISIONS.md,
+  2026-11-21). `min` is the configuration of every VeeR ASIC number, and `tcm`'s memories are
+  behavioural models with no area or power in any ASIC result.
 
 ## 4. SKY130 core-only layout: Hazard3 and Ibex
 
@@ -287,9 +289,9 @@ From `docs/LIMITATIONS.md`, plus flow limitations from `docs/STATUS.md`.
   error: the testbench and adapters now give every core the same 1-cycle memory.
   - Until bcb0f10, VeeR's AXI adapter registered every response, so VeeR saw 2-cycle reads. The
     earlier, lower VeeR result is kept as a diagnostic note in LIMITATIONS.md.
-  - **Open decision** (Dwiti, Ayush, professor): (a) keep "no TCM/cache" for all cores and report
-    VeeR's penalty; (b) give VeeR ICCM and DCCM, which adds SRAM area in the chip-top scope;
-    (c) report both.
+  - **Decided** (Dwiti, 2026-11-21): `min` is the headline, keeping "no TCM/cache" for all cores
+    and reporting VeeR's penalty as a finding; `tcm` stays as a reference row. Hardening a TCM
+    variant (SRAM macros, chip-top scope) is still open with the professor.
 - **ASIC numbers cover VeeR `min` only.** `tcm` runs only in RTL simulation, with behavioural
   memories; no SRAM area is in any ASIC number.
 
@@ -312,8 +314,8 @@ From `docs/LIMITATIONS.md`, plus flow limitations from `docs/STATUS.md`.
 - **[PENDING] FPGA:** Vivado builds (timing, utilisation, power), board runs, and the
   `collect.py --md fpga` table.
 - **[PENDING] Padded chip top, SCL 180 nm, GLS.**
-- **[PENDING] Decisions:** VeeR headline configuration (with or without TCMs); VeeR PMP/debug
-  patching; own pad ring vs Caravel.
+- **[PENDING] Decisions:** whether to harden a VeeR TCM variant; VeeR PMP/debug patching; own
+  pad ring vs Caravel.
 
 ## Appendix: all core-only layout runs
 
