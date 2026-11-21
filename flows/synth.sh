@@ -12,6 +12,7 @@
 # SYNTH_ONLY=1: stop after Yosys synthesis (no placement/timing estimate; low memory)
 # HARDEN=1  : run the full LibreLane Classic flow to GDS + DRC/LVS/STA sign-off (core-only layout);
 #             output in results/raw/sky130/<core>/harden_<cfg>[_wrap]_<clk>MHz[_<TAG>]/
+# THREADS=n : router / KLayout DRC+XOR / STA threads (memory and runtime only; default = all cores)
 # POSTROUTE=1 (with HARDEN=1): flow ClassicPostRouteRepair (flows/llplugins): after detailed
 #             routing, RCX -> repair_design + repair_timing on extracted parasitics -> re-route
 # TAG=name  : suffix for the run name, so a run never overwrites an earlier one
@@ -61,7 +62,7 @@ done
 
 # LibreLane config (absolute paths; repo is mounted at the same path in the container)
 REPO="$REPO" TOP="$TOP" CLK_PORT="$CLK_PORT" CLK_MHZ="$CLK_MHZ" SRCS="$SRCS" INCS="$INCS" \
-DEFINES="$DEFINES" PARAMS="$PARAMS" POSTROUTE="${POSTROUTE:-0}" FRONTEND="${FRONTEND:-slang}" python3 - > "$BUILD/config.json" <<'EOF'
+DEFINES="$DEFINES" PARAMS="$PARAMS" POSTROUTE="${POSTROUTE:-0}" FRONTEND="${FRONTEND:-slang}" THREADS="${THREADS:-}" python3 - > "$BUILD/config.json" <<'EOF'
 import json, os
 e = os.environ
 ab = lambda p: os.path.join(e["REPO"], p)
@@ -111,6 +112,12 @@ if e.get("HARDEN") == "1":
         # that set the limits: worst setup/slew (ss, incl. max RC) and worst hold (ff, min RC).
         cfg["PNR_CORNERS"] = ["nom_tt_025C_1v80", "nom_ss_100C_1v60", "max_ss_100C_1v60",
                               "nom_ff_n40C_1v95", "min_ff_n40C_1v95"]
+if e.get("THREADS"):
+    # Runtime/memory only (no QoR or sign-off setting): fewer router/DRC/STA threads lower peak
+    # memory on a small Docker VM. Recorded in run.info as threads=.
+    n = int(e["THREADS"])
+    for k in ("DRT_THREADS", "KLAYOUT_DRC_THREADS", "KLAYOUT_XOR_THREADS", "STA_THREADS"):
+        cfg[k] = n
 if e["FRONTEND"] == "slang":
     cfg["USE_SLANG"] = True
     cfg["SLANG_ARGUMENTS"] = ["--std", "latest", "--single-unit", "--allow-hierarchical-const",
@@ -125,6 +132,7 @@ EOF
   echo "patches=$(cd cores/$CORE/patches && ls *.patch 2>/dev/null | tr '\n' ' ')"
   echo "librelane_image=$LIBRELANE_IMAGE"
   echo "harden_settings=${HARDEN:+exclude clkdlybuf4s*}${PGRT:+, post-GRT repair}${REPAIR_MARGIN:+, wire-length 400um + 30% repair margin + CTS cluster 10}${MULTICORNER:+, multi-corner PnR (tt/ss/ff)}${POSTROUTE:+, post-route repair (RCX) + re-route}"
+  echo "threads=${THREADS:-default}"
   echo "pdk=$PDK"; echo "pdk_version=$(basename "$(dirname "$(readlink "$PDK_ROOT/$PDK")")")"
   echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 } > "$OUT/run.info"
