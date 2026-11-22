@@ -11,7 +11,7 @@ CLK   ?= 50
 SCOPE ?= core
 CFG   ?=
 
-.PHONY: all-synth all-results smoke veer-configs $(addsuffix -synth,$(CORES)) $(addsuffix -sim,$(CORES)) $(addsuffix -harden,$(CORES)) $(addsuffix -postcts,$(CORES))
+.PHONY: all-synth all-results extract-results results-report smoke veer-configs $(addsuffix -synth,$(CORES)) $(addsuffix -sim,$(CORES)) $(addsuffix -harden,$(CORES)) $(addsuffix -postcts,$(CORES))
 
 veer-configs:
 	cores/veer_el2/gen_config.sh
@@ -40,3 +40,9 @@ all-results:
 	scripts/collect.py --update-report reports/initial_synthesis.md
 	scripts/collect.py --headline --update-report reports/email_prof_draft.md
 	~/tools/venv/bin/python scripts/md2pdf.py reports/initial_synthesis.md
+
+extract-results:
+	scripts/collect.py --all-md
+
+results-report:
+	scripts/collect.py --report

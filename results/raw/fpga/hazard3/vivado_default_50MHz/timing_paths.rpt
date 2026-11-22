@@ -1,0 +1,1769 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (lin64) Build 6511674 Tue Jun 16 11:01:26 MDT 2026
+| Date         : Thu Nov 19 18:15:30 2026
+| Host         : ayush-Yoga-Slim-7-Pro-14IAP7 running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_timing -setup -max_paths 20 -nworst 1 -path_type full -file /home/ayush/fpga_project/processor-compare/results/raw/fpga/hazard3/vivado_default_50MHz/timing_paths.rpt
+| Design       : ps_wrapper
+| Device       : 7z020-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             3.228ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2/ADDRARDADDR[9]
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.882ns  (logic 5.547ns (34.925%)  route 10.335ns (65.074%))
+  Logic Levels:           17  (CARRY4=6 LUT2=2 LUT4=1 LUT5=1 LUT6=7)
+  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.700ns = ( 22.700 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.266ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          0.835    14.118    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I5_O)        0.124    14.242 f  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[1]_i_1/O
+                         net (fo=75, routed)          1.132    15.374    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[1]_i_1_n_0
+    SLICE_X66Y45         LUT2 (Prop_lut2_I0_O)        0.148    15.522 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[25]_i_9/O
+                         net (fo=6, routed)           1.044    16.566    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[25]_i_9_n_0
+    SLICE_X58Y46         LUT6 (Prop_lut6_I2_O)        0.328    16.894 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_2_i_7/O
+                         net (fo=4, routed)           0.868    17.761    ps_i/core/inst/u_core/u_core/core/frontend/f_rs1_coarse[4]
+    SLICE_X44Y47         LUT4 (Prop_lut4_I3_O)        0.124    17.885 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_2_i_1/O
+                         net (fo=1, routed)           0.985    18.871    ps_i/core/inst/u_core/u_core/core/regs/raddr1[4]
+    RAMB18_X2Y21         RAMB18E1                                     r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2/ADDRARDADDR[9]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.700    22.700    <hidden>
+                         clock pessimism              0.266    22.966    <hidden>
+                         clock uncertainty           -0.302    22.664    <hidden>
+    RAMB18_X2Y21         RAMB18E1 (Setup_ramb18e1_CLKARDCLK_ADDRARDADDR[9])
+                                                     -0.566    22.098    ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2
+  -------------------------------------------------------------------
+                         required time                         22.098    <hidden>
+                         arrival time                         -18.871    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.228    <hidden>
+
+Slack (MET) :             3.277ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[0]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        16.252ns  (logic 5.897ns (36.285%)  route 10.355ns (63.715%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=3 LUT6=7)
+  Clock Path Skew:        -0.198ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.675ns = ( 22.675 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I4_O)        0.119    13.278 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3/O
+                         net (fo=39, routed)          1.279    14.557    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3_n_0
+    SLICE_X68Y43         LUT5 (Prop_lut5_I1_O)        0.355    14.912 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8/O
+                         net (fo=2, routed)           0.946    15.857    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8_n_0
+    SLICE_X63Y44         LUT5 (Prop_lut5_I0_O)        0.150    16.007 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_1_i_40/O
+                         net (fo=4, routed)           1.075    17.082    ps_i/core/inst/u_core/u_core/core/frontend/f_rs2_coarse[4]
+    SLICE_X46Y47         LUT6 (Prop_lut6_I0_O)        0.326    17.408 f  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_13/O
+                         net (fo=1, routed)           0.667    18.075    ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_13_n_0
+    SLICE_X46Y46         LUT6 (Prop_lut6_I5_O)        0.124    18.199 f  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_3/O
+                         net (fo=2, routed)           0.917    19.116    ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_3_n_0
+    SLICE_X43Y49         LUT3 (Prop_lut3_I1_O)        0.124    19.240 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[0]_i_1/O
+                         net (fo=1, routed)           0.000    19.240    ps_i/core/inst/u_core/u_core/core/frontend_n_108
+    SLICE_X43Y49         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.675    22.675    <hidden>
+                         clock pessimism              0.115    22.790    <hidden>
+                         clock uncertainty           -0.302    22.488    <hidden>
+    SLICE_X43Y49         FDCE (Setup_fdce_C_D)        0.029    22.517    ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[0]
+  -------------------------------------------------------------------
+                         required time                         22.517    <hidden>
+                         arrival time                         -19.240    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.277    <hidden>
+
+Slack (MET) :             3.297ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[2]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        16.278ns  (logic 5.923ns (36.387%)  route 10.355ns (63.613%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=3 LUT6=7)
+  Clock Path Skew:        -0.198ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.675ns = ( 22.675 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I4_O)        0.119    13.278 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3/O
+                         net (fo=39, routed)          1.279    14.557    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3_n_0
+    SLICE_X68Y43         LUT5 (Prop_lut5_I1_O)        0.355    14.912 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8/O
+                         net (fo=2, routed)           0.946    15.857    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8_n_0
+    SLICE_X63Y44         LUT5 (Prop_lut5_I0_O)        0.150    16.007 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_1_i_40/O
+                         net (fo=4, routed)           1.075    17.082    ps_i/core/inst/u_core/u_core/core/frontend/f_rs2_coarse[4]
+    SLICE_X46Y47         LUT6 (Prop_lut6_I0_O)        0.326    17.408 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_13/O
+                         net (fo=1, routed)           0.667    18.075    ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_13_n_0
+    SLICE_X46Y46         LUT6 (Prop_lut6_I5_O)        0.124    18.199 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_3/O
+                         net (fo=2, routed)           0.917    19.116    ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_3_n_0
+    SLICE_X43Y49         LUT3 (Prop_lut3_I1_O)        0.150    19.266 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_1/O
+                         net (fo=1, routed)           0.000    19.266    ps_i/core/inst/u_core/u_core/core/frontend_n_106
+    SLICE_X43Y49         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.675    22.675    <hidden>
+                         clock pessimism              0.115    22.790    <hidden>
+                         clock uncertainty           -0.302    22.488    <hidden>
+    SLICE_X43Y49         FDCE (Setup_fdce_C_D)        0.075    22.563    ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[2]
+  -------------------------------------------------------------------
+                         required time                         22.563    <hidden>
+                         arrival time                         -19.266    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.297    <hidden>
+
+Slack (MET) :             3.318ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/ADDRARDADDR[9]
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.606ns  (logic 5.675ns (36.364%)  route 9.931ns (63.636%))
+  Logic Levels:           16  (CARRY4=6 LUT2=1 LUT3=1 LUT5=3 LUT6=5)
+  Clock Path Skew:        0.000ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.700ns = ( 22.700 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.288ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I4_O)        0.119    13.278 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3/O
+                         net (fo=39, routed)          1.279    14.557    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3_n_0
+    SLICE_X68Y43         LUT5 (Prop_lut5_I1_O)        0.355    14.912 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8/O
+                         net (fo=2, routed)           0.946    15.857    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8_n_0
+    SLICE_X63Y44         LUT5 (Prop_lut5_I0_O)        0.150    16.007 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_1_i_40/O
+                         net (fo=4, routed)           1.240    17.247    ps_i/core/inst/u_core/u_core/core/frontend/f_rs2_coarse[4]
+    SLICE_X45Y47         LUT3 (Prop_lut3_I2_O)        0.352    17.599 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_1_i_1/O
+                         net (fo=1, routed)           0.995    18.594    ps_i/core/inst/u_core/u_core/core/regs/raddr2[4]
+    RAMB18_X2Y20         RAMB18E1                                     r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/ADDRARDADDR[9]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.700    22.700    <hidden>
+                         clock pessimism              0.288    22.988    <hidden>
+                         clock uncertainty           -0.302    22.686    <hidden>
+    RAMB18_X2Y20         RAMB18E1 (Setup_ramb18e1_CLKARDCLK_ADDRARDADDR[9])
+                                                     -0.774    21.912    ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1
+  -------------------------------------------------------------------
+                         required time                         21.912    <hidden>
+                         arrival time                         -18.594    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.318    <hidden>
+
+Slack (MET) :             3.324ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2/ADDRARDADDR[8]
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.578ns  (logic 5.546ns (35.602%)  route 10.032ns (64.398%))
+  Logic Levels:           17  (CARRY4=6 LUT2=2 LUT3=1 LUT4=1 LUT5=1 LUT6=6)
+  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.700ns = ( 22.700 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.266ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          0.835    14.118    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I5_O)        0.124    14.242 f  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[1]_i_1/O
+                         net (fo=75, routed)          1.107    15.349    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[1]_i_1_n_0
+    SLICE_X65Y45         LUT2 (Prop_lut2_I0_O)        0.153    15.502 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_2/O
+                         net (fo=23, routed)          0.756    16.258    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.decomp_instr_is_32bit
+    SLICE_X54Y45         LUT3 (Prop_lut3_I2_O)        0.327    16.585 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_2_i_8/O
+                         net (fo=4, routed)           0.839    17.424    ps_i/core/inst/u_core/u_core/core/frontend/f_rs1_coarse[3]
+    SLICE_X48Y48         LUT4 (Prop_lut4_I3_O)        0.119    17.543 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_2_i_2/O
+                         net (fo=1, routed)           1.023    18.566    ps_i/core/inst/u_core/u_core/core/regs/raddr1[3]
+    RAMB18_X2Y21         RAMB18E1                                     r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2/ADDRARDADDR[8]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.700    22.700    <hidden>
+                         clock pessimism              0.266    22.966    <hidden>
+                         clock uncertainty           -0.302    22.664    <hidden>
+    RAMB18_X2Y21         RAMB18E1 (Setup_ramb18e1_CLKARDCLK_ADDRARDADDR[8])
+                                                     -0.774    21.890    ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2
+  -------------------------------------------------------------------
+                         required time                         21.890    <hidden>
+                         arrival time                         -18.566    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.324    <hidden>
+
+Slack (MET) :             3.474ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[0]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        16.088ns  (logic 6.358ns (39.519%)  route 9.730ns (60.481%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=2 LUT4=1 LUT5=1 LUT6=7)
+  Clock Path Skew:        -0.212ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.661ns = ( 22.661 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.656    14.202    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT4 (Prop_lut4_I3_O)        0.354    14.556 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_3/O
+                         net (fo=11, routed)          1.104    15.659    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_3_n_0
+    SLICE_X46Y48         LUT3 (Prop_lut3_I2_O)        0.325    15.984 f  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[1]_i_2/O
+                         net (fo=3, routed)           0.886    16.870    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[11]_0[1]
+    SLICE_X48Y46         LUT3 (Prop_lut3_I0_O)        0.374    17.244 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_16/O
+                         net (fo=2, routed)           0.515    17.759    ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_16_n_0
+    SLICE_X50Y46         LUT6 (Prop_lut6_I5_O)        0.332    18.091 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_3/O
+                         net (fo=2, routed)           0.862    18.953    ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_3_n_0
+    SLICE_X50Y46         LUT6 (Prop_lut6_I1_O)        0.124    19.077 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[0]_i_1/O
+                         net (fo=1, routed)           0.000    19.077    ps_i/core/inst/u_core/u_core/core/frontend_n_112
+    SLICE_X50Y46         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.661    22.661    <hidden>
+                         clock pessimism              0.115    22.776    <hidden>
+                         clock uncertainty           -0.302    22.474    <hidden>
+    SLICE_X50Y46         FDCE (Setup_fdce_C_D)        0.077    22.551    ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[0]
+  -------------------------------------------------------------------
+                         required time                         22.551    <hidden>
+                         arrival time                         -19.077    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.474    <hidden>
+
+Slack (MET) :             3.486ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[2]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        16.080ns  (logic 6.358ns (39.539%)  route 9.722ns (60.461%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=2 LUT4=1 LUT5=1 LUT6=7)
+  Clock Path Skew:        -0.212ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.661ns = ( 22.661 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.656    14.202    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT4 (Prop_lut4_I3_O)        0.354    14.556 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_3/O
+                         net (fo=11, routed)          1.104    15.659    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_3_n_0
+    SLICE_X46Y48         LUT3 (Prop_lut3_I2_O)        0.325    15.984 f  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[1]_i_2/O
+                         net (fo=3, routed)           0.886    16.870    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[11]_0[1]
+    SLICE_X48Y46         LUT3 (Prop_lut3_I0_O)        0.374    17.244 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_16/O
+                         net (fo=2, routed)           0.515    17.759    ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_16_n_0
+    SLICE_X50Y46         LUT6 (Prop_lut6_I5_O)        0.332    18.091 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_3/O
+                         net (fo=2, routed)           0.854    18.945    ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_3_n_0
+    SLICE_X50Y46         LUT6 (Prop_lut6_I1_O)        0.124    19.069 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[2]_i_1/O
+                         net (fo=1, routed)           0.000    19.069    ps_i/core/inst/u_core/u_core/core/frontend_n_110
+    SLICE_X50Y46         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.661    22.661    <hidden>
+                         clock pessimism              0.115    22.776    <hidden>
+                         clock uncertainty           -0.302    22.474    <hidden>
+    SLICE_X50Y46         FDCE (Setup_fdce_C_D)        0.081    22.555    ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[2]
+  -------------------------------------------------------------------
+                         required time                         22.555    <hidden>
+                         arrival time                         -19.069    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.486    <hidden>
+
+Slack (MET) :             3.491ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[1]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        16.040ns  (logic 5.897ns (36.764%)  route 10.143ns (63.236%))
+  Logic Levels:           18  (CARRY4=6 LUT2=2 LUT3=1 LUT5=4 LUT6=5)
+  Clock Path Skew:        -0.198ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.675ns = ( 22.675 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I4_O)        0.119    13.278 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3/O
+                         net (fo=39, routed)          1.279    14.557    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[33]_i_3_n_0
+    SLICE_X68Y43         LUT5 (Prop_lut5_I1_O)        0.355    14.912 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8/O
+                         net (fo=2, routed)           0.946    15.857    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[24]_i_8_n_0
+    SLICE_X63Y44         LUT5 (Prop_lut5_I0_O)        0.150    16.007 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_1_i_40/O
+                         net (fo=4, routed)           1.153    17.160    ps_i/core/inst/u_core/u_core/core/frontend/f_rs2_coarse[4]
+    SLICE_X48Y47         LUT3 (Prop_lut3_I2_O)        0.326    17.486 r  ps_i/core/inst/u_core/u_core/core/frontend/d_rs2_predecoded[4]_i_2/O
+                         net (fo=2, routed)           0.670    18.156    ps_i/core/inst/u_core/u_core/core/frontend/d_rs2_predecoded_reg[4][0]
+    SLICE_X48Y47         LUT5 (Prop_lut5_I1_O)        0.124    18.280 f  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_4/O
+                         net (fo=3, routed)           0.624    18.905    ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[2]_i_4_n_0
+    SLICE_X43Y49         LUT2 (Prop_lut2_I1_O)        0.124    19.029 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs2_select_regs_xm_mw[1]_i_1/O
+                         net (fo=1, routed)           0.000    19.029    ps_i/core/inst/u_core/u_core/core/frontend_n_107
+    SLICE_X43Y49         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.675    22.675    <hidden>
+                         clock pessimism              0.115    22.790    <hidden>
+                         clock uncertainty           -0.302    22.488    <hidden>
+    SLICE_X43Y49         FDCE (Setup_fdce_C_D)        0.031    22.519    ps_i/core/inst/u_core/u_core/core/x_rs2_select_regs_xm_mw_reg[1]
+  -------------------------------------------------------------------
+                         required time                         22.519    <hidden>
+                         arrival time                         -19.029    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.491    <hidden>
+
+Slack (MET) :             3.751ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[23]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.838ns  (logic 5.671ns (35.806%)  route 10.167ns (64.194%))
+  Logic Levels:           18  (CARRY4=6 LUT2=2 LUT3=1 LUT5=1 LUT6=8)
+  Clock Path Skew:        -0.138ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.735ns = ( 22.736 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          1.042    14.325    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X53Y42         LUT6 (Prop_lut6_I3_O)        0.124    14.449 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[2]_i_1/O
+                         net (fo=35, routed)          1.373    15.822    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[2]_i_1_n_0
+    SLICE_X62Y46         LUT2 (Prop_lut2_I1_O)        0.148    15.970 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[26]_i_12/O
+                         net (fo=6, routed)           0.873    16.843    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[26]_i_12_n_0
+    SLICE_X65Y46         LUT3 (Prop_lut3_I0_O)        0.328    17.171 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[23]_i_8/O
+                         net (fo=1, routed)           0.446    17.617    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[23]_i_8_n_0
+    SLICE_X65Y45         LUT6 (Prop_lut6_I1_O)        0.124    17.741 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[23]_i_3/O
+                         net (fo=1, routed)           0.962    18.703    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[23]_i_3_n_0
+    SLICE_X61Y44         LUT6 (Prop_lut6_I1_O)        0.124    18.827 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[23]_i_1/O
+                         net (fo=1, routed)           0.000    18.827    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.decomp_instr_out[23]
+    SLICE_X61Y44         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[23]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.735    22.736    <hidden>
+                         clock pessimism              0.115    22.850    <hidden>
+                         clock uncertainty           -0.302    22.548    <hidden>
+    SLICE_X61Y44         FDCE (Setup_fdce_C_D)        0.029    22.577    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[23]
+  -------------------------------------------------------------------
+                         required time                         22.577    <hidden>
+                         arrival time                         -18.827    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.751    <hidden>
+
+Slack (MET) :             3.812ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[1]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.703ns  (logic 5.671ns (36.114%)  route 10.032ns (63.886%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT5=2 LUT6=9)
+  Clock Path Skew:        -0.212ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.661ns = ( 22.661 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          1.042    14.325    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X53Y42         LUT6 (Prop_lut6_I3_O)        0.124    14.449 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[2]_i_1/O
+                         net (fo=35, routed)          1.360    15.809    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[2]_i_1_n_0
+    SLICE_X56Y45         LUT6 (Prop_lut6_I1_O)        0.124    15.933 f  ps_i/core/inst/u_core/u_core/core/frontend/d_rs1_predecoded[4]_i_3/O
+                         net (fo=1, routed)           0.444    16.377    ps_i/core/inst/u_core/u_core/core/frontend/d_rs1_predecoded[4]_i_3_n_0
+    SLICE_X56Y45         LUT6 (Prop_lut6_I1_O)        0.124    16.501 r  ps_i/core/inst/u_core/u_core/core/frontend/d_rs1_predecoded[4]_i_2/O
+                         net (fo=7, routed)           0.848    17.349    ps_i/core/inst/u_core/u_core/core/frontend/d_rs1_predecoded[4]_i_2_n_0
+    SLICE_X53Y46         LUT5 (Prop_lut5_I0_O)        0.150    17.499 f  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[1]_i_3/O
+                         net (fo=1, routed)           0.867    18.366    ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[1]_i_3_n_0
+    SLICE_X52Y46         LUT6 (Prop_lut6_I1_O)        0.326    18.692 r  ps_i/core/inst/u_core/u_core/core/frontend/x_rs1_select_regs_xm_mw[1]_i_1/O
+                         net (fo=1, routed)           0.000    18.692    ps_i/core/inst/u_core/u_core/core/frontend_n_111
+    SLICE_X52Y46         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.661    22.661    <hidden>
+                         clock pessimism              0.115    22.776    <hidden>
+                         clock uncertainty           -0.302    22.474    <hidden>
+    SLICE_X52Y46         FDCE (Setup_fdce_C_D)        0.029    22.503    ps_i/core/inst/u_core/u_core/core/x_rs1_select_regs_xm_mw_reg[1]
+  -------------------------------------------------------------------
+                         required time                         22.503    <hidden>
+                         arrival time                         -18.692    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.812    <hidden>
+
+Slack (MET) :             3.930ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[21]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.708ns  (logic 5.904ns (37.586%)  route 9.804ns (62.414%))
+  Logic Levels:           18  (CARRY4=6 LUT2=3 LUT5=1 LUT6=8)
+  Clock Path Skew:        -0.137ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.737ns = ( 22.736 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          0.913    14.196    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X61Y42         LUT6 (Prop_lut6_I5_O)        0.124    14.320 f  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[13]_i_1/O
+                         net (fo=64, routed)          1.239    15.559    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[13]_i_1_n_0
+    SLICE_X57Y46         LUT2 (Prop_lut2_I1_O)        0.154    15.713 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[22]_i_8/O
+                         net (fo=4, routed)           0.818    16.531    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[22]_i_8_n_0
+    SLICE_X60Y45         LUT2 (Prop_lut2_I0_O)        0.353    16.884 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[21]_i_5/O
+                         net (fo=1, routed)           0.806    17.690    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[21]_i_5_n_0
+    SLICE_X62Y45         LUT6 (Prop_lut6_I0_O)        0.326    18.016 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[21]_i_2/O
+                         net (fo=1, routed)           0.557    18.572    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[21]_i_2_n_0
+    SLICE_X62Y47         LUT6 (Prop_lut6_I0_O)        0.124    18.696 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[21]_i_1/O
+                         net (fo=1, routed)           0.000    18.696    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.decomp_instr_out[21]
+    SLICE_X62Y47         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[21]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.737    22.736    <hidden>
+                         clock pessimism              0.115    22.851    <hidden>
+                         clock uncertainty           -0.302    22.549    <hidden>
+    SLICE_X62Y47         FDCE (Setup_fdce_C_D)        0.077    22.626    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[21]
+  -------------------------------------------------------------------
+                         required time                         22.626    <hidden>
+                         arrival time                         -18.696    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.930    <hidden>
+
+Slack (MET) :             3.981ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2/ADDRARDADDR[5]
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.129ns  (logic 5.431ns (35.898%)  route 9.698ns (64.102%))
+  Logic Levels:           16  (CARRY4=6 LUT2=1 LUT4=1 LUT5=2 LUT6=6)
+  Clock Path Skew:        -0.022ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.700ns = ( 22.700 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.266ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          1.010    14.293    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X68Y42         LUT6 (Prop_lut6_I5_O)        0.124    14.417 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[14]_i_1/O
+                         net (fo=73, routed)          1.348    15.765    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[14]_i_1_n_0
+    SLICE_X57Y46         LUT5 (Prop_lut5_I4_O)        0.152    15.917 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_2_i_11/O
+                         net (fo=4, routed)           0.879    16.797    ps_i/core/inst/u_core/u_core/core/frontend/f_rs1_coarse[0]
+    SLICE_X47Y47         LUT4 (Prop_lut4_I3_O)        0.332    17.129 r  ps_i/core/inst/u_core/u_core/core/frontend/real_dualport_noreset.mem_reg_2_i_5/O
+                         net (fo=1, routed)           0.989    18.118    ps_i/core/inst/u_core/u_core/core/regs/raddr1[0]
+    RAMB18_X2Y21         RAMB18E1                                     r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2/ADDRARDADDR[5]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.700    22.700    <hidden>
+                         clock pessimism              0.266    22.966    <hidden>
+                         clock uncertainty           -0.302    22.664    <hidden>
+    RAMB18_X2Y21         RAMB18E1 (Setup_ramb18e1_CLKARDCLK_ADDRARDADDR[5])
+                                                     -0.566    22.098    ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2
+  -------------------------------------------------------------------
+                         required time                         22.098    <hidden>
+                         arrival time                         -18.118    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  3.981    <hidden>
+
+Slack (MET) :             4.004ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[16]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.582ns  (logic 5.901ns (37.870%)  route 9.681ns (62.130%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=3 LUT6=7)
+  Clock Path Skew:        -0.140ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.733ns = ( 22.733 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          1.102    14.384    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X55Y42         LUT6 (Prop_lut6_I3_O)        0.124    14.508 f  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[3]_i_1/O
+                         net (fo=28, routed)          1.032    15.540    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[3]_i_1_n_0
+    SLICE_X60Y43         LUT5 (Prop_lut5_I3_O)        0.152    15.692 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[18]_i_12/O
+                         net (fo=2, routed)           0.791    16.483    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[18]_i_12_n_0
+    SLICE_X61Y43         LUT3 (Prop_lut3_I2_O)        0.352    16.835 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[18]_i_11/O
+                         net (fo=2, routed)           0.705    17.539    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[18]_i_11_n_0
+    SLICE_X60Y44         LUT5 (Prop_lut5_I3_O)        0.326    17.865 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[16]_i_2/O
+                         net (fo=1, routed)           0.581    18.447    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[16]_i_2_n_0
+    SLICE_X59Y44         LUT6 (Prop_lut6_I0_O)        0.124    18.571 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[16]_i_1/O
+                         net (fo=1, routed)           0.000    18.571    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.decomp_instr_out[16]
+    SLICE_X59Y44         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[16]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.733    22.733    <hidden>
+                         clock pessimism              0.115    22.848    <hidden>
+                         clock uncertainty           -0.302    22.546    <hidden>
+    SLICE_X59Y44         FDCE (Setup_fdce_C_D)        0.029    22.575    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[16]
+  -------------------------------------------------------------------
+                         required time                         22.575    <hidden>
+                         arrival time                         -18.571    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.004    <hidden>
+
+Slack (MET) :             4.008ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[13]/CE
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.336ns  (logic 5.671ns (36.977%)  route 9.665ns (63.023%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=2 LUT6=8)
+  Clock Path Skew:        -0.149ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.711ns = ( 22.711 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.129ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.484    14.030    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT5 (Prop_lut5_I4_O)        0.326    14.356 f  ps_i/core/inst/u_core/u_core/core/frontend/mepc[31]_i_7/O
+                         net (fo=5, routed)           0.684    15.039    ps_i/core/inst/u_core/u_core/core/frontend/wen0
+    SLICE_X60Y55         LUT3 (Prop_lut3_I2_O)        0.124    15.163 r  ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4/O
+                         net (fo=4, routed)           0.520    15.683    ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4_n_0
+    SLICE_X59Y55         LUT6 (Prop_lut6_I0_O)        0.124    15.807 f  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7/O
+                         net (fo=1, routed)           0.574    16.381    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7_n_0
+    SLICE_X56Y51         LUT6 (Prop_lut6_I5_O)        0.124    16.505 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3/O
+                         net (fo=2, routed)           0.668    17.174    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3_n_0
+    SLICE_X60Y56         LUT6 (Prop_lut6_I5_O)        0.124    17.298 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_1/O
+                         net (fo=32, routed)          1.027    18.325    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[31]_0[0]
+    SLICE_X63Y67         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[13]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.711    22.711    <hidden>
+                         clock pessimism              0.129    22.840    <hidden>
+                         clock uncertainty           -0.302    22.538    <hidden>
+    SLICE_X63Y67         FDCE (Setup_fdce_C_CE)      -0.205    22.333    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[13]
+  -------------------------------------------------------------------
+                         required time                         22.333    <hidden>
+                         arrival time                         -18.325    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.008    <hidden>
+
+Slack (MET) :             4.008ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[16]/CE
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.336ns  (logic 5.671ns (36.977%)  route 9.665ns (63.023%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=2 LUT6=8)
+  Clock Path Skew:        -0.149ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.711ns = ( 22.711 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.129ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.484    14.030    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT5 (Prop_lut5_I4_O)        0.326    14.356 f  ps_i/core/inst/u_core/u_core/core/frontend/mepc[31]_i_7/O
+                         net (fo=5, routed)           0.684    15.039    ps_i/core/inst/u_core/u_core/core/frontend/wen0
+    SLICE_X60Y55         LUT3 (Prop_lut3_I2_O)        0.124    15.163 r  ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4/O
+                         net (fo=4, routed)           0.520    15.683    ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4_n_0
+    SLICE_X59Y55         LUT6 (Prop_lut6_I0_O)        0.124    15.807 f  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7/O
+                         net (fo=1, routed)           0.574    16.381    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7_n_0
+    SLICE_X56Y51         LUT6 (Prop_lut6_I5_O)        0.124    16.505 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3/O
+                         net (fo=2, routed)           0.668    17.174    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3_n_0
+    SLICE_X60Y56         LUT6 (Prop_lut6_I5_O)        0.124    17.298 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_1/O
+                         net (fo=32, routed)          1.027    18.325    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[31]_0[0]
+    SLICE_X63Y67         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[16]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.711    22.711    <hidden>
+                         clock pessimism              0.129    22.840    <hidden>
+                         clock uncertainty           -0.302    22.538    <hidden>
+    SLICE_X63Y67         FDCE (Setup_fdce_C_CE)      -0.205    22.333    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[16]
+  -------------------------------------------------------------------
+                         required time                         22.333    <hidden>
+                         arrival time                         -18.325    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.008    <hidden>
+
+Slack (MET) :             4.012ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[10]/CE
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.334ns  (logic 5.671ns (36.984%)  route 9.663ns (63.016%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=2 LUT6=8)
+  Clock Path Skew:        -0.147ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.713ns = ( 22.713 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.129ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.484    14.030    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT5 (Prop_lut5_I4_O)        0.326    14.356 f  ps_i/core/inst/u_core/u_core/core/frontend/mepc[31]_i_7/O
+                         net (fo=5, routed)           0.684    15.039    ps_i/core/inst/u_core/u_core/core/frontend/wen0
+    SLICE_X60Y55         LUT3 (Prop_lut3_I2_O)        0.124    15.163 r  ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4/O
+                         net (fo=4, routed)           0.520    15.683    ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4_n_0
+    SLICE_X59Y55         LUT6 (Prop_lut6_I0_O)        0.124    15.807 f  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7/O
+                         net (fo=1, routed)           0.574    16.381    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7_n_0
+    SLICE_X56Y51         LUT6 (Prop_lut6_I5_O)        0.124    16.505 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3/O
+                         net (fo=2, routed)           0.668    17.174    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3_n_0
+    SLICE_X60Y56         LUT6 (Prop_lut6_I5_O)        0.124    17.298 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_1/O
+                         net (fo=32, routed)          1.025    18.322    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[31]_0[0]
+    SLICE_X65Y66         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[10]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.713    22.713    <hidden>
+                         clock pessimism              0.129    22.842    <hidden>
+                         clock uncertainty           -0.302    22.540    <hidden>
+    SLICE_X65Y66         FDCE (Setup_fdce_C_CE)      -0.205    22.335    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[10]
+  -------------------------------------------------------------------
+                         required time                         22.335    <hidden>
+                         arrival time                         -18.322    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.012    <hidden>
+
+Slack (MET) :             4.012ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[23]/CE
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.334ns  (logic 5.671ns (36.984%)  route 9.663ns (63.016%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=2 LUT6=8)
+  Clock Path Skew:        -0.147ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.713ns = ( 22.713 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.129ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.484    14.030    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT5 (Prop_lut5_I4_O)        0.326    14.356 f  ps_i/core/inst/u_core/u_core/core/frontend/mepc[31]_i_7/O
+                         net (fo=5, routed)           0.684    15.039    ps_i/core/inst/u_core/u_core/core/frontend/wen0
+    SLICE_X60Y55         LUT3 (Prop_lut3_I2_O)        0.124    15.163 r  ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4/O
+                         net (fo=4, routed)           0.520    15.683    ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4_n_0
+    SLICE_X59Y55         LUT6 (Prop_lut6_I0_O)        0.124    15.807 f  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7/O
+                         net (fo=1, routed)           0.574    16.381    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7_n_0
+    SLICE_X56Y51         LUT6 (Prop_lut6_I5_O)        0.124    16.505 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3/O
+                         net (fo=2, routed)           0.668    17.174    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3_n_0
+    SLICE_X60Y56         LUT6 (Prop_lut6_I5_O)        0.124    17.298 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_1/O
+                         net (fo=32, routed)          1.025    18.322    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[31]_0[0]
+    SLICE_X65Y66         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[23]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.713    22.713    <hidden>
+                         clock pessimism              0.129    22.842    <hidden>
+                         clock uncertainty           -0.302    22.540    <hidden>
+    SLICE_X65Y66         FDCE (Setup_fdce_C_CE)      -0.205    22.335    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[23]
+  -------------------------------------------------------------------
+                         required time                         22.335    <hidden>
+                         arrival time                         -18.322    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.012    <hidden>
+
+Slack (MET) :             4.012ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[24]/CE
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.334ns  (logic 5.671ns (36.984%)  route 9.663ns (63.016%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=2 LUT6=8)
+  Clock Path Skew:        -0.147ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.713ns = ( 22.713 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.129ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.484    14.030    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT5 (Prop_lut5_I4_O)        0.326    14.356 f  ps_i/core/inst/u_core/u_core/core/frontend/mepc[31]_i_7/O
+                         net (fo=5, routed)           0.684    15.039    ps_i/core/inst/u_core/u_core/core/frontend/wen0
+    SLICE_X60Y55         LUT3 (Prop_lut3_I2_O)        0.124    15.163 r  ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4/O
+                         net (fo=4, routed)           0.520    15.683    ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4_n_0
+    SLICE_X59Y55         LUT6 (Prop_lut6_I0_O)        0.124    15.807 f  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7/O
+                         net (fo=1, routed)           0.574    16.381    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7_n_0
+    SLICE_X56Y51         LUT6 (Prop_lut6_I5_O)        0.124    16.505 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3/O
+                         net (fo=2, routed)           0.668    17.174    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3_n_0
+    SLICE_X60Y56         LUT6 (Prop_lut6_I5_O)        0.124    17.298 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_1/O
+                         net (fo=32, routed)          1.025    18.322    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[31]_0[0]
+    SLICE_X65Y66         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[24]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.713    22.713    <hidden>
+                         clock pessimism              0.129    22.842    <hidden>
+                         clock uncertainty           -0.302    22.540    <hidden>
+    SLICE_X65Y66         FDCE (Setup_fdce_C_CE)      -0.205    22.335    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[24]
+  -------------------------------------------------------------------
+                         required time                         22.335    <hidden>
+                         arrival time                         -18.322    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.012    <hidden>
+
+Slack (MET) :             4.012ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[9]/CE
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.334ns  (logic 5.671ns (36.984%)  route 9.663ns (63.016%))
+  Logic Levels:           18  (CARRY4=6 LUT2=1 LUT3=1 LUT5=2 LUT6=8)
+  Clock Path Skew:        -0.147ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.713ns = ( 22.713 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.129ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          1.177    13.396    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X56Y50         LUT5 (Prop_lut5_I4_O)        0.150    13.546 r  ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8/O
+                         net (fo=2, routed)           0.484    14.030    ps_i/core/inst/u_core/u_core/core/frontend/xm_rd[3]_i_8_n_0
+    SLICE_X56Y51         LUT5 (Prop_lut5_I4_O)        0.326    14.356 f  ps_i/core/inst/u_core/u_core/core/frontend/mepc[31]_i_7/O
+                         net (fo=5, routed)           0.684    15.039    ps_i/core/inst/u_core/u_core/core/frontend/wen0
+    SLICE_X60Y55         LUT3 (Prop_lut3_I2_O)        0.124    15.163 r  ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4/O
+                         net (fo=4, routed)           0.520    15.683    ps_i/core/inst/u_core/u_core/core/frontend/mcycleh[31]_i_4_n_0
+    SLICE_X59Y55         LUT6 (Prop_lut6_I0_O)        0.124    15.807 f  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7/O
+                         net (fo=1, routed)           0.574    16.381    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_7_n_0
+    SLICE_X56Y51         LUT6 (Prop_lut6_I5_O)        0.124    16.505 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3/O
+                         net (fo=2, routed)           0.668    17.174    ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_3_n_0
+    SLICE_X60Y56         LUT6 (Prop_lut6_I5_O)        0.124    17.298 r  ps_i/core/inst/u_core/u_core/core/frontend/minstreth[31]_i_1/O
+                         net (fo=32, routed)          1.025    18.322    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[31]_0[0]
+    SLICE_X65Y66         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[9]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.713    22.713    <hidden>
+                         clock pessimism              0.129    22.842    <hidden>
+                         clock uncertainty           -0.302    22.540    <hidden>
+    SLICE_X65Y66         FDCE (Setup_fdce_C_CE)      -0.205    22.335    ps_i/core/inst/u_core/u_core/core/csr_u/minstreth_reg[9]
+  -------------------------------------------------------------------
+                         required time                         22.335    <hidden>
+                         arrival time                         -18.322    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.012    <hidden>
+
+Slack (MET) :             4.055ns  (required time - arrival time)
+  Source:                 ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+                            (rising edge-triggered cell RAMB18E1 clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[14]/D
+                            (rising edge-triggered cell FDCE clocked by clk_fpga_0  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk_fpga_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk_fpga_0 rise@20.000ns - clk_fpga_0 rise@0.000ns)
+  Data Path Delay:        15.535ns  (logic 5.671ns (36.505%)  route 9.864ns (63.495%))
+  Logic Levels:           18  (CARRY4=6 LUT2=2 LUT3=1 LUT5=1 LUT6=8)
+  Clock Path Skew:        -0.137ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.737ns = ( 22.736 - 20.000 ) 
+    Source Clock Delay      (SCD):    2.988ns
+    Clock Pessimism Removal (CPR):    0.115ns
+  Clock Uncertainty:      0.302ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.600ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_fpga_0 rise edge)
+                                                      0.000     0.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.988     2.988    <hidden>
+    RAMB18_X2Y20         RAMB18E1                     0.000     2.988 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+    RAMB18_X2Y20         RAMB18E1 (Prop_ramb18e1_CLKARDCLK_DOADO[9])
+                                                      2.454     5.442 r  ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/DOADO[9]
+                         net (fo=1, routed)           1.166     6.609    ps_i/core/inst/u_core/u_core/core/regs/x_rdata2[9]
+    SLICE_X32Y52         LUT6 (Prop_lut6_I3_O)        0.124     6.733 r  ps_i/core/inst/u_core/u_core/core/regs/result_i_23/O
+                         net (fo=6, routed)           0.800     7.533    ps_i/core/inst/u_core/u_core/core/regs/x_rs2_bypass[9]
+    SLICE_X41Y56         LUT2 (Prop_lut2_I1_O)        0.124     7.657 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53/O
+                         net (fo=1, routed)           0.000     7.657    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_53_n_0
+    SLICE_X41Y56         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     8.207 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45/CO[3]
+                         net (fo=1, routed)           0.000     8.207    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_45_n_0
+    SLICE_X41Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.321 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40/CO[3]
+                         net (fo=1, routed)           0.000     8.321    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_40_n_0
+    SLICE_X41Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.435 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31/CO[3]
+                         net (fo=1, routed)           0.000     8.435    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_31_n_0
+    SLICE_X41Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.549 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21/CO[3]
+                         net (fo=1, routed)           0.000     8.549    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_21_n_0
+    SLICE_X41Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.663 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12/CO[3]
+                         net (fo=1, routed)           0.000     8.663    ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_12_n_0
+    SLICE_X41Y61         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.976 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_reg_i_10/O[3]
+                         net (fo=1, routed)           0.616     9.592    ps_i/core/inst/u_core/u_core/core/regs/fast_branchcmp.branchcmp_u/diff[31]
+    SLICE_X46Y58         LUT6 (Prop_lut6_I0_O)        0.306     9.898 r  ps_i/core/inst/u_core/u_core/core/regs/dphase_active_i_i_8/O
+                         net (fo=2, routed)           0.800    10.698    ps_i/core/inst/u_core/u_core/core/frontend/x_branch_cmp_noinvert
+    SLICE_X50Y51         LUT6 (Prop_lut6_I5_O)        0.124    10.822 f  ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5/O
+                         net (fo=2, routed)           0.477    11.299    ps_i/core/inst/u_core/u_core/core/frontend/dphase_active_i_i_5_n_0
+    SLICE_X50Y51         LUT6 (Prop_lut6_I2_O)        0.124    11.423 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4/O
+                         net (fo=1, routed)           0.672    12.094    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_4_n_0
+    SLICE_X46Y49         LUT6 (Prop_lut6_I0_O)        0.124    12.218 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_is_32bit_i_3/O
+                         net (fo=38, routed)          0.940    13.159    ps_i/core/inst/u_core/u_core/core/frontend/x_stall
+    SLICE_X58Y49         LUT5 (Prop_lut5_I3_O)        0.124    13.283 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4/O
+                         net (fo=52, routed)          1.042    14.325    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[27]_i_4_n_0
+    SLICE_X53Y42         LUT6 (Prop_lut6_I3_O)        0.124    14.449 r  ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[2]_i_1/O
+                         net (fo=35, routed)          1.373    15.822    ps_i/core/inst/u_core/u_core/core/frontend/buf_contents[2]_i_1_n_0
+    SLICE_X62Y46         LUT2 (Prop_lut2_I1_O)        0.148    15.970 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[26]_i_12/O
+                         net (fo=6, routed)           0.920    16.890    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[26]_i_12_n_0
+    SLICE_X67Y46         LUT3 (Prop_lut3_I2_O)        0.328    17.218 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[27]_i_6/O
+                         net (fo=2, routed)           0.587    17.805    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[27]_i_6_n_0
+    SLICE_X64Y47         LUT6 (Prop_lut6_I5_O)        0.124    17.929 f  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[14]_i_2/O
+                         net (fo=1, routed)           0.470    18.400    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[14]_i_2_n_0
+    SLICE_X63Y47         LUT6 (Prop_lut6_I0_O)        0.124    18.524 r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir[14]_i_1/O
+                         net (fo=1, routed)           0.000    18.524    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.decomp_instr_out[14]
+    SLICE_X63Y47         FDCE                                         r  ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[14]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_fpga_0 rise edge)
+                                                     20.000    20.000 r  <hidden>
+                         propagated clock network latency
+                                                      2.737    22.736    <hidden>
+                         clock pessimism              0.115    22.851    <hidden>
+                         clock uncertainty           -0.302    22.549    <hidden>
+    SLICE_X63Y47         FDCE (Setup_fdce_C_D)        0.029    22.578    ps_i/core/inst/u_core/u_core/core/frontend/have_decompress.cir_reg[14]
+  -------------------------------------------------------------------
+                         required time                         22.578    <hidden>
+                         arrival time                         -18.524    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  4.055    <hidden>
+
+
+
+

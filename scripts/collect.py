@@ -6,6 +6,8 @@ Every number in tables, reports, emails or the paper must come from this script.
 usage:
   scripts/collect.py              # rebuild results/results.csv
   scripts/collect.py --md synth   # also print the synthesis table as Markdown (also: sim, harden, fpga)
+  scripts/collect.py --all-md     # rebuild every CSV and print all four result tables
+  scripts/collect.py --report    # write reports/collected_results.md with summaries and detailed rows
   scripts/collect.py --update-report reports/initial_synthesis.md
   scripts/collect.py --headline --update-report reports/email_prof_draft.md
                                   # rewrite the table between the BEGIN/END collect.py markers
@@ -31,7 +33,7 @@ FPGA_COLUMNS = ["core", "config", "clock_target_mhz", "clock_actual_mhz", "run_i
                 "core_luts", "core_ffs", "core_lutram", "core_bram36", "core_bram18", "core_dsp",
                 "total_luts", "total_ffs", "total_bram36",
                 "power_total_w", "power_dynamic_w", "power_core_w", "power_activity",
-                "sim_check", "board_programs_passed", "board_identical_to_rtl_sim",
+                "sim_check", "board_run_status", "board_programs_passed", "board_identical_to_rtl_sim",
                 "board_coremark_marked_cycles", "board_coremark_per_mhz", "board_dhrystone_marked_cycles",
                 "board_dmips_per_mhz", "report_path", "board_path"]
 HARDEN_COLUMNS = ["core", "config", "top", "clock_target_mhz", "run_id", "settings",
@@ -299,13 +301,13 @@ def md_synth(rows):
     names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
     rows = sorted(rows, key=lambda r: (order.get(r["core"], 9), {"bp": 1}.get(r["config"], 0), float(r["clock_target_mhz"])))
     base = next((r["area_um2"] for r in rows if r["core"] == "hazard3"), None)
-    out = ["| Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | fmax |",
+    out = ["| Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | Pre-layout fmax estimate (MHz) |",
            "|---|---|---|---|---:|---:|---:|---:|---:|---|"]
     for r in rows:
         top = "core + wrapper" if r["top"] == "wrapper" else "vendor top (old)"
         out.append(f"| {names.get(r['core'], r['core'])} | {r['config']} | {top} | {r['frontend']} | "
                    f"{r['cells']:,} | {r['area_um2']:,.0f} | {r['area_um2'] / base:.2f}× | "
-                   f"{r['flops']:,} | {r['latches']:,} | pending (full layout) |")
+                   f"{r['flops']:,} | {r['latches']:,} | {r['fmax_est_mhz_postgpl_tt']:.1f} |")
     return "\n".join(out)
 
 
@@ -317,14 +319,14 @@ def md_headline(rows):
     names = {"hazard3": "Hazard3", "ibex": "Ibex (small)", "veer_el2": "VeeR EL2 (min)"}
     rows = [r for c, cfg in HEADLINE.items() for r in rows if r["core"] == c and r["config"] == cfg]
     base = next((r["area_um2"] for r in rows if r["core"] == "hazard3"), None)
-    out = ["| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | fmax |",
+    out = ["| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Pre-layout fmax estimate (MHz) |",
            "|---|---:|---:|---:|---:|---|"]
     for r in rows:
         name = names[r["core"]] + ("" if r["top"] == "wrapper" else " †")
         out.append(f"| {name} | {r['cells']:,} | {r['area_um2']:,.0f} | {r['area_um2'] / base:.2f}× | "
-                   f"{r['flops']:,} | pending, will come from full layout |")
+                   f"{r['flops']:,} | {r['fmax_est_mhz_postgpl_tt']:.1f} |")
     if any(r["top"] != "wrapper" for r in rows):
-        out.append("\n† Synthesized from the core's own top, not yet with the common wrapper; to be updated.")
+        out.append("\n† Vendor-top sensitivity result, not the headline wrapped configuration.")
     return "\n".join(out)
 
 
@@ -426,10 +428,12 @@ def collect_fpga():
         runs = sorted(glob.glob(os.path.join(base, "vivado_*", "summary.txt")))
         boards = sorted(glob.glob(os.path.join(base, "board_*", "*.json")))
         if not runs and not boards:
-            rows.append({"core": core, "sim_check": sim_check, "run_id": "not built yet"})
+            rows.append({"core": core, "sim_check": sim_check, "board_run_status": "not run",
+                         "run_id": "not built yet"})
             continue
         for summ in runs or [None]:
-            r = {"core": core, "sim_check": sim_check}
+            r = {"core": core, "sim_check": sim_check,
+                 "board_run_status": "completed" if boards else "not run"}
             if summ:
                 d = os.path.dirname(summ)
                 kv = read_kv(summ)
@@ -483,22 +487,111 @@ def collect_fpga():
 def md_fpga(rows):
     names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2"}
     out = ["| Core | Config | Clock (MHz) | WNS (ns) | fmax (MHz) | Core LUTs | Core FFs | Core BRAM36 | Core DSP | "
-           "Power total / core (W, vectorless) | FPGA sim vs RTL sim | Board: passed / identical to RTL sim | "
+           "Power total / core (W, vectorless) | FPGA sim vs RTL sim | Board run | Board: passed / identical to RTL sim | "
            "Board CoreMark/MHz | Board DMIPS/MHz |",
            "|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---:|---:|"]
     for r in rows:
         g = lambda k: str(r.get(k, "")) or "–"
         out.append(f"| {names[r['core']]} | {g('config')} | {g('clock_actual_mhz')} | {g('wns_ns')} | {g('fmax_mhz')} | "
                    f"{g('core_luts')} | {g('core_ffs')} | {g('core_bram36')} | {g('core_dsp')} | "
-                   f"{g('power_total_w')} / {g('power_core_w')} | {g('sim_check')} | "
-                   f"{g('board_programs_passed')} / {g('board_identical_to_rtl_sim')} | "
-                   f"{g('board_coremark_per_mhz')} | {g('board_dmips_per_mhz')} |")
+                   f"{g('power_total_w')} / {g('power_core_w')} | {g('sim_check')} | {g('board_run_status')} | "
+                   f"{g('board_programs_passed') if r.get('board_run_status') == 'completed' else 'not run'} / "
+                   f"{g('board_identical_to_rtl_sim') if r.get('board_run_status') == 'completed' else 'not run'} | "
+                   f"{g('board_coremark_per_mhz') if r.get('board_run_status') == 'completed' else 'not run'} | "
+                   f"{g('board_dmips_per_mhz') if r.get('board_run_status') == 'completed' else 'not run'} |")
     return "\n".join(out)
+
+
+def report_table(headers, rows):
+    """Render a Markdown table, escaping separators and rendering empty values consistently."""
+    clean = lambda x: str(x).replace("|", "\\|").replace("\n", " ") if x not in (None, "") else "—"
+    return "\n".join([
+        "| " + " | ".join(clean(label) for _, label in headers) + " |",
+        "|" + "|".join("---" for _ in headers) + "|",
+        *["| " + " | ".join(clean(r.get(k, "")) for k, _ in headers) + " |" for r in rows],
+    ])
+
+
+def full_results_report(synth, sim, harden, fpga):
+    """Readable consolidated report with all collected rows and detailed benchmark cycles."""
+    names = {"hazard3": "Hazard3", "ibex": "Ibex", "veer_el2": "VeeR EL2", "veer_el2_min": "VeeR EL2 FPGA config"}
+    lines = [
+        "# Collected processor comparison results", "",
+        "Generated from the tool reports and simulation logs under `results/raw/` by `scripts/collect.py`.",
+        "All performance, area, timing, and power values below are taken from the local project results.", "",
+        "## RTL simulation summary", "",
+        md_sim(sim), "",
+        "### Per-benchmark RTL simulation results", "",
+        "Cycle counts are from the shared Verilator testbench. `marked_cycles` is the measured benchmark window; it is zero for tests without a benchmark marker.", "",
+    ]
+    detail_headers = [("core", "Core"), ("config", "Config"), ("bench", "Benchmark"), ("exit", "Exit"),
+                      ("cycles", "Total cycles"), ("marked_cycles", "Marked cycles"), ("iterations", "Iterations"),
+                      ("coremark_per_mhz", "CoreMark/MHz"), ("dhrystone_cycles_per_run", "Dhrystone cycles/run"),
+                      ("dmips_per_mhz", "DMIPS/MHz"), ("log_path", "Log")]
+    sim_rows = []
+    for r in sim:
+        q = dict(r)
+        q["core"] = names.get(r["core"], r["core"])
+        sim_rows.append(q)
+    lines.extend([report_table(detail_headers, sim_rows), "", "## SKY130 synthesis", "",
+                  "The fmax column is a pre-layout estimate at the typical corner. It is not routed sign-off timing.", ""])
+    synth_headers = [("core", "Core"), ("config", "Config"), ("top", "Top"), ("clock_target_mhz", "Target MHz"),
+                     ("frontend", "Frontend"), ("cells", "Cells"), ("area_um2", "Area µm²"),
+                     ("sequential_area_um2", "Sequential area µm²"), ("flops", "Flops"), ("latches", "Latches"),
+                     ("fmax_est_mhz_postgpl_tt", "Pre-layout fmax MHz"), ("report_path", "Raw reports")]
+    synth_rows = []
+    for r in synth:
+        q = dict(r); q["core"] = names.get(r["core"], r["core"])
+        q["top"] = "core + wrapper" if r["top"] == "wrapper" else "vendor top (sensitivity)"
+        synth_rows.append(q)
+    lines.extend([report_table(synth_headers, synth_rows), "", "## SKY130 layout and sign-off checks", "",
+                  "A `no` sign-off result means at least one required corner/check still has a violation. DRC/LVS/antenna clean alone does not establish timing sign-off.", ""])
+    hard_headers = [("core", "Core"), ("config", "Config"), ("clock_target_mhz", "Target MHz"), ("run_id", "Run"),
+                    ("fmax_tt_mhz", "fmax tt MHz"), ("fmax_ss_mhz", "fmax ss MHz"),
+                    ("fmax_ss_maxrc_mhz", "fmax ss maxRC MHz"), ("magic_drc", "Magic DRC"),
+                    ("klayout_drc", "KLayout DRC"), ("lvs_errors", "LVS errors"), ("antenna_nets", "Antenna nets"),
+                    ("setup_ws_tt_ns", "Setup WS tt ns"), ("setup_ws_ss_ns", "Setup WS ss ns"),
+                    ("setup_ws_ff_ns", "Setup WS ff ns"), ("setup_vio_count", "Setup violations"),
+                    ("hold_ws_worst_ns", "Worst hold WS ns"), ("hold_vio_count", "Hold violations"),
+                    ("max_slew_vio", "Slew violations"), ("max_cap_vio", "Cap violations"),
+                    ("die_area_um2", "Die area µm²"), ("core_area_um2", "Core area µm²"),
+                    ("stdcells", "Std cells"), ("power_total_w", "Default power W"),
+                    ("power_coremark_tt_w", "CoreMark power W"), ("power_coremark_reg_annot", "Annotated regs"),
+                    ("signoff_clean", "Sign-off clean"), ("report_path", "Raw run")]
+    hard_rows = []
+    for r in harden:
+        q = dict(r); q["core"] = names.get(r["core"], r["core"])
+        q["signoff_clean"] = "yes" if r["signoff_clean"] else "no"
+        hard_rows.append(q)
+    lines.extend([report_table(hard_headers, hard_rows), "", "## FPGA Vivado implementation", "",
+                  "These are Vivado synthesis/implementation reports for the Zynq-7020 PL design. Power is Vivado's vectorless estimate; cycle-accurate behavior is independently covered by the FPGA simulation checks.", ""])
+    fpga_headers = [("core", "Core"), ("config", "Config"), ("clock_actual_mhz", "Clock MHz"),
+                    ("wns_ns", "WNS ns"), ("whs_ns", "WHS ns"), ("fmax_mhz", "Estimated fmax MHz"),
+                    ("setup_failing_endpoints", "Setup failing endpoints"), ("hold_failing_endpoints", "Hold failing endpoints"),
+                    ("core_luts", "Core LUTs"), ("core_ffs", "Core FFs"), ("core_lutram", "Core LUTRAM"),
+                    ("core_bram36", "Core BRAM36"), ("core_bram18", "Core BRAM18"), ("core_dsp", "Core DSP"),
+                    ("total_luts", "Total LUTs"), ("total_ffs", "Total FFs"), ("total_bram36", "Total BRAM36"),
+                    ("power_total_w", "Total power W"), ("power_dynamic_w", "Dynamic power W"),
+                    ("sim_check", "FPGA sim vs RTL"), ("report_path", "Reports")]
+    fpga_rows = []
+    for r in fpga:
+        q = dict(r); q["core"] = names.get(r["core"], r["core"])
+        fpga_rows.append(q)
+    lines.extend([report_table(fpga_headers, fpga_rows), "", "## Interpretation notes", "",
+                  "- The RTL simulation table includes the VeeR `tcm` sensitivity configuration, which passes 51/52; the main VeeR `min` configuration passes 52/52.",
+                  "- The FPGA simulation check compares the 52-program FPGA-shell simulation against RTL reference results; it is not a physical-board measurement.",
+                  "- Vivado timing is shown for every collected clock point. Negative WNS indicates setup timing failure; negative WHS would indicate hold failure.",
+                  "- Layout `signoff_clean` evaluates setup, hold, slew, cap, DRC, LVS, and antenna checks across required corners.",
+                  "- Raw report/log paths are listed in each table for traceability.", ""])
+    return "\n".join(lines)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--md", choices=["synth", "sim", "harden", "fpga"], help="print a Markdown table to stdout")
+    ap.add_argument("--all-md", action="store_true", help="print synthesis, RTL simulation, layout, and FPGA tables")
+    ap.add_argument("--report", nargs="?", const=os.path.join(REPO, "reports", "collected_results.md"),
+                    help="write consolidated report (optional output path)")
     ap.add_argument("--update-report", metavar="MD", help="replace the synth table inside MD's markers")
     ap.add_argument("--headline", action="store_true", help="use the short one-config-per-core table")
     a = ap.parse_args()
@@ -521,18 +614,33 @@ def main():
         w.writeheader()
         w.writerows(fpga)
     print(f"[collect] wrote {len(fpga)} rows to {os.path.relpath(FPGA_CSV, REPO)}", file=sys.stderr)
-    if a.md == "fpga":
-        print(md_fpga(fpga))
-        return
-    if a.md == "sim":
-        print(md_sim(sim))
-        return
     harden = collect_harden()
     with open(HARDEN_CSV, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=HARDEN_COLUMNS)
         w.writeheader()
         w.writerows(harden)
     print(f"[collect] wrote {len(harden)} rows to {os.path.relpath(HARDEN_CSV, REPO)}", file=sys.stderr)
+    if a.all_md:
+        synth = prefer_wrapped([r for r in rows if r["stage"] == "synth"])
+        print("## Synthesis\n\n" + md_synth(synth))
+        print("\n## RTL simulation\n\n" + md_sim(sim))
+        print("\n## SKY130 layout\n\n" + md_harden(harden))
+        print("\n## FPGA\n\n" + md_fpga(fpga))
+        return
+    if a.report:
+        synth_all = [r for r in rows if r["stage"] == "synth"]
+        report = full_results_report(synth_all, sim, harden, fpga)
+        os.makedirs(os.path.dirname(os.path.abspath(a.report)), exist_ok=True)
+        with open(a.report, "w") as f:
+            f.write(report)
+        print(f"[collect] wrote consolidated report to {os.path.relpath(a.report, REPO)}", file=sys.stderr)
+        return
+    if a.md == "fpga":
+        print(md_fpga(fpga))
+        return
+    if a.md == "sim":
+        print(md_sim(sim))
+        return
     if a.md == "harden":
         print(md_harden(harden))
         return

@@ -1,0 +1,17 @@
+core=hazard3
+config=default
+top=hazard3_fpga
+vivado=2026.1
+part=xc7z020clg400-1
+board_part=
+clk_target_mhz=50
+clk_actual_mhz=50.000000
+clock=clk_fpga_0
+period_ns=20.000
+wns_ns=3.228
+whs_ns=0.067
+setup_failing_endpoints=0
+hold_failing_endpoints=0
+worst_setup_start=ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_1/CLKARDCLK
+worst_setup_end=ps_i/core/inst/u_core/u_core/core/regs/real_dualport_noreset.mem_reg_2/ADDRARDADDR[9]
+power_activity=vectorless

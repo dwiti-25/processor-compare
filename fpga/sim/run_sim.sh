@@ -21,10 +21,14 @@ TOP=$(sed -n 's/^TOP //p' <<<"$LIST")
 SRCS=$(sed -n 's/^SRC //p' <<<"$LIST" | tr '\n' ' ')
 INCARGS=$(sed -n 's/^INC /-I/p' <<<"$LIST" | tr '\n' ' ')
 DEFARGS=$(sed -n 's/^DEF /+define+/p' <<<"$LIST" | tr '\n' ' ')
+TRACE=${TRACE:-0}
+TRACE_ARGS=()
+if [ "$TRACE" = "1" ]; then TRACE_ARGS+=(--trace --trace-structs); fi
 
-if [ ! -x "$OUT/Vtb_fpga" ] || [ -n "${REBUILD:-}" ]; then
+if [ ! -x "$OUT/Vtb_fpga" ] || [ -n "${REBUILD:-}" ] || [ "$TRACE" = "1" ]; then
   echo "[fpga-sim] building $TOP"
   verilator --binary --timing -j 4 -O3 --x-assign fast --x-initial fast \
+    "${TRACE_ARGS[@]}" \
     -Wno-fatal -Wno-lint -Wno-style -Wno-TIMESCALEMOD -Wno-MULTIDRIVEN -Wno-UNOPTFLAT \
     -Wno-IMPLICITSTATIC -Wno-INITIALDLY -Wno-SIDEEFFECT -Wno-ASCRANGE -Wno-LATCH \
     --top-module tb_fpga +define+FPGA_TOP=$TOP $DEFARGS $INCARGS \
@@ -32,10 +36,27 @@ if [ ! -x "$OUT/Vtb_fpga" ] || [ -n "${REBUILD:-}" ]; then
     || { echo "[fpga-sim] build failed, see $OUT/build.log"; tail -20 "$OUT/build.log"; exit 1; }
 fi
 
-BENCHES=${*:-$(make -s -C common/bench list)}
-make -s -C common/bench all > /dev/null
+if [ "$TRACE" = "1" ]; then
+  # Trace mode uses the checked-in Verilog hex images so generating a waveform
+  # does not require rebuilding software with the RISC-V GCC toolchain.
+  TRACE_BENCH=${TRACE_BENCH:-${*:-rv32ui-simple}}
+  BENCHES=$TRACE_BENCH
+  mkdir -p results/raw/fpga/waves
+else
+  BENCHES=${*:-$(make -s -C common/bench list)}
+  make -s -C common/bench all > /dev/null
+fi
 for b in $BENCHES; do
-  "$OUT/Vtb_fpga" +hex=build/bench/$b.hex > "$LOG/$b.log" 2>&1 || true
+  if [ "$TRACE" = "1" ]; then
+    hex="fpga/sw/hex/$b.hex"
+    if [ ! -f "$hex" ]; then
+      echo "[fpga-sim] trace image not found: $hex"
+      exit 1
+    fi
+    "$OUT/Vtb_fpga" +hex="$hex" +trace=results/raw/fpga/waves/${CORE}_${b}.vcd > "$LOG/$b.log" 2>&1 || true
+  else
+    "$OUT/Vtb_fpga" +hex=build/bench/$b.hex > "$LOG/$b.log" 2>&1 || true
+  fi
 done
 python3 - "$CORE" "$LOG" "results/raw/sim/${CORE}_$RTLCFG" $BENCHES <<'PY'
 import re, sys, os

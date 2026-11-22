@@ -1,6 +1,6 @@
 # Initial results: Hazard3, Ibex, VeeR EL2 on SKY130 (core-only synthesis + RTL benchmarks)
 
-Dwiti Suchak, Ayush. BITS Pilani. Data as of <!-- BEGIN collect.py:data_time -->2026-11-18 23:40 (IST)<!-- END collect.py -->.
+Dwiti Suchak, Ayush. BITS Pilani. Data as of <!-- BEGIN collect.py:data_time -->2026-11-19 16:24 (IST)<!-- END collect.py -->.
 
 ## What was run
 
@@ -17,18 +17,19 @@ Dwiti Suchak, Ayush. BITS Pilani. Data as of <!-- BEGIN collect.py:data_time -->
 - **Area** is Yosys cell area after technology mapping, before placement (no fill, taps or buffering).
 - **Headline configs:** Hazard3 "default", Ibex "small", **VeeR EL2 "min"** (no tightly-coupled
   memories, no caches, branch predictor off).
-- **fmax:** pending. Signed-off fmax will come from the full core-only layout runs (running now).
-  Pre-route estimates are kept in `results/results.csv` only.
+- **fmax:** the table reports pre-layout estimates from post-global-placement timing at the
+  typical corner. These are useful for comparison but are not routed, sign-off timing results.
+  Routed SKY130 timing and sign-off status are reported separately in `results/harden_results.csv`.
 
 ## Synthesis (SKY130, core-only)
 
 <!-- BEGIN collect.py:synth -->
-| Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | fmax |
+| Core | Config | Synthesized top | Frontend | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Latches | Pre-layout fmax estimate (MHz) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|
-| Hazard3 | default | core + wrapper | Yosys read_verilog | 13,152 | 156,519 | 1.00× | 1,940 | 0 | pending (full layout) |
-| Ibex | small | core + wrapper | yosys-slang | 11,922 | 150,477 | 0.96× | 1,924 | 1 | pending (full layout) |
-| VeeR EL2 | min | core + wrapper | yosys-slang | 50,627 | 579,032 | 3.70× | 6,384 | 224 | pending (full layout) |
-| VeeR EL2 | bp | vendor top (old) | yosys-slang | 61,383 | 720,779 | 4.61× | 8,521 | 305 | pending (full layout) |
+| Hazard3 | default | core + wrapper | Yosys read_verilog | 13,152 | 156,519 | 1.00× | 1,940 | 0 | 47.6 |
+| Ibex | small | core + wrapper | yosys-slang | 11,922 | 150,477 | 0.96× | 1,924 | 1 | 49.3 |
+| VeeR EL2 | min | core + wrapper | yosys-slang | 50,627 | 579,032 | 3.70× | 6,384 | 224 | 24.2 |
+| VeeR EL2 | bp | vendor top (old) | yosys-slang | 61,383 | 720,779 | 4.61× | 8,521 | 305 | 20.1 |
 <!-- END collect.py -->
 
 ## Benchmarks in RTL simulation

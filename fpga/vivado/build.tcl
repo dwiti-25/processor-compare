@@ -56,13 +56,48 @@ if {$board ne "none"} {
 if {$board_part ne ""} { set_property board_part $board_part [current_project] }
 puts "FPGA build: board_part='$board_part'"
 
-add_files -norecurse [dict get $src files]
+# Module-reference elaboration needs the included headers registered with the
+# project as header files, not only discoverable through include_dirs. Without
+# scanning includes Vivado 2026.1 can reject Hazard3's hazard3_config_inst.vh
+# while creating the block-design module reference.
+set header_files {}
+foreach incdir [dict get $src incdirs] {
+    foreach pattern {*.vh *.svh} {
+        foreach header [glob -nocomplain -directory $incdir $pattern] {
+            lappend header_files $header
+        }
+    }
+}
+if {[llength $header_files]} {
+    add_files -norecurse $header_files
+    foreach header $header_files {
+        set_property file_type {Verilog Header} [get_files $header]
+    }
+}
+if {$argv_core eq "veer_el2"} {
+    # Match VeeR's own Vivado setup: its typedef-bearing parameter header must
+    # be a project SystemVerilog global include. The simulation flow uses a
+    # generated wrapper header instead; Vivado gets these original headers.
+    set cfg_dir [file join $repo cores veer_el2 config $cfg]
+    set common_defs [file join $cfg_dir common_defines.vh]
+    set pdef [file join $cfg_dir el2_pdef.vh]
+    set_property is_global_include true [get_files $common_defs]
+    set_property is_global_include true [get_files $pdef]
+}
+add_files -scan_for_includes -norecurse [dict get $src files]
 foreach f [dict get $src files] {
     if {[regexp {\.(sv|svh|vh)$} $f]} { set_property file_type SystemVerilog [get_files $f] }
 }
+if {$argv_core eq "veer_el2"} {
+    # The include scan recognizes .vh as a Verilog Header and can reset its
+    # language type; restore SystemVerilog after all scans are complete.
+    set_property file_type SystemVerilog [get_files $pdef]
+}
 set gi [dict get $src global_include]
 if {$gi ne ""} {
-    add_files -norecurse $gi
+    # VeeR's generated global header includes the selected config headers; scan
+    # it too so those headers are registered for module-reference elaboration.
+    add_files -scan_for_includes -norecurse $gi
     set_property file_type {Verilog Header} [get_files $gi]
     set_property is_global_include true [get_files $gi]
 }

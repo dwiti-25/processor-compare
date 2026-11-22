@@ -1,0 +1,17 @@
+core=veer_el2
+config=min_fpga
+top=veer_el2_fpga
+vivado=2026.1
+part=xc7z020clg400-1
+board_part=
+clk_target_mhz=50
+clk_actual_mhz=50.000000
+clock=clk_fpga_0
+period_ns=20.000
+wns_ns=-11.690
+whs_ns=0.042
+setup_failing_endpoints=1581
+hold_failing_endpoints=0
+worst_setup_start=ps_i/core/inst/u_core/u_core/dec/tlu/freeff/genblock.dff/genblock.dffs/dout_reg[3]/C
+worst_setup_end=ps_i/core/inst/u_core/u_core/ifu/mem_ctl/ifu_iccm_reg_acc_ff/genblock.dffs/genblock.dffs/dout_reg[0]/D
+power_activity=vectorless

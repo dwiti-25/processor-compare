@@ -116,6 +116,10 @@ scripts/collect.py --md synth   # also print the synthesis table as Markdown
 scripts/collect.py --md sim     # RTL sim: tests passed, CoreMark/MHz, DMIPS/MHz
 scripts/collect.py --md harden  # core-only layout: fmax, DRC/LVS, slack, slew, area, power
 scripts/collect.py --md fpga    # FPGA: timing, core utilization, power, board cycles
+scripts/collect.py --all-md    # rebuild every results CSV and print synthesis, simulation, layout, and FPGA tables
+make extract-results           # same full extraction shortcut
+scripts/collect.py --report    # write a consolidated report with benchmark cycle detail and all collected runs
+make results-report            # same report-generation shortcut
 ```
 
 `make all-results` also regenerates the tables inside `reports/initial_synthesis.md` and

@@ -60,7 +60,8 @@ module tb_fpga;
 
   localparam int RAM_BYTES = 256 * 1024;
   logic [7:0] img [RAM_BYTES];
-  string hex;
+  string hex, trace_path;
+  bit trace_enabled = 1'b0;
   longint unsigned maxcycles = 200_000_000, ncyc = 0;
   always @(posedge clk) ncyc <= ncyc + 1;
 
@@ -70,6 +71,12 @@ module tb_fpga;
     int unsigned nchk;
     awvalid = 0; wvalid = 0; bready = 0; arvalid = 0; rready = 0; awaddr = 0; araddr = 0; wdata = 0; wstrb = 0;
     if (!$value$plusargs("hex=%s", hex)) $fatal(1, "TB: +hex=<file> required");
+    if ($value$plusargs("trace=%s", trace_path)) begin
+      trace_enabled = 1'b1;
+      $dumpfile(trace_path);
+      $dumpvars(0, tb_fpga);
+      $dumpoff; // Ignore reset, image loading, and AXI readback; trace the CPU run only.
+    end
     void'($value$plusargs("maxcycles=%d", maxcycles));
     for (int k = 0; k < RAM_BYTES; k++) img[k] = 8'h00;
     $readmemh(hex, img);
@@ -97,6 +104,7 @@ module tb_fpga;
       nchk++;
     end
 
+    if (trace_enabled) $dumpon;
     wr(19'h4_0000, 32'h1);                // RUN
     axi_write(19'h0_0100, 32'hdead_beef, r);
     if (r != 2'b10) $fatal(1, "TB: RAM write during run not refused");
@@ -105,6 +113,7 @@ module tb_fpga;
       rd(19'h4_0004, st);
       if (ncyc > maxcycles) begin $display("\nFPGA_RESULT core=%s exit=timeout", `STR(`FPGA_TOP)); $finish; end
     end while (!st[0]);
+    if (trace_enabled) $dumpoff;
 
     rd(19'h4_0008, exitc); rd(19'h4_0010, clo); rd(19'h4_0014, chi); rd(19'h4_0018, mlo); rd(19'h4_001C, mhi);
     rd(19'h4_0020, clen); rd(19'h4_0024, ecnt); rd(19'h4_0028, eaddr);

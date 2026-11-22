@@ -1,0 +1,37 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (lin64) Build 6511674 Tue Jun 16 11:01:26 MDT 2026
+| Date         : Thu Nov 19 18:15:29 2026
+| Host         : ayush-Yoga-Slim-7-Pro-14IAP7 running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_utilization -hierarchical -hierarchical_depth 4 -file /home/ayush/fpga_project/processor-compare/results/raw/fpga/hazard3/vivado_default_50MHz/utilization_hier.rpt
+| Design       : ps_wrapper
+| Device       : xc7z020clg400-1
+| Speed File   : -1
+| Design State : Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++--------------------+---------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|      Instance      |              Module             | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++--------------------+---------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| ps_wrapper         |                           (top) |       3370 |       3309 |       0 |   61 | 1883 |     64 |     34 |          3 |
+|   ps_i             |                              ps |       3370 |       3309 |       0 |   61 | 1883 |     64 |     34 |          3 |
+|     core           |                       ps_core_0 |       2961 |       2961 |       0 |    0 | 1354 |     64 |     34 |          3 |
+|       inst         |          ps_core_0_hazard3_fpga |       2961 |       2961 |       0 |    0 | 1354 |     64 |     34 |          3 |
+|         u_core     |          ps_core_0_hazard3_wrap |       2403 |       2403 |       0 |    0 |  774 |      0 |      2 |          3 |
+|         u_shell    |            ps_core_0_fpga_shell |        560 |        560 |       0 |    0 |  580 |     64 |     32 |          0 |
+|     ps7_axi_periph |             ps_ps7_axi_periph_0 |        392 |        332 |       0 |   60 |  496 |      0 |      0 |          0 |
+|       s00_couplers |         s00_couplers_imp_UOXWVW |        392 |        332 |       0 |   60 |  496 |      0 |      0 |          0 |
+|         auto_pc    | ps_ps7_axi_periph_imp_auto_pc_0 |        392 |        332 |       0 |   60 |  496 |      0 |      0 |          0 |
++--------------------+---------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

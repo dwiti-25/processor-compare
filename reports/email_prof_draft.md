@@ -10,16 +10,15 @@ Yosys, OpenROAD, sky130_fd_sc_hd standard cells), the same 50 MHz clock target, 
 configurations with unused features disabled.
 
 <!-- BEGIN collect.py:headline -->
-| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | fmax |
+| Core | Cells | Cell area (µm²) | Area vs Hazard3 | Flops | Pre-layout fmax estimate (MHz) |
 |---|---:|---:|---:|---:|---|
-| Hazard3 | 13,152 | 156,519 | 1.00× | 1,940 | pending, will come from full layout |
-| Ibex (small) | 11,922 | 150,477 | 0.96× | 1,924 | pending, will come from full layout |
-| VeeR EL2 (min) | 50,627 | 579,032 | 3.70× | 6,384 | pending, will come from full layout |
+| Hazard3 | 13,152 | 156,519 | 1.00× | 1,940 | 47.6 |
+| Ibex (small) | 11,922 | 150,477 | 0.96× | 1,924 | 49.3 |
+| VeeR EL2 (min) | 50,627 | 579,032 | 3.70× | 6,384 | 24.2 |
 <!-- END collect.py -->
 
-\* Pre-route estimate at the typical corner (25 °C, 1.8 V): after placement, clock-tree synthesis and
-timing optimisation, but before routing. The remaining estimates are still running and will
-follow; signed-off post-route numbers will come from the full RTL-to-GDS runs.
+\* Pre-layout estimate at the typical corner (25 °C, 1.8 V), after global placement and design-rule
+repair, before clock-tree synthesis and routing. These estimates are not sign-off fmax values.
 
 Notes:
 - Area is standard-cell area after synthesis (before placement).

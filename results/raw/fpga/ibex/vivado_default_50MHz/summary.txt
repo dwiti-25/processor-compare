@@ -1,0 +1,17 @@
+core=ibex
+config=default
+top=ibex_fpga
+vivado=2026.1
+part=xc7z020clg400-1
+board_part=
+clk_target_mhz=50
+clk_actual_mhz=50.000000
+clock=clk_fpga_0
+period_ns=20.000
+wns_ns=1.621
+whs_ns=0.044
+setup_failing_endpoints=0
+hold_failing_endpoints=0
+worst_setup_start=ps_i/core/inst/u_core/u_core/u_ibex_core/if_stage_i/instr_valid_id_q_reg/C
+worst_setup_end=ps_i/core/inst/u_core/u_core/u_ibex_core/if_stage_i/gen_prefetch_buffer.prefetch_buffer_i/fifo_i/g_fifo_regs[0].g_rdata_nr.rdata_q_reg[0][26]/CE
+power_activity=vectorless
